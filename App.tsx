@@ -1,10 +1,14 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { View, StatusBar, Platform, Dimensions } from "react-native";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
+import styled from "styled-components/native";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
+
+const STATUS_BAR_HEIGHT =
+  Platform.OS === "android" ? StatusBar.currentHeight : getStatusBarHeight();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -17,7 +21,12 @@ export default function App() {
       <SafeAreaProvider>
         <Navigation colorScheme={colorScheme} />
         <StatusBar />
+        <Nav />
       </SafeAreaProvider>
     );
   }
 }
+
+const Nav = styled.View`
+  height: ${STATUS_BAR_HEIGHT + "px"};
+`;

@@ -7,10 +7,10 @@ import { RootTabScreenProps } from "../types";
 
 export default function TabOneScreen({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
+}: RootTabScreenProps<"TabThree">) {
   return (
     <ContentLayout path="/screens/TabOneScreen.tsx">
-      <Text>Tab One</Text>
+      <Text>Tab Three</Text>
     </ContentLayout>
   );
 }
