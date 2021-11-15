@@ -1,4 +1,3 @@
-import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -7,7 +6,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable, Image, View } from "react-native";
+import { ColorSchemeName, Image, Pressable } from "react-native";
 import styled from "styled-components/native";
 
 import Colors from "../constants/Colors";
@@ -66,19 +65,20 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
-  // FIXME : Title 지우고도 아랫쪽 텍스트가 남아있도록 처리해줘야 함.
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
+      backBehavior="order"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        headerTitleStyle: { display: "none" },
       }}
     >
       <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "포트폴리오",
+          tabBarLabel: "포트폴리오",
           tabBarIcon: () => (
             <Image source={require("../assets/Icons/Navigation/Main.png")} />
           ),
@@ -102,7 +102,7 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={TabTwoScreen}
         options={({ navigation }: RootTabScreenProps<"TabTwo">) => ({
-          title: "계좌",
+          tabBarLabel: "계좌",
           tabBarIcon: () => (
             <Image source={require("../assets/Icons/Navigation/Account.png")} />
           ),
@@ -126,7 +126,7 @@ function BottomTabNavigator() {
         name="TabThree"
         component={TabThreeScreen}
         options={({ navigation }: RootTabScreenProps<"TabThree">) => ({
-          title: "설정",
+          tabBarLabel: "설정",
           tabBarIcon: () => (
             <Image source={require("../assets/Icons/Navigation/Setting.png")} />
           ),
