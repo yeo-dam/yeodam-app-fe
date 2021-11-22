@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, Platform } from "react-native";
+import { StatusBar, Platform, View, Text } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import styled from "styled-components/native";

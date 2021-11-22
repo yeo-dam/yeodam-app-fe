@@ -1,0 +1,13 @@
+{
+  "name": "yeodam-mockup-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev:client": "cd ../client && yarn start",
+    "dev:server": "json-server --watch --no-cors db.json --port 3001"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "json-server": "^0.17.0"
+  }
+}

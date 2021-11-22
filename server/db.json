@@ -1,0 +1,21 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "make json-server",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nulla alias accusamus debitis similique ullam, exercitationem, natus, fuga aspernatur consequuntur numquam veniam. Enim amet sunt corporis, facere velit fugit non?"
+    },
+    {
+      "id": 2,
+      "title": "make react app",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nulla alias accusamus debitis similique ullam, exercitationem, natus, fuga aspernatur consequuntur numquam veniam. Enim amet sunt corporis, facere velit fugit non?"
+    },
+    {
+      "id": 3,
+      "title": "explain things to others",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nulla alias accusamus debitis similique ullam, exercitationem, natus, fuga aspernatur consequuntur numquam veniam. Enim amet sunt corporis, facere velit fugit non?"
+    }
+  ],
+  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
+  "profile": { "name": "typicode" }
+}
