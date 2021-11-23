@@ -1,11 +1,14 @@
 import * as React from "react";
-import { ActivityIndicator, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { useCallback, useEffect, useState } from "react";
 import { GetPostsAPI } from "../Api";
 
 import ContentLayout from "../components/Templates/ContentLayout";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
+import NoData from "../components/Molecules/NoData";
+import ErrorMsg from "../components/Molecules/ErrorMsg";
+import Loadable from "../components/Molecules/Loadable";
 
 export default function TabOneScreen({
   navigation,
@@ -36,17 +39,19 @@ export default function TabOneScreen({
     GetPosts();
   }, []);
 
+  if (isPostLoading) {
+    return <Loadable />;
+  }
+
+  if (isError) {
+    return <ErrorMsg />;
+  }
+
   return (
     <ContentLayout path="/screens/TabOneScreen.tsx">
       <Text>Tab One</Text>
       <View>
-        {isPostLoading ? (
-          <View>
-            <ActivityIndicator />
-          </View>
-        ) : (
-          posts &&
-          posts.length > 0 &&
+        {posts && posts.length > 0 ? (
           posts.map((item) => (
             <View>
               <Text>{item.id}</Text>
@@ -54,6 +59,8 @@ export default function TabOneScreen({
               <Text>{item.description}</Text>
             </View>
           ))
+        ) : (
+          <NoData />
         )}
       </View>
     </ContentLayout>
