@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
 
-import { View } from "../Themed";
+import { View } from "../../components/Themed";
 
 type Props = {
   path: string;

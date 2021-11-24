@@ -1,24 +1,25 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { useCallback, useEffect, useState } from "react";
+import { GetPostsAPI } from "../../../Api";
 
-import ContentLayout from "../components/Templates/ContentLayout";
-import { Text, View } from "../components/Themed";
-import { RootTabScreenProps } from "../types";
-import { GetPostsAPI } from "../Api";
-import ErrorMsg from "../components/Molecules/ErrorMsg";
-import NoData from "../components/Molecules/NoData";
-import Loadable from "../components/Molecules/Loadable";
+import ContentLayout from "../../Templates/ContentLayout";
+import { Text, View } from "../../Themed";
+import { RootTabScreenProps } from "../../../types";
+import NoData from "../../Molecules/NoData";
+import ErrorMsg from "../../Molecules/ErrorMsg";
+import Loadable from "../../Molecules/Loadable";
 
 export default function TabOneScreen({
   navigation,
-}: RootTabScreenProps<"TabThree">) {
+}: RootTabScreenProps<"TabOne">) {
   const [isPostLoading, setIsPostsLoading] = useState(false);
   const [isError, setisError] = useState(false);
   const [posts, setPosts] = useState<
     { id: number; title: string; description: string }[] | undefined
   >();
 
+  // TODO: 아래 코드가 vm 파일로 이동해야 할 것
   const GetPosts = useCallback(async () => {
     const [isApiLoading, isApiError, data] = await GetPostsAPI();
 
@@ -49,7 +50,7 @@ export default function TabOneScreen({
 
   return (
     <ContentLayout path="/screens/TabOneScreen.tsx">
-      <Text>Tab Three</Text>
+      <Text>Tab One</Text>
       <View>
         {posts && posts.length > 0 ? (
           posts.map((item) => (

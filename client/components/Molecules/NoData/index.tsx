@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import styled from "styled-components/native";
 
 type Props = {};

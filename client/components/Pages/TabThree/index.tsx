@@ -1,24 +1,25 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { useCallback, useEffect, useState } from "react";
-import { GetPostsAPI } from "../Api";
 
-import ContentLayout from "../components/Templates/ContentLayout";
-import { Text, View } from "../components/Themed";
-import { RootTabScreenProps } from "../types";
-import ErrorMsg from "../components/Molecules/ErrorMsg";
-import NoData from "../components/Molecules/NoData";
-import Loadable from "../components/Molecules/Loadable";
+import ContentLayout from "../../../components/Templates/ContentLayout";
+import { Text, View } from "../../../components/Themed";
+import { RootTabScreenProps } from "../../../types";
+import { GetPostsAPI } from "../../../Api";
+import ErrorMsg from "../../../components/Molecules/ErrorMsg";
+import NoData from "../../../components/Molecules/NoData";
+import Loadable from "../../../components/Molecules/Loadable";
 
-export default function TabTwoScreen({
+export default function TabOneScreen({
   navigation,
-}: RootTabScreenProps<"TabTwo">) {
+}: RootTabScreenProps<"TabThree">) {
   const [isPostLoading, setIsPostsLoading] = useState(false);
   const [isError, setisError] = useState(false);
   const [posts, setPosts] = useState<
     { id: number; title: string; description: string }[] | undefined
   >();
 
+  // TODO: 아래 코드가 vm 파일로 이동해야 할 것
   const GetPosts = useCallback(async () => {
     const [isApiLoading, isApiError, data] = await GetPostsAPI();
 
@@ -48,8 +49,8 @@ export default function TabTwoScreen({
   }
 
   return (
-    <ContentLayout path="/screens/TabTwoScreen.tsx">
-      <Text>Tab Two</Text>
+    <ContentLayout path="/screens/TabOneScreen.tsx">
+      <Text>Tab Three</Text>
       <View>
         {posts && posts.length > 0 ? (
           posts.map((item) => (
