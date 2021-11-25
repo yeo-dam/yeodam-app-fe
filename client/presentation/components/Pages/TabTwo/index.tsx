@@ -1,18 +1,18 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { useCallback, useEffect, useState } from "react";
-import { GetPostsAPI } from "../../../Api";
+import { GetPostsAPI } from "../../../../Api";
 
-import ContentLayout from "../../Templates/ContentLayout";
+import ContentLayout from "~presentation/components/Templates/ContentLayout";
 import { Text, View } from "../../Themed";
-import { RootTabScreenProps } from "../../../types";
-import NoData from "../../Molecules/NoData";
-import ErrorMsg from "../../Molecules/ErrorMsg";
-import Loadable from "../../Molecules/Loadable";
+import { RootTabScreenProps } from "../../../../types";
+import ErrorMsg from "~presentation/components/Molecules/ErrorMsg";
+import NoData from "~presentation/components/Molecules/NoData";
+import Loadable from "~presentation/components/Molecules/Loadable";
 
-export default function TabOneScreen({
+export default function TabTwoScreen({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
+}: RootTabScreenProps<"TabTwo">) {
   const [isPostLoading, setIsPostsLoading] = useState(false);
   const [isError, setisError] = useState(false);
   const [posts, setPosts] = useState<
@@ -49,8 +49,8 @@ export default function TabOneScreen({
   }
 
   return (
-    <ContentLayout path="/screens/TabOneScreen.tsx">
-      <Text>Tab One</Text>
+    <ContentLayout path="/screens/TabTwoScreen.tsx">
+      <Text>Tab Two</Text>
       <View>
         {posts && posts.length > 0 ? (
           posts.map((item) => (

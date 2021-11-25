@@ -6,6 +6,16 @@ module.exports = function (api) {
       ["react-native-reanimated/plugin"],
       ["@babel/plugin-proposal-decorators", { legacy: true }],
       ["@babel/plugin-proposal-class-properties", { loose: true }],
+      [
+        "module-resolver",
+        {
+          root: ["./"],
+          extensions: [".ios.js", ".android.js", ".js", ".ts", ".tsx", ".json"],
+          alias: {
+            "~presentation": "./presentation",
+          },
+        },
+      ],
     ],
   };
 };

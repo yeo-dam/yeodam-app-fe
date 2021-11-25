@@ -1,13 +1,13 @@
 import { action, computed, flow, observable } from "mobx";
 import BaseViewModel from "../BaseViewModel";
 
-export default class TabOneViewModel extends BaseViewModel {
-  private static _Instance: TabOneViewModel;
+export default class TabTwoViewModel extends BaseViewModel {
+  private static _Instance: TabTwoViewModel;
   static GetInstance() {
-    if (!TabOneViewModel._Instance) {
-      TabOneViewModel._Instance = new TabOneViewModel();
+    if (!TabTwoViewModel._Instance) {
+      TabTwoViewModel._Instance = new TabTwoViewModel();
     }
-    return TabOneViewModel._Instance;
+    return TabTwoViewModel._Instance;
   }
   private constructor() {
     super();
@@ -22,7 +22,7 @@ export default class TabOneViewModel extends BaseViewModel {
   }
 
   @action
-  load = flow(function* (this: TabOneViewModel, id: string) {
+  load = flow(function* (this: TabTwoViewModel, id: string) {
     this._isLoading.set(true);
     this._isLoading.set(false);
   });

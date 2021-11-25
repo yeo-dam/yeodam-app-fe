@@ -13,9 +13,9 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../components/Pages/TabOne";
-import TabThreeScreen from "../components/Pages/TabThree";
-import TabTwoScreen from "../components/Pages/TabTwo";
+import TabOneScreen from "../presentation/components/Pages/TabOne";
+import TabThreeScreen from "../presentation/components/Pages/TabThree";
+import TabTwoScreen from "../presentation/components/Pages/TabTwo";
 import {
   RootStackParamList,
   RootTabParamList,
