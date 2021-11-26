@@ -1,5 +1,6 @@
 import React from "react";
 import { StatusBar, Platform, View, Text } from "react-native";
+import ViewModelProvider from "~presentation/components/Pages/Index.vm";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import styled from "styled-components/native";
@@ -20,11 +21,13 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-        <Nav />
-      </SafeAreaProvider>
+      <ViewModelProvider>
+        <SafeAreaProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+          <Nav />
+        </SafeAreaProvider>
+      </ViewModelProvider>
     );
   }
 }

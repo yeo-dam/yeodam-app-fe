@@ -1,7 +1,6 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { useCallback, useEffect, useState } from "react";
-import { GetPostsAPI } from "../../../../Api";
+import { useEffect } from "react";
 
 import ContentLayout from "~presentation/components/Templates/ContentLayout";
 import { Text, View } from "../../Themed";
@@ -9,42 +8,27 @@ import { RootTabScreenProps } from "../../../../types";
 import NoData from "~presentation/components/Molecules/NoData";
 import ErrorMsg from "~presentation/components/Molecules/ErrorMsg";
 import Loadable from "~presentation/components/Molecules/Loadable";
+import { getRootViewModel } from "../Index.vm";
+import TabOneViewModel from "./TabOne.vm";
+import { observer } from "mobx-react";
 
-export default function TabOneScreen({
-  navigation,
-}: RootTabScreenProps<"TabOne">) {
-  const [isPostLoading, setIsPostsLoading] = useState(false);
-  const [isError, setisError] = useState(false);
-  const [posts, setPosts] = useState<
-    { id: number; title: string; description: string }[] | undefined
-  >();
-
-  // TODO: 아래 코드가 vm 파일로 이동해야 할 것
-  const GetPosts = useCallback(async () => {
-    const [isApiLoading, isApiError, data] = await GetPostsAPI();
-
-    if (isApiLoading) {
-      setIsPostsLoading(true);
-    }
-
-    if (isApiError) {
-      setisError(true);
-    }
-
-    if (data) {
-      setPosts(data);
-    }
-  }, []);
+const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabOne">) => {
+  const vm = getRootViewModel<TabOneViewModel>(
+    (viewModel) => viewModel.tab.tabOne
+  );
 
   useEffect(() => {
-    GetPosts();
+    async function loadPosts() {
+      await vm.load();
+    }
+    loadPosts();
   }, []);
 
-  if (isPostLoading) {
+  if (vm.isLoading) {
     return <Loadable />;
   }
 
-  if (isError) {
+  if (vm.isError) {
     return <ErrorMsg />;
   }
 
@@ -52,9 +36,9 @@ export default function TabOneScreen({
     <ContentLayout path="/screens/TabOneScreen.tsx">
       <Text>Tab One</Text>
       <View>
-        {posts && posts.length > 0 ? (
-          posts.map((item) => (
-            <View>
+        {vm.posts && vm.posts.length > 0 ? (
+          vm.posts.map((item, index) => (
+            <View key={index}>
               <Text>{item.id}</Text>
               <Text>{item.title}</Text>
               <Text>{item.description}</Text>
@@ -66,7 +50,9 @@ export default function TabOneScreen({
       </View>
     </ContentLayout>
   );
-}
+};
+
+export default observer(TabOneScreen);
 
 const styles = StyleSheet.create({
   container: {
