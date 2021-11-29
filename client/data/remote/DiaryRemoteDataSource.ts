@@ -16,7 +16,7 @@ export default class DiaryRemoteDataSource extends RemoteDataSource {
     super();
   }
 
-  public GetPosts(): Promise<[boolean, PagerEntity<DiaryEntity[]>]> {
-    return Fetcher<PagerEntity<DiaryEntity[]>>("/diaries");
+  public GetDiaries(): Promise<PagerEntity<DiaryEntity>> {
+    return Fetcher<PagerEntity<DiaryEntity>>("/diaries");
   }
 }

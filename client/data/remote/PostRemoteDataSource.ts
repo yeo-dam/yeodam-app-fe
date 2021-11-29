@@ -16,7 +16,7 @@ export default class PostRemoteDataSource extends RemoteDataSource {
     super();
   }
 
-  public GetPosts(): Promise<[boolean, PagerEntity<PostEntity[]>]> {
-    return Fetcher<PagerEntity<PostEntity[]>>("/posts");
+  public GetPosts(): Promise<PagerEntity<PostEntity>> {
+    return Fetcher<PagerEntity<PostEntity>>("/posts");
   }
 }

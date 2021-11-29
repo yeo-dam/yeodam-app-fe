@@ -16,7 +16,7 @@ export default class PlaylistRemoteDataSource extends RemoteDataSource {
     super();
   }
 
-  public GetPlaylists(): Promise<[boolean, PagerEntity<PlaylistEntity[]>]> {
-    return Fetcher<PagerEntity<PlaylistEntity[]>>("/playlists");
+  public GetPlaylists(): Promise<PagerEntity<PlaylistEntity>> {
+    return Fetcher<PagerEntity<PlaylistEntity>>("/playlists");
   }
 }

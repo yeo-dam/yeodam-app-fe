@@ -16,7 +16,7 @@ export default class UserRemoteDataSource extends RemoteDataSource {
     super();
   }
 
-  public GetUsers(): Promise<[boolean, PagerEntity<UserEntity[]>]> {
-    return Fetcher<PagerEntity<UserEntity[]>>("/users");
+  public GetUsers(): Promise<PagerEntity<UserEntity>> {
+    return Fetcher<PagerEntity<UserEntity>>("/users");
   }
 }

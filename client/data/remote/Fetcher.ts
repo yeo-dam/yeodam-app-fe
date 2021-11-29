@@ -16,22 +16,20 @@ export type FetcherRequest = Pick<RequestInit, "body"> & {
 const Fetcher = async <T>(
   url: string,
   options?: FetcherRequest
-): Promise<[boolean, T]> => {
+): Promise<T> => {
   console.log("Input >>>> ", url);
 
   const requestUrl = `${process.env.HOSTNAME} +':'${process.env.PORTNUMBER} + ${url}`;
   const response = await fetch(requestUrl, options);
   const data = await response.json();
-  let fetchError = false;
 
   if (!response.ok) {
-    fetchError = true;
-    console.log(data.err.message);
+    throw new Error(`${data.err.message}`);
   } else {
     console.log("Output >>>>>> ", data);
   }
 
-  return [fetchError, data];
+  return data;
 };
 
 export default Fetcher;
