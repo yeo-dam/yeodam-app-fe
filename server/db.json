@@ -1,21 +1,217 @@
 {
-  "posts": [
+  "users": [
     {
-      "id": 1,
-      "title": "make json-server",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nulla alias accusamus debitis similique ullam, exercitationem, natus, fuga aspernatur consequuntur numquam veniam. Enim amet sunt corporis, facere velit fugit non?"
+      "id": "1",
+      "name": "빠니보틀 Pani Bottle",
+      "email": "panibottle88@gmail.com",
+      "userType": "AIO",
+      "password": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "createdAt": "2021. 11. 29. 오후 12:44:22"
     },
     {
-      "id": 2,
-      "title": "make react app",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nulla alias accusamus debitis similique ullam, exercitationem, natus, fuga aspernatur consequuntur numquam veniam. Enim amet sunt corporis, facere velit fugit non?"
+      "id": "2",
+      "name": "영알남YAN",
+      "email": "Yan8522@gmail.com",
+      "userType": "STP",
+      "password": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "createdAt": "2021. 11. 29. 오후 12:44:22",
+      "ProviderType": "N"
     },
     {
-      "id": 3,
-      "title": "explain things to others",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nulla alias accusamus debitis similique ullam, exercitationem, natus, fuga aspernatur consequuntur numquam veniam. Enim amet sunt corporis, facere velit fugit non?"
+      "id": "3",
+      "name": "미키서 Mickey Seo",
+      "email": "MickeySeo88@naver.com",
+      "userType": "AHN",
+      "password": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "createdAt": "2021. 11. 29. 오후 12:44:22",
+      "ProviderType": "K"
     }
   ],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" }
+  "posts": [
+    {
+      "postId": "1",
+      "user": { "id": "1" },
+      "placeId": "1",
+      "placeType": "F",
+      "title": "강남역 쉑쉑 버거",
+      "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+      "create_time": "2021. 11. 29. 오후 1:44:22",
+      "update_time": "2021. 11. 29. 오후 1:44:22",
+      "images": [
+        {
+          "imageId:": "1",
+          "width": 200,
+          "height": 300,
+          "fileName": "asdas.jpg",
+          "filepath": "https://picsum.photos/200/300"
+        },
+        {
+          "imageId:": "2",
+          "width": 200,
+          "height": 300,
+          "fileName": "asdas.jpg",
+          "filepath": "https://picsum.photos/200/300"
+        },
+        {
+          "imageId:": "3",
+          "width": 200,
+          "height": 300,
+          "fileName": "asdas.jpg",
+          "filepath": "https://picsum.photos/200/300"
+        }
+      ],
+      "comments": [
+        {
+          "postId": "1",
+          "id": "2",
+          "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
+        },
+        {
+          "postId": "1",
+          "id": "3",
+          "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
+        },
+        {
+          "postId": "1",
+          "id": "4",
+          "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
+        }
+      ]
+    },
+    {
+      "postId": "2",
+      "user": { "id": "1" },
+      "placeId": "1",
+      "placeType": "F",
+      "title": "강남역 쉑쉑 버거",
+      "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+      "create_time": "2021. 11. 29. 오후 1:44:22",
+      "update_time": "2021. 11. 29. 오후 1:44:22",
+      "images": [
+        { "imageId:": "1", "filepath": "https://picsum.photos/200/300" },
+        { "imageId:": "2", "filepath": "https://picsum.photos/200/300" },
+        { "imageId:": "3", "filepath": "https://picsum.photos/200/300" }
+      ],
+      "comments": [
+        {
+          "postId": "1",
+          "id": "2",
+          "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
+        },
+        {
+          "postId": "1",
+          "id": "3",
+          "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
+        },
+        {
+          "postId": "1",
+          "id": "4",
+          "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
+        }
+      ]
+    },
+    {
+      "postId": "3",
+      "user": { "id": "1" },
+      "placeId": "1",
+      "id": "1",
+      "placeType": "F",
+      "title": "강남역 쉑쉑 버거",
+      "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+      "create_time": "2021. 11. 29. 오후 1:44:22",
+      "update_time": "2021. 11. 29. 오후 1:44:22",
+      "images": [
+        { "imageId:": "1", "filepath": "https://picsum.photos/200/300" },
+        { "imageId:": "2", "filepath": "https://picsum.photos/200/300" },
+        { "imageId:": "3", "filepath": "https://picsum.photos/200/300" }
+      ],
+      "comments": [
+        {
+          "postId": "1",
+          "id": "2",
+          "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
+        },
+        {
+          "postId": "1",
+          "id": "3",
+          "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
+        },
+        {
+          "postId": "1",
+          "id": "4",
+          "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
+        }
+      ]
+    }
+  ],
+  "diaries": [
+    {
+      "id": "1",
+      "name": "11월 29일 일기",
+      "date": "2021. 11. 29",
+      "posts": [
+        { "id": "1" },
+        { "id": "2" },
+        { "id": "3" },
+        { "id": "4" },
+        { "id": "5" }
+      ],
+      "createAt": "2021. 11. 29. 오후 1:44:22",
+      "updateAt": "2021. 11. 29. 오후 1:44:22"
+    },
+    {
+      "id": "2",
+      "name": "11월 27일 일기",
+      "date": "2021. 11. 27",
+      "posts": [
+        { "id": "1" },
+        { "id": "2" },
+        { "id": "3" },
+        { "id": "4" },
+        { "id": "5" }
+      ],
+      "createAt": "2021. 11. 29. 오후 1:44:22",
+      "updateAt": "2021. 11. 29. 오후 1:44:22"
+    },
+    {
+      "id": "3",
+      "name": "11월 25일 일기",
+      "date": "2021. 11. 25",
+      "posts": [
+        { "id": "1" },
+        { "id": "2" },
+        { "id": "3" },
+        { "id": "4" },
+        { "id": "5" }
+      ],
+      "createAt": "2021. 11. 29. 오후 1:44:22",
+      "updateAt": "2021. 11. 29. 오후 1:44:22"
+    }
+  ],
+  "tags": [
+    {
+      "id": "1",
+      "title": "맛집"
+    },
+    {
+      "id": "2",
+      "title": "사진 찍기 좋은 곳"
+    },
+    {
+      "id": "3",
+      "title": "감성카페"
+    }
+  ],
+  "playlists": [
+    {
+      "id": "1",
+      "title": "비오는 날 가기 좋은 감성 카페",
+      "posts": [{ "id": "1" }, { "id": "2" }, { "id": "3" }, { "id": "4" }]
+    },
+    {
+      "id": "2",
+      "title": "한적하고 분위기 있는 일식 맛집",
+      "posts": [{ "id": "5" }, { "id": "6" }, { "id": "7" }, { "id": "8" }]
+    }
+  ]
 }
