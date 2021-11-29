@@ -2,9 +2,9 @@ export default interface Entity {
   id: string;
   content: string;
   user: {
-    userId: string;
+    id: string;
   };
-  postId: {
-    postId: string;
+  post: {
+    id: string;
   };
 }

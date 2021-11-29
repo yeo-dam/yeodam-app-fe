@@ -1,7 +1,7 @@
 import PostEntity from "../PostEntity";
 
 export default interface Entity {
-  Id: string;
+  id: string;
   title: string;
   posts: PostEntity[];
   createAt: Date;

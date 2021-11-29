@@ -1,4 +1,4 @@
-import PlaceType from "enum/PlaceType";
+import PlaceType from "domain/enum/PlaceType";
 import CommentEntity from "../CommentEntity";
 import ImageFileEntity from "../ImageFileEntity";
 
@@ -7,7 +7,9 @@ export default interface Entity {
   user: {
     id: string;
   };
-  placeId: string;
+  place: {
+    id: string;
+  };
   title: string;
   description: string;
   createdAt: Date;
