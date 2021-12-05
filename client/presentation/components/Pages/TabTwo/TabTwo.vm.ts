@@ -1,4 +1,3 @@
-import { GetPostsAPI } from "Api";
 import PagerModel from "domain/model/PagerModel";
 import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
