@@ -1,3 +1,5 @@
+import { HOSTNAME, PORTNUMBER } from "@env";
+
 type FetchMethod = "GET" | "POST" | "PATCH" | "DELETE" | "PUT";
 type AnyObject = {
   [key: string]: any;
@@ -17,9 +19,10 @@ const Fetcher = async <T>(
   url: string,
   options?: FetcherRequest
 ): Promise<T> => {
-  console.log("Input >>>> ", url);
+  const requestUrl = `${HOSTNAME}:${PORTNUMBER}${url}`;
 
-  const requestUrl = `${process.env.HOSTNAME} +':'${process.env.PORTNUMBER} + ${url}`;
+  console.log("Input >>>> ", requestUrl);
+
   const response = await fetch(requestUrl, options);
   const data = await response.json();
 

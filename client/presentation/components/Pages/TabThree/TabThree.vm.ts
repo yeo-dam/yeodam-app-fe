@@ -1,14 +1,17 @@
-import { GetPostsAPI } from "Api";
+import PagerModel from "domain/model/PagerModel";
+import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
 import BaseViewModel from "../BaseViewModel";
 
-export default class TabThreeViewModel extends BaseViewModel {
-  private static _Instance: TabThreeViewModel;
+export default class TabOneViewModel extends BaseViewModel {
+  private static _Instance: TabOneViewModel;
+  private readonly _PostUserCase = PostRepositoryImpl.GetInstace();
+
   static GetInstance() {
-    if (!TabThreeViewModel._Instance) {
-      TabThreeViewModel._Instance = new TabThreeViewModel();
+    if (!TabOneViewModel._Instance) {
+      TabOneViewModel._Instance = new TabOneViewModel();
     }
-    return TabThreeViewModel._Instance;
+    return TabOneViewModel._Instance;
   }
   private constructor() {
     super();
@@ -19,6 +22,9 @@ export default class TabThreeViewModel extends BaseViewModel {
 
   @observable
   private _isError = observable.box<boolean>(false);
+
+  @observable
+  private _pager = observable.box<PagerModel>(undefined);
 
   @observable
   private _posts =
@@ -41,17 +47,19 @@ export default class TabThreeViewModel extends BaseViewModel {
     return this._posts.get();
   }
 
+  @computed
+  public get pager() {
+    return this._pager.get();
+  }
+
   @action
-  load = flow(function* (this: TabThreeViewModel) {
+  load = flow(function* (this: TabOneViewModel) {
     this._isLoading.set(true);
 
-    const [isApiError, data] = yield GetPostsAPI();
+    const [pager, posts] = yield this._PostUserCase.getPostlists();
 
-    if (!isApiError) {
-      this._posts.set(data);
-    } else {
-      this._isError.set(true);
-    }
+    this._posts.set(posts);
+    this._pager.set(pager);
 
     this._isLoading.set(false);
   });

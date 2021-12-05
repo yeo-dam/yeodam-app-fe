@@ -1,9 +1,13 @@
 import { GetPostsAPI } from "Api";
+import PagerModel from "domain/model/PagerModel";
+import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
 import BaseViewModel from "../BaseViewModel";
 
 export default class TabTwoViewModel extends BaseViewModel {
   private static _Instance: TabTwoViewModel;
+  private readonly _PostUserCase = PostRepositoryImpl.GetInstace();
+
   static GetInstance() {
     if (!TabTwoViewModel._Instance) {
       TabTwoViewModel._Instance = new TabTwoViewModel();
@@ -19,6 +23,9 @@ export default class TabTwoViewModel extends BaseViewModel {
 
   @observable
   private _isError = observable.box<boolean>(false);
+
+  @observable
+  private _pager = observable.box<PagerModel>(undefined);
 
   @observable
   private _posts =
@@ -45,13 +52,10 @@ export default class TabTwoViewModel extends BaseViewModel {
   load = flow(function* (this: TabTwoViewModel) {
     this._isLoading.set(true);
 
-    const [isApiError, data] = yield GetPostsAPI();
+    const [pager, posts] = yield this._PostUserCase.getPostlists();
 
-    if (!isApiError) {
-      this._posts.set(data);
-    } else {
-      this._isError.set(true);
-    }
+    this._posts.set(posts);
+    this._pager.set(pager);
 
     this._isLoading.set(false);
   });

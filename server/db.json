@@ -27,123 +27,129 @@
       "ProviderType": "K"
     }
   ],
-  "posts": [
-    {
-      "postId": "1",
-      "user": { "id": "1" },
-      "placeId": "1",
-      "placeType": "F",
-      "title": "강남역 쉑쉑 버거",
-      "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
-      "create_time": "2021. 11. 29. 오후 1:44:22",
-      "update_time": "2021. 11. 29. 오후 1:44:22",
-      "images": [
-        {
-          "imageId:": "1",
-          "width": 200,
-          "height": 300,
-          "fileName": "asdas.jpg",
-          "filepath": "https://picsum.photos/200/300"
-        },
-        {
-          "imageId:": "2",
-          "width": 200,
-          "height": 300,
-          "fileName": "asdas.jpg",
-          "filepath": "https://picsum.photos/200/300"
-        },
-        {
-          "imageId:": "3",
-          "width": 200,
-          "height": 300,
-          "fileName": "asdas.jpg",
-          "filepath": "https://picsum.photos/200/300"
-        }
-      ],
-      "comments": [
-        {
-          "postId": "1",
-          "id": "2",
-          "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
-        },
-        {
-          "postId": "1",
-          "id": "3",
-          "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
-        },
-        {
-          "postId": "1",
-          "id": "4",
-          "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
-        }
-      ]
-    },
-    {
-      "postId": "2",
-      "user": { "id": "1" },
-      "placeId": "1",
-      "placeType": "F",
-      "title": "강남역 쉑쉑 버거",
-      "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
-      "create_time": "2021. 11. 29. 오후 1:44:22",
-      "update_time": "2021. 11. 29. 오후 1:44:22",
-      "images": [
-        { "imageId:": "1", "filepath": "https://picsum.photos/200/300" },
-        { "imageId:": "2", "filepath": "https://picsum.photos/200/300" },
-        { "imageId:": "3", "filepath": "https://picsum.photos/200/300" }
-      ],
-      "comments": [
-        {
-          "postId": "1",
-          "id": "2",
-          "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
-        },
-        {
-          "postId": "1",
-          "id": "3",
-          "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
-        },
-        {
-          "postId": "1",
-          "id": "4",
-          "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
-        }
-      ]
-    },
-    {
-      "postId": "3",
-      "user": { "id": "1" },
-      "placeId": "1",
-      "id": "1",
-      "placeType": "F",
-      "title": "강남역 쉑쉑 버거",
-      "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
-      "create_time": "2021. 11. 29. 오후 1:44:22",
-      "update_time": "2021. 11. 29. 오후 1:44:22",
-      "images": [
-        { "imageId:": "1", "filepath": "https://picsum.photos/200/300" },
-        { "imageId:": "2", "filepath": "https://picsum.photos/200/300" },
-        { "imageId:": "3", "filepath": "https://picsum.photos/200/300" }
-      ],
-      "comments": [
-        {
-          "postId": "1",
-          "id": "2",
-          "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
-        },
-        {
-          "postId": "1",
-          "id": "3",
-          "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
-        },
-        {
-          "postId": "1",
-          "id": "4",
-          "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
-        }
-      ]
-    }
-  ],
+  "posts": {
+    "items": [
+      {
+        "postId": "1",
+        "user": { "id": "1" },
+        "placeId": "1",
+        "placeType": "F",
+        "title": "강남역 쉑쉑 버거",
+        "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+        "create_time": "2021. 11. 29. 오후 1:44:22",
+        "update_time": "2021. 11. 29. 오후 1:44:22",
+        "images": [
+          {
+            "imageId:": "1",
+            "width": 200,
+            "height": 300,
+            "fileName": "asdas.jpg",
+            "filepath": "https://picsum.photos/200/300"
+          },
+          {
+            "imageId:": "2",
+            "width": 200,
+            "height": 300,
+            "fileName": "asdas.jpg",
+            "filepath": "https://picsum.photos/200/300"
+          },
+          {
+            "imageId:": "3",
+            "width": 200,
+            "height": 300,
+            "fileName": "asdas.jpg",
+            "filepath": "https://picsum.photos/200/300"
+          }
+        ],
+        "comments": [
+          {
+            "postId": "1",
+            "id": "2",
+            "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
+          },
+          {
+            "postId": "1",
+            "id": "3",
+            "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
+          },
+          {
+            "postId": "1",
+            "id": "4",
+            "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
+          }
+        ]
+      },
+      {
+        "postId": "2",
+        "user": { "id": "1" },
+        "placeId": "1",
+        "placeType": "F",
+        "title": "강남역 쉑쉑 버거",
+        "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+        "create_time": "2021. 11. 29. 오후 1:44:22",
+        "update_time": "2021. 11. 29. 오후 1:44:22",
+        "images": [
+          { "imageId:": "1", "filepath": "https://picsum.photos/200/300" },
+          { "imageId:": "2", "filepath": "https://picsum.photos/200/300" },
+          { "imageId:": "3", "filepath": "https://picsum.photos/200/300" }
+        ],
+        "comments": [
+          {
+            "postId": "1",
+            "id": "2",
+            "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
+          },
+          {
+            "postId": "1",
+            "id": "3",
+            "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
+          },
+          {
+            "postId": "1",
+            "id": "4",
+            "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
+          }
+        ]
+      },
+      {
+        "postId": "3",
+        "user": { "id": "1" },
+        "placeId": "1",
+        "id": "1",
+        "placeType": "F",
+        "title": "강남역 쉑쉑 버거",
+        "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+        "create_time": "2021. 11. 29. 오후 1:44:22",
+        "update_time": "2021. 11. 29. 오후 1:44:22",
+        "images": [
+          { "imageId:": "1", "filepath": "https://picsum.photos/200/300" },
+          { "imageId:": "2", "filepath": "https://picsum.photos/200/300" },
+          { "imageId:": "3", "filepath": "https://picsum.photos/200/300" }
+        ],
+        "comments": [
+          {
+            "postId": "1",
+            "id": "2",
+            "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
+          },
+          {
+            "postId": "1",
+            "id": "3",
+            "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
+          },
+          {
+            "postId": "1",
+            "id": "4",
+            "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
+          }
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 10,
+    "total": 3,
+    "count": 3
+  },
   "diaries": [
     {
       "id": "1",

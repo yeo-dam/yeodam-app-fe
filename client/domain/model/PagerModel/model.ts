@@ -1,7 +1,5 @@
 import { IsNotEmpty, IsNumber } from "class-validator";
-import PagerEntity from "data/entity/PagerEntity";
-
-export default class PagerModel implements PagerEntity {
+export default class PagerModel {
   @IsNumber()
   @IsNotEmpty()
   total: number;

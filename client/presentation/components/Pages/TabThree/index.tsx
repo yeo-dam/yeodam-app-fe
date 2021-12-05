@@ -33,7 +33,7 @@ const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabThree">) => {
   }
 
   return (
-    <ContentLayout path="/screens/TabOneScreen.tsx">
+    <ContentLayout path="/screens/TabThreeScreen.tsx">
       <Text>Tab Three</Text>
       <View>
         {vm.posts && vm.posts.length > 0 ? (
