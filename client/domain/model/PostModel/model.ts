@@ -7,12 +7,12 @@ import {
   IsOptional,
   IsString,
 } from "class-validator";
-import PostEntity from "data/entity/PostEntity";
-import PlaceType from "domain/enum/PlaceType";
-import ImageFileModel from "../ImageFileModel/model";
-import PlaceModel from "../PlaceModel";
-import UserModel from "../UserModel";
-import CommentModel from "../CommentModel";
+import PostEntity from "~data/entity/PostEntity";
+import PlaceType from "~domain/enum/PlaceType";
+import ImageFileModel from "~domain/model/ImageFileModel/model";
+import PlaceModel from "~domain/model/PlaceModel";
+import UserModel from "~domain/model/UserModel";
+import CommentModel from "~domain/model/CommentModel";
 import { Type } from "class-transformer";
 
 class PostModel implements PostEntity {

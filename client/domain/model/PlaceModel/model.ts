@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsString } from "class-validator";
-import PlaceType from "domain/enum/PlaceType";
+import PlaceType from "../../enum/PlaceType";
 
 class PlaceModel {
   @IsString()

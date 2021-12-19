@@ -4,7 +4,4 @@ export default interface Entity {
   user: {
     id: string;
   };
-  post: {
-    id: string;
-  };
 }

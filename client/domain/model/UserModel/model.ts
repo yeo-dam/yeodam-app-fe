@@ -6,9 +6,9 @@ import {
   IsOptional,
   IsString,
 } from "class-validator";
-import UserEntity from "data/entity/UserEntity";
-import ProviderType from "domain/enum/ProviderType";
-import UserMbtiType from "domain/enum/UserMbtiType";
+import UserEntity from "../../../data/entity/UserEntity";
+import ProviderType from "../../enum/ProviderType";
+import UserMbtiType from "../../enum/UserMbtiType";
 import ImageFileModel from "../ImageFileModel";
 
 export default class UserModel implements UserEntity {
