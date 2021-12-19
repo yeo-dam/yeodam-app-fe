@@ -1,15 +1,13 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "start:and": "adb reverse tcp:3001 tcp:3001; expo start;;",
+    "start": "adb reverse tcp:3001 tcp:3001; expo start",
+    "start:clear": "adb reverse tcp:3001 tcp:3001; expo start -c",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll",
-    "storybook": "start-storybook -p 7007",
-    "build-storybook": "build-storybook"
+    "test": "jest --watchAll"
   },
   "jest": {
     "preset": "jest-expo",
@@ -22,6 +20,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
+    "@hookform/resolvers": "^2.8.4",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
@@ -35,10 +34,12 @@
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
     "expo-web-browser": "~9.2.0",
+    "firebase": "8.2.3",
     "mobx": "^6.3.7",
     "mobx-react": "^7.2.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-hook-form": "^7.21.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-dotenv": "^3.3.0",
     "react-native-gesture-handler": "~1.10.2",
@@ -53,13 +54,6 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-decorators": "^7.16.4",
-    "@storybook/addon-actions": "^5.3",
-    "@storybook/addon-knobs": "^5.3",
-    "@storybook/addon-links": "^5.3",
-    "@storybook/addon-ondevice-actions": "^5.3.23",
-    "@storybook/addon-ondevice-knobs": "^5.3.25",
-    "@storybook/react-native": "^5.3.25",
-    "@storybook/react-native-server": "^5.3.23",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
     "@types/react-native-dotenv": "^0.2.0",
