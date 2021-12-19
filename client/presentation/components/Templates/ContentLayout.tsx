@@ -1,15 +1,17 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
+import { Text } from "react-native";
 
 import { View } from "../Themed";
 
 type Props = {
-  path: string;
+  title: string;
 };
 
-const ContentLayout: FC<Props> = ({ path, children }) => {
+const ContentLayout: FC<Props> = ({ title, children }) => {
   return (
     <Wrapper>
+      <Text>{title}</Text>
       <View>{children}</View>
     </Wrapper>
   );

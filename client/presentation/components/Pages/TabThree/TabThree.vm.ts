@@ -1,4 +1,5 @@
 import PagerModel from "domain/model/PagerModel";
+import PostModel from "domain/model/PostModel/model";
 import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
 import BaseViewModel from "../BaseViewModel";
@@ -27,10 +28,7 @@ export default class TabOneViewModel extends BaseViewModel {
   private _pager = observable.box<PagerModel>(undefined);
 
   @observable
-  private _posts =
-    observable.box<{ id: number; title: string; description: string }[]>(
-      undefined
-    );
+  private _posts = observable.box<PostModel[]>(undefined);
 
   @computed
   public get isLoading() {

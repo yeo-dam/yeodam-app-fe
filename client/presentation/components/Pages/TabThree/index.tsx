@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { FlatList, ListRenderItem, StyleSheet } from "react-native";
 import { useEffect } from "react";
 
 import ContentLayout from "~presentation/components/Templates/ContentLayout";
@@ -11,6 +11,8 @@ import Loadable from "~presentation/components/Molecules/Loadable";
 import { getRootViewModel } from "../Index.vm";
 import TabThreeViewModel from "./TabThree.vm";
 import { observer } from "mobx-react";
+import PostModel from "domain/model/PostModel";
+import SamplePost from "~presentation/components/Organisms/SamplePost";
 
 const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabThree">) => {
   const vm = getRootViewModel<TabThreeViewModel>(
@@ -33,17 +35,14 @@ const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabThree">) => {
   }
 
   return (
-    <ContentLayout path="/screens/TabThreeScreen.tsx">
-      <Text>Tab Three</Text>
+    <ContentLayout title="Tab Three">
       <View>
         {vm.posts && vm.posts.length > 0 ? (
-          vm.posts.map((item, index) => (
-            <View key={index}>
-              <Text>{item.id}</Text>
-              <Text>{item.title}</Text>
-              <Text>{item.description}</Text>
-            </View>
-          ))
+          <FlatList<PostModel>
+            data={vm.posts}
+            renderItem={SamplePost}
+            keyExtractor={(item) => item.id}
+          ></FlatList>
         ) : (
           <NoData />
         )}
