@@ -1,4 +1,5 @@
 import { IsBoolean, IsDate, IsNotEmpty, IsString } from "class-validator";
+import TransformDate from "~domain/helper/transformDate";
 
 class FileModel {
   @IsString()
@@ -6,10 +7,12 @@ class FileModel {
   id: string;
 
   @IsDate()
+  @TransformDate()
   @IsNotEmpty()
   createdAt: Date;
 
   @IsDate()
+  @TransformDate()
   @IsNotEmpty()
   updatedAt: Date;
 

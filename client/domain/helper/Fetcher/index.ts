@@ -3,6 +3,18 @@ type AnyObject = {
   [key: string]: any;
 };
 
+export type ResponseChecker<T> = T extends { items: T[] } ? ListFormat<T> : T;
+
+export type ListFormat<T> = {
+  items: T[];
+  currentItemCount: number;
+  itemsPerPage: number;
+  pageIndex: number;
+  startIndex: number;
+  totalItems: number;
+  totalPages: number;
+};
+
 export type FetcherRequest = Pick<RequestInit, "body"> & {
   method?: FetchMethod;
   accessToken?: string;
@@ -16,7 +28,7 @@ export type FetcherRequest = Pick<RequestInit, "body"> & {
 const Fetcher = async <T>(
   url: string,
   options?: FetcherRequest
-): Promise<T> => {
+): Promise<ResponseChecker<T>> => {
   const mergedOpt: RequestInit = { method: "GET" };
 
   if (options?.method !== undefined) {
@@ -36,6 +48,7 @@ const Fetcher = async <T>(
       Expires: "-1",
       Pragma: "no-cache",
     };
+    3;
   }
   // 바디 체크[E]
   if (options?.body !== undefined) {

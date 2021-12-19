@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import { IsEnum, IsNotEmpty, IsString } from "class-validator";
 import PlaceType from "../../enum/PlaceType";
 

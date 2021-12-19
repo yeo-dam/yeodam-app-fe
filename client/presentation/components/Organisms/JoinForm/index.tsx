@@ -1,5 +1,5 @@
 import LoginDto from "domain/dto/LoginDto";
-import classValidatorResolver from "domain/helper/classValidator";
+import classValidatorResolver from "~domain/helper/classValidator";
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import Button from "~presentation/components/Atoms/Button";

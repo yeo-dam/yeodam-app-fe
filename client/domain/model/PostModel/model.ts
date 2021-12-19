@@ -2,28 +2,31 @@ import {
   ArrayNotEmpty,
   IsArray,
   IsDate,
-  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
+  ValidateNested,
 } from "class-validator";
 import PostEntity from "~data/entity/PostEntity";
-import PlaceType from "~domain/enum/PlaceType";
 import ImageFileModel from "~domain/model/ImageFileModel/model";
 import PlaceModel from "~domain/model/PlaceModel";
 import UserModel from "~domain/model/UserModel";
 import CommentModel from "~domain/model/CommentModel";
 import { Type } from "class-transformer";
+import TransformDate from "~domain/helper/transformDate";
 
 class PostModel implements PostEntity {
   @IsString()
   @IsNotEmpty()
   id: string;
 
+  @ValidateNested()
+  @Type(() => UserModel)
   @IsNotEmpty()
   user: UserModel;
 
-  @IsEnum(PlaceModel)
+  @ValidateNested()
+  @Type(() => PlaceModel)
   @IsNotEmpty()
   place: PlaceModel;
 
@@ -36,23 +39,23 @@ class PostModel implements PostEntity {
   description: string;
 
   @IsDate()
+  @TransformDate()
   @IsNotEmpty()
   createdAt: Date;
 
   @IsDate()
+  @TransformDate()
   @IsOptional()
   updatedAt?: Date;
 
-  @IsEnum(PlaceType)
-  @IsNotEmpty()
-  placeType: PlaceType;
-
+  @ValidateNested({ each: true })
   @Type(() => ImageFileModel)
   @IsArray()
   @ArrayNotEmpty()
   @IsNotEmpty()
   images: ImageFileModel[];
 
+  @ValidateNested({ each: true })
   @Type(() => CommentModel)
   @IsArray()
   @IsOptional()
