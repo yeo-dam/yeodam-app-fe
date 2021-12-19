@@ -1,7 +1,10 @@
 import { plainToClass } from "class-transformer";
-import PlaylistRemoteDataSource from "data/remote/PlaylistRemoteDataSource";
-import PagerModel from "domain/model/PagerModel/model";
-import PlaylistModel from "domain/model/PlaylistModel";
+import { validate } from "class-validator";
+import PagerEntity from "~data/entity/PagerEntity";
+import PlaylistEntity from "~data/entity/PlaylistEntity";
+import Fetcher from "~domain/helper/Fetcher";
+import PagerModel from "~domain/model/PagerModel/model";
+import PlaylistModel from "~domain/model/PlaylistModel";
 
 interface PlaylistRepository {
   getPlaylists(): Promise<[PagerModel, PlaylistModel[]]>;
@@ -16,23 +19,29 @@ export default class PlaylistRepositoryImpl implements PlaylistRepository {
     return PlaylistRepositoryImpl._Instance;
   }
 
-  private readonly _remote = PlaylistRemoteDataSource.GetInstace();
   private constructor() {}
 
   public async getPlaylists(): Promise<[PagerModel, PlaylistModel[]]> {
-    const playLists = await this._remote.GetPlaylists();
-    const playlistInstances = playLists.items.map((post) =>
+    const playlistEntities = await Fetcher<PagerEntity<PlaylistEntity>>(
+      "/playlists"
+    );
+    const playlistInstances = playlistEntities.items.map((post) =>
       plainToClass(PlaylistModel, {
         ...post,
       })
     );
 
     const pagerModel = plainToClass(PagerModel, {
-      count: playLists.count,
-      total: playLists.total,
-      limit: playLists.limit,
-      offset: playLists.offset,
+      count: playlistEntities.count,
+      total: playlistEntities.total,
+      limit: playlistEntities.limit,
+      offset: playlistEntities.offset,
     });
+
+    const err = await validate(playlistInstances);
+    if (err.length > 0) {
+      throw err;
+    }
 
     return [pagerModel, playlistInstances];
   }

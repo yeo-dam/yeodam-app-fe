@@ -1,7 +1,10 @@
 import { plainToClass } from "class-transformer";
-import DiaryRemoteDataSource from "data/remote/DiaryRemoteDataSource";
-import PagerModel from "domain/model/PagerModel";
-import DiaryModel from "domain/model/DiaryModel";
+import PagerModel from "~domain/model/PagerModel";
+import DiaryModel from "~domain/model/DiaryModel";
+import Fetcher from "~domain/helper/Fetcher";
+import PagerEntity from "~data/entity/PagerEntity";
+import DiaryEntity from "~data/entity/DiaryEntity";
+import { validate } from "class-validator";
 
 interface DiaryRepository {
   getDiarylists(): Promise<[PagerModel, DiaryModel[]]>;
@@ -16,11 +19,10 @@ export default class DiaryRepositoryImpl implements DiaryRepository {
     return DiaryRepositoryImpl._Instance;
   }
 
-  private readonly _remote = DiaryRemoteDataSource.GetInstace();
   private constructor() {}
 
   public async getDiarylists(): Promise<[PagerModel, DiaryModel[]]> {
-    const diaryLists = await this._remote.GetDiaries();
+    const diaryLists = await Fetcher<PagerEntity<DiaryEntity>>("/diaries");
     const diaryInstances = diaryLists.items.map((post) =>
       plainToClass(DiaryModel, {
         ...post,
@@ -33,6 +35,12 @@ export default class DiaryRepositoryImpl implements DiaryRepository {
       limit: diaryLists.limit,
       offset: diaryLists.offset,
     });
+
+    const err = await validate(diaryInstances);
+    if (err.length > 0) {
+      throw err;
+    }
+
     return [pagerModel, diaryInstances];
   }
 }

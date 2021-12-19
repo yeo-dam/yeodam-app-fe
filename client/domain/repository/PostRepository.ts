@@ -1,7 +1,10 @@
 import { plainToClass } from "class-transformer";
-import PostRemoteDataSource from "data/remote/PostRemoteDataSource";
-import PagerModel from "domain/model/PagerModel";
-import PostModel from "domain/model/PostModel";
+import { validate } from "class-validator";
+import PagerEntity from "~data/entity/PagerEntity";
+import PostEntity from "~data/entity/PostEntity";
+import Fetcher from "~domain/helper/Fetcher";
+import PagerModel from "~domain/model/PagerModel";
+import PostModel from "~domain/model/PostModel";
 
 interface PostRepository {
   getPostlists(): Promise<[PagerModel, PostModel[]]>;
@@ -16,23 +19,29 @@ export default class PostRepositoryImpl implements PostRepository {
     return PostRepositoryImpl._Instance;
   }
 
-  private readonly _remote = PostRemoteDataSource.GetInstace();
   private constructor() {}
 
   public async getPostlists(): Promise<[PagerModel, PostModel[]]> {
-    const postLists = await this._remote.GetPosts();
-    const postInstances = postLists.items.map((post) =>
+    const postlistEntities = await Fetcher<PagerEntity<PostEntity>>("/posts");
+    const postInstances = postlistEntities.items.map((post) =>
       plainToClass(PostModel, {
         ...post,
       })
     );
 
     const pagerModel = plainToClass(PagerModel, {
-      count: postLists.count,
-      total: postLists.total,
-      limit: postLists.limit,
-      offset: postLists.offset,
+      count: postlistEntities.count,
+      total: postlistEntities.total,
+      limit: postlistEntities.limit,
+      offset: postlistEntities.offset,
     });
+
+    const err = await validate(postInstances, {});
+    if (err.length > 0) {
+      throw new Error("Validation Failed!!");
+    } else {
+      console.log("Validtaion Successed!!");
+    }
 
     return [pagerModel, postInstances];
   }

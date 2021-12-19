@@ -1,7 +1,10 @@
 import { plainToClass } from "class-transformer";
-import UserRemoteDataSource from "data/remote/UserRemoteDataSource";
-import PagerModel from "domain/model/PagerModel/model";
-import UserModel from "domain/model/UserModel/model";
+import { validate } from "class-validator";
+import PagerEntity from "~data/entity/PagerEntity";
+import UserEntity from "~data/entity/UserEntity";
+import Fetcher from "~domain/helper/Fetcher";
+import PagerModel from "~domain/model/PagerModel/model";
+import UserModel from "~domain/model/UserModel/model";
 
 interface UserRepository {
   getUserlists(): Promise<[PagerModel, UserModel[]]>;
@@ -16,23 +19,27 @@ export default class UserRepositoryImpl implements UserRepository {
     return UserRepositoryImpl._Instance;
   }
 
-  private readonly _remote = UserRemoteDataSource.GetInstace();
   private constructor() {}
 
   public async getUserlists(): Promise<[PagerModel, UserModel[]]> {
-    const userList = await this._remote.GetUsers();
-    const userListInstances = userList.items.map((post) =>
+    const userlistEntities = await Fetcher<PagerEntity<UserEntity>>("/users");
+    const userListInstances = userlistEntities.items.map((post) =>
       plainToClass(UserModel, {
         ...post,
       })
     );
 
     const pagerModel = plainToClass(PagerModel, {
-      count: userList.count,
-      total: userList.total,
-      limit: userList.limit,
-      offset: userList.offset,
+      count: userlistEntities.count,
+      total: userlistEntities.total,
+      limit: userlistEntities.limit,
+      offset: userlistEntities.offset,
     });
+
+    const err = await validate(userListInstances);
+    if (err.length > 0) {
+      throw err;
+    }
 
     return [pagerModel, userListInstances];
   }
