@@ -2,8 +2,13 @@ import * as React from "react";
 
 import { Text, TextProps } from "../../Themed";
 
-export function MonoText(props: TextProps) {
+function Typography(props: TextProps) {
   return (
-    <Text {...props} style={[props.style, { fontFamily: "space-mono" }]} />
+    <Text
+      {...props}
+      style={[props.style, { fontFamily: "Spoqa-Han-Sans-Neo" }]}
+    />
   );
 }
+
+export default Typography;
