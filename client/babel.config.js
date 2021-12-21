@@ -20,6 +20,7 @@ module.exports = function (api) {
             "~presentation": "./presentation",
             "~domain": "./domain",
             "~data": "./data",
+            "~asset": "./assets",
           },
         },
       ],

@@ -6,22 +6,23 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Image, Pressable } from "react-native";
+import { ColorSchemeName, Image, Pressable, View } from "react-native";
 import styled from "styled-components/native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../presentation/components/Pages/TabOne";
-import TabThreeScreen from "../presentation/components/Pages/TabThree";
-import TabTwoScreen from "../presentation/components/Pages/TabTwo";
+import MainScreen from "../presentation/components/Pages/Main";
+import MyPageScreen from "../presentation/components/Pages/MyPage";
+import CreateScreen from "../presentation/components/Pages/Create";
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import { WithLocalSvg } from "react-native-svg";
 
 export default function Navigation({
   colorScheme,
@@ -67,7 +68,7 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Main"
       backBehavior="order"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
@@ -75,74 +76,38 @@ function BottomTabNavigator() {
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          tabBarLabel: "포트폴리오",
+        name="Main"
+        component={MainScreen}
+        options={({ navigation }: RootTabScreenProps<"Main">) => ({
+          tabBarLabel: "홈",
           tabBarIcon: () => (
-            <Image source={require("../assets/Icons/Navigation/Main.png")} />
-          ),
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}>
-              <BackIcon
-                source={require("../assets/Icons/Navigation/Back.png")}
-              />
-            </Pressable>
-          ),
-          headerRight: () => (
-            <Pressable onPress={() => console.log("X button Clicked")}>
-              <CloseIcon
-                source={require("../assets/Icons/Navigation/Close.png")}
-              />
-            </Pressable>
+            <WithLocalSvg asset={require("~asset/Icons/Navigation/Add.svg")} />
           ),
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={({ navigation }: RootTabScreenProps<"TabTwo">) => ({
-          tabBarLabel: "계좌",
+        name="Create"
+        component={CreateScreen}
+        options={({ navigation }: RootTabScreenProps<"Create">) => ({
+          tabBarLabel: "생성",
           tabBarIcon: () => (
-            <Image source={require("../assets/Icons/Navigation/Account.png")} />
-          ),
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}>
-              <BackIcon
-                source={require("../assets/Icons/Navigation/Back.png")}
+            <CreateBtnBox>
+              <WithLocalSvg
+                asset={require("~asset/Icons/Navigation/createBtn.svg")}
               />
-            </Pressable>
-          ),
-          headerRight: () => (
-            <Pressable onPress={() => console.log("X button Clicked")}>
-              <CloseIcon
-                source={require("../assets/Icons/Navigation/Close.png")}
-              />
-            </Pressable>
+            </CreateBtnBox>
           ),
         })}
       />
       <BottomTab.Screen
-        name="TabThree"
-        component={TabThreeScreen}
-        options={({ navigation }: RootTabScreenProps<"TabThree">) => ({
+        name="MyPage"
+        component={MyPageScreen}
+        options={({ navigation }: RootTabScreenProps<"MyPage">) => ({
           tabBarLabel: "설정",
           tabBarIcon: () => (
-            <Image source={require("../assets/Icons/Navigation/Setting.png")} />
-          ),
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}>
-              <BackIcon
-                source={require("../assets/Icons/Navigation/Back.png")}
-              />
-            </Pressable>
-          ),
-          headerRight: () => (
-            <Pressable onPress={() => console.log("X button Clicked")}>
-              <CloseIcon
-                source={require("../assets/Icons/Navigation/Close.png")}
-              />
-            </Pressable>
+            <WithLocalSvg
+              asset={require("~asset/Icons/Navigation/Setting.svg")}
+            />
           ),
         })}
       />
@@ -156,4 +121,8 @@ const BackIcon = styled(Image)`
 
 const CloseIcon = styled(Image)`
   margin-right: 32px;
+`;
+
+const CreateBtnBox = styled.View`
+  padding-top: 8;
 `;

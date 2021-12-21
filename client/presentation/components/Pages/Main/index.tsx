@@ -1,23 +1,24 @@
 import * as React from "react";
-import { FlatList, ListRenderItem, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import { useEffect } from "react";
 
 import ContentLayout from "~presentation/components/Templates/ContentLayout";
 import { Text, View } from "../../Themed";
 import { RootTabScreenProps } from "../../../../types";
-import ErrorMsg from "~presentation/components/Molecules/ErrorMsg";
 import NoData from "~presentation/components/Molecules/NoData";
+import ErrorMsg from "~presentation/components/Molecules/ErrorMsg";
 import Loadable from "~presentation/components/Molecules/Loadable";
 import { getRootViewModel } from "../Index.vm";
-import TabTwoViewModel from "./TabTwo.vm";
+import MainViewModel from "./Main.vm";
 import { observer } from "mobx-react";
-import PostModel from "domain/model/PostModel";
+import PostModel from "domain/model/PostModel/model";
 import SamplePost from "~presentation/components/Organisms/SamplePost";
+import Nav from "~presentation/components/Organisms/Nav";
+import Carousel from "~presentation/components/Organisms/Carousel";
+import styled from "styled-components/native";
 
-const TabTwoScreen = ({ navigation }: RootTabScreenProps<"TabTwo">) => {
-  const vm = getRootViewModel<TabTwoViewModel>(
-    (viewModel) => viewModel.tab.tabTwo
-  );
+const MainScreen = ({ navigation }: RootTabScreenProps<"Main">) => {
+  const vm = getRootViewModel<MainViewModel>((viewModel) => viewModel.tab.Main);
 
   useEffect(() => {
     async function loadPosts() {
@@ -35,7 +36,9 @@ const TabTwoScreen = ({ navigation }: RootTabScreenProps<"TabTwo">) => {
   }
 
   return (
-    <ContentLayout title="Tab Two">
+    <ContentLayout>
+      <Carousel />
+      <Nav />
       <View>
         {vm.posts && vm.posts.length > 0 ? (
           <FlatList<PostModel>
@@ -51,7 +54,9 @@ const TabTwoScreen = ({ navigation }: RootTabScreenProps<"TabTwo">) => {
   );
 };
 
-export default observer(TabTwoScreen);
+export default observer(MainScreen);
+
+const ScrollList = styled.View``;
 
 const styles = StyleSheet.create({
   container: {
