@@ -4,15 +4,15 @@ import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
 import BaseViewModel from "../BaseViewModel";
 
-export default class TabTwoViewModel extends BaseViewModel {
-  private static _Instance: TabTwoViewModel;
+export default class CreateModel extends BaseViewModel {
+  private static _Instance: CreateModel;
   private readonly _PostUserCase = PostRepositoryImpl.GetInstace();
 
   static GetInstance() {
-    if (!TabTwoViewModel._Instance) {
-      TabTwoViewModel._Instance = new TabTwoViewModel();
+    if (!CreateModel._Instance) {
+      CreateModel._Instance = new CreateModel();
     }
-    return TabTwoViewModel._Instance;
+    return CreateModel._Instance;
   }
   private constructor() {
     super();
@@ -46,7 +46,7 @@ export default class TabTwoViewModel extends BaseViewModel {
   }
 
   @action
-  load = flow(function* (this: TabTwoViewModel) {
+  load = flow(function* (this: CreateModel) {
     this._isLoading.set(true);
 
     const [pager, posts] = yield this._PostUserCase.getPostlists();

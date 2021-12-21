@@ -5,13 +5,12 @@ import { Text } from "react-native";
 import { View } from "../Themed";
 
 type Props = {
-  title: string;
+  title?: string;
 };
 
 const ContentLayout: FC<Props> = ({ title, children }) => {
   return (
     <Wrapper>
-      <Text>{title}</Text>
       <View>{children}</View>
     </Wrapper>
   );
@@ -20,7 +19,7 @@ const ContentLayout: FC<Props> = ({ title, children }) => {
 export default ContentLayout;
 
 const Wrapper = styled.View`
-  flex: 1;
+  margin-top: 20;
   align-items: center;
   justify-content: center;
 `;

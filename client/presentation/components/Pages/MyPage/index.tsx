@@ -1,22 +1,23 @@
 import * as React from "react";
-import { FlatList, ListRenderItem, ScrollView, StyleSheet } from "react-native";
+import { FlatList, ListRenderItem, StyleSheet } from "react-native";
 import { useEffect } from "react";
 
 import ContentLayout from "~presentation/components/Templates/ContentLayout";
-import { Text, View } from "../../Themed";
+import { Text, View } from "~presentation/components/Themed";
 import { RootTabScreenProps } from "../../../../types";
-import NoData from "~presentation/components/Molecules/NoData";
 import ErrorMsg from "~presentation/components/Molecules/ErrorMsg";
+import NoData from "~presentation/components/Molecules/NoData";
 import Loadable from "~presentation/components/Molecules/Loadable";
 import { getRootViewModel } from "../Index.vm";
-import TabOneViewModel from "./TabOne.vm";
-import { observer, Observer } from "mobx-react";
-import PostModel from "domain/model/PostModel/model";
+import MyPageViewModel from "./MyPage.vm";
+import { observer } from "mobx-react";
+import PostModel from "domain/model/PostModel";
 import SamplePost from "~presentation/components/Organisms/SamplePost";
+import Typography from "~presentation/components/Atoms/Typography";
 
-const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabOne">) => {
-  const vm = getRootViewModel<TabOneViewModel>(
-    (viewModel) => viewModel.tab.tabOne
+const MyPageScreen = ({ navigation }: RootTabScreenProps<"MyPage">) => {
+  const vm = getRootViewModel<MyPageViewModel>(
+    (viewModel) => viewModel.tab.MyPage
   );
 
   useEffect(() => {
@@ -35,23 +36,15 @@ const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabOne">) => {
   }
 
   return (
-    <ContentLayout title="Tab One">
+    <ContentLayout title="Tab Three">
       <View>
-        {vm.posts && vm.posts.length > 0 ? (
-          <FlatList<PostModel>
-            data={vm.posts}
-            renderItem={SamplePost}
-            keyExtractor={(item) => item.id}
-          ></FlatList>
-        ) : (
-          <NoData />
-        )}
+        <Typography>마이페이지</Typography>
       </View>
     </ContentLayout>
   );
 };
 
-export default observer(TabOneScreen);
+export default observer(MyPageScreen);
 
 const styles = StyleSheet.create({
   container: {

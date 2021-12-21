@@ -1,15 +1,15 @@
 import { useLocalObservable } from "mobx-react-lite";
 import React, { useContext } from "react";
-import TabOneViewModel from "./TabOne/TabOne.vm";
-import TabThreeViewModel from "./TabThree/TabThree.vm";
-import TabTwoViewModel from "./TabTwo/TabTwo.vm";
+import MainViewModel from "./Main/Main.vm";
+import MyPageViewModel from "./MyPage/MyPage.vm";
+import CreateViewModel from "./Create/Create.vm";
 
 const createViewModel = () => {
   return {
     tab: {
-      tabOne: TabOneViewModel.GetInstance(),
-      tabTwo: TabTwoViewModel.GetInstance(),
-      tabThree: TabThreeViewModel.GetInstance(),
+      Main: MainViewModel.GetInstance(),
+      Create: CreateViewModel.GetInstance(),
+      MyPage: MyPageViewModel.GetInstance(),
     },
   };
 };

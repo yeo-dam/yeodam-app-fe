@@ -1,22 +1,23 @@
 import * as React from "react";
-import { FlatList, ListRenderItem, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import { useEffect } from "react";
 
 import ContentLayout from "~presentation/components/Templates/ContentLayout";
-import { Text, View } from "~presentation/components/Themed";
+import { View } from "../../Themed";
 import { RootTabScreenProps } from "../../../../types";
 import ErrorMsg from "~presentation/components/Molecules/ErrorMsg";
 import NoData from "~presentation/components/Molecules/NoData";
 import Loadable from "~presentation/components/Molecules/Loadable";
 import { getRootViewModel } from "../Index.vm";
-import TabThreeViewModel from "./TabThree.vm";
+import CreateViewModel from "./Create.vm";
 import { observer } from "mobx-react";
 import PostModel from "domain/model/PostModel";
 import SamplePost from "~presentation/components/Organisms/SamplePost";
+import Typography from "~presentation/components/Atoms/Typography";
 
-const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabThree">) => {
-  const vm = getRootViewModel<TabThreeViewModel>(
-    (viewModel) => viewModel.tab.tabThree
+const CreateScreen = ({ navigation }: RootTabScreenProps<"Create">) => {
+  const vm = getRootViewModel<CreateViewModel>(
+    (viewModel) => viewModel.tab.Create
   );
 
   useEffect(() => {
@@ -35,23 +36,13 @@ const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabThree">) => {
   }
 
   return (
-    <ContentLayout title="Tab Three">
-      <View>
-        {vm.posts && vm.posts.length > 0 ? (
-          <FlatList<PostModel>
-            data={vm.posts}
-            renderItem={SamplePost}
-            keyExtractor={(item) => item.id}
-          ></FlatList>
-        ) : (
-          <NoData />
-        )}
-      </View>
+    <ContentLayout title="Tab Two">
+      <Typography>생성화면</Typography>
     </ContentLayout>
   );
 };
 
-export default observer(TabOneScreen);
+export default observer(CreateScreen);
 
 const styles = StyleSheet.create({
   container: {
