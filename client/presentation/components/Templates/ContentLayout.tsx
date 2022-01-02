@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
-import { Text } from "react-native";
 
 import { View } from "../Themed";
 
@@ -19,7 +18,7 @@ const ContentLayout: FC<Props> = ({ title, children }) => {
 export default ContentLayout;
 
 const Wrapper = styled.View`
-  margin-top: 20;
+  flex: 1;
   align-items: center;
   justify-content: center;
 `;

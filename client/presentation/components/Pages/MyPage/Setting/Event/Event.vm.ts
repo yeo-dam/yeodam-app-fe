@@ -2,7 +2,7 @@ import PagerModel from "domain/model/PagerModel";
 import PostModel from "domain/model/PostModel/model";
 import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
-import BaseViewModel from "../BaseViewModel";
+import BaseViewModel from "~presentation/components/Pages/BaseViewModel";
 
 export default class ThisViewModel extends BaseViewModel {
   private static _Instance: ThisViewModel;

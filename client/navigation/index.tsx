@@ -6,11 +6,9 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Image, Pressable, View } from "react-native";
+import { ColorSchemeName, Image } from "react-native";
 import styled from "styled-components/native";
 
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import MainScreen from "../presentation/components/Pages/Main";
@@ -23,6 +21,9 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { WithLocalSvg } from "react-native-svg";
+import Typography from "~presentation/components/Atoms/Typography";
+import { useState } from "react";
+import { CREATE_SCREEN_NAME } from "~presentation/components/Pages/Create";
 
 export default function Navigation({
   colorScheme,
@@ -64,32 +65,29 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
       initialRouteName="Main"
       backBehavior="order"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        headerTitleStyle: { display: "none" },
+        headerShown: false,
       }}
     >
       <BottomTab.Screen
         name="Main"
         component={MainScreen}
         options={({ navigation }: RootTabScreenProps<"Main">) => ({
-          tabBarLabel: "홈",
+          tabBarLabel: () => <Typography variant="body2">피드</Typography>,
           tabBarIcon: () => (
             <WithLocalSvg asset={require("~asset/Icons/Navigation/Add.svg")} />
           ),
         })}
       />
       <BottomTab.Screen
-        name="Create"
+        name="CreateMain"
         component={CreateScreen}
-        options={({ navigation }: RootTabScreenProps<"Create">) => ({
-          tabBarLabel: "생성",
+        options={({ navigation }: RootTabScreenProps<"CreateMain">) => ({
+          tabBarLabel: () => <Typography variant="body2">입력</Typography>,
           tabBarIcon: () => (
             <CreateBtnBox>
               <WithLocalSvg
@@ -103,7 +101,7 @@ function BottomTabNavigator() {
         name="MyPage"
         component={MyPageScreen}
         options={({ navigation }: RootTabScreenProps<"MyPage">) => ({
-          tabBarLabel: "설정",
+          tabBarLabel: () => <Typography variant="body2">마이</Typography>,
           tabBarIcon: () => (
             <WithLocalSvg
               asset={require("~asset/Icons/Navigation/Setting.svg")}

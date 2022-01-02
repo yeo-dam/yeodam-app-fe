@@ -1,17 +1,10 @@
 import React from "react";
-import { StatusBar, Platform } from "react-native";
 import ViewModelProvider from "~presentation/components/Pages/Index.vm";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import styled from "styled-components/native";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-
-export const IsAndroid = Platform.OS === "android";
-export const STATUS_BAR_HEIGHT = IsAndroid
-  ? StatusBar.currentHeight
-  : getStatusBarHeight();
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import styled from "styled-components/native";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -23,15 +16,15 @@ export default function App() {
     return (
       <ViewModelProvider>
         <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-          <Nav />
+          <StyledSafeAreaView>
+            <Navigation colorScheme={colorScheme} />
+          </StyledSafeAreaView>
         </SafeAreaProvider>
       </ViewModelProvider>
     );
   }
 }
 
-const Nav = styled.View`
-  height: ${STATUS_BAR_HEIGHT + "px"};
+const StyledSafeAreaView = styled(SafeAreaView)`
+  flex: 1;
 `;

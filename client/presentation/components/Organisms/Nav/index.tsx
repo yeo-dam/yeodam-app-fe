@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { View } from "react-native";
 import styled from "styled-components/native";
 import Typography from "~presentation/components/Atoms/Typography";
 import { WithLocalSvg } from "react-native-svg";
@@ -10,30 +9,42 @@ const Component: FC<Props> = () => {
   return (
     <Wrapper>
       <Typography>Logo</Typography>
-      <SearchBox>
-        <View>
+      <InnerWrapper>
+        <SearchBox>
           <Typography>검색</Typography>
           <WithLocalSvg asset={require("~asset/Icons/Navigation/Search.svg")} />
-        </View>
-        <View>
+        </SearchBox>
+        <NotiBox>
           <Typography>알림</Typography>
           <WithLocalSvg
             asset={require("~asset/Icons/Navigation/Notification.svg")}
           />
-        </View>
-      </SearchBox>
+        </NotiBox>
+      </InnerWrapper>
     </Wrapper>
   );
 };
 
 export default Component;
 
-const Wrapper = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const SearchBox = styled.View`
+const Flex = styled.View`
   display: flex;
   flex-direction: row;
+`;
+
+const Wrapper = styled(Flex)`
+  border: 1px solid orange;
+`;
+
+const InnerWrapper = styled.View`
+  width: 90%;
+`;
+
+const SearchBox = styled(Flex)`
+  justify-content: space-between;
+  border: 1px solid blue;
+`;
+
+const NotiBox = styled(Flex)`
+  border: 1px solid blue;
 `;

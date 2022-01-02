@@ -1,14 +1,32 @@
 import * as React from "react";
+import { TextProps } from "react-native";
+import styled from "styled-components/native";
+import { variantStyles } from "./style";
+import { Variant } from "./types";
 
-import { Text, TextProps } from "../../Themed";
+type Props = React.PropsWithChildren<
+  {
+    variant?: Variant;
+    textColor?: string;
+  } & TextProps
+>;
 
-function Typography(props: TextProps) {
+const Component = ({
+  children,
+  variant = "body1",
+  textColor,
+  ...rest
+}: Props) => {
   return (
-    <Text
-      {...props}
-      style={[props.style, { fontFamily: "Spoqa-Han-Sans-Neo" }]}
-    />
+    <Typography variant={variant} textColor={textColor} {...rest}>
+      {children}
+    </Typography>
   );
-}
+};
 
-export default Typography;
+const Typography = styled.Text<{ variant: Variant; textColor?: string }>`
+  font-family: "Spoqa-Han-Sans-Neo";
+  ${({ variant }) => variantStyles[variant]};
+`;
+
+export default Component;

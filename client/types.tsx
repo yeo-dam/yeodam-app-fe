@@ -27,8 +27,22 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 
 export type RootTabParamList = {
   Main: undefined;
-  Create: undefined;
-  MyPage: undefined;
+  Search: undefined;
+  Comment: undefined;
+  CreateMain: undefined;
+  CreatePost: undefined;
+  CreateStory: undefined;
+  MyPageMain: undefined;
+  MyPageLikes: undefined;
+  MyPageMap: undefined;
+  MyPageSetting: undefined;
+  MyPageUser: undefined;
+  SettingMain: undefined;
+  SettingEvent: undefined;
+  SettingNotice: undefined;
+  SettingNotification: undefined;
+  SettingPolicy: undefined;
+  SettingProfileEdit: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
