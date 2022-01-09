@@ -2,7 +2,7 @@ import PostModel from "domain/model/PostModel";
 import React from "react";
 import { ListRenderItem } from "react-native";
 import styled from "styled-components/native";
-import Typography from "~presentation/components/Atoms/Typography";
+import Typography from "~presentation/components/Shared/Typography";
 
 const SamplePost: ListRenderItem<PostModel> = ({ item }) => {
   return (
