@@ -2,9 +2,9 @@ import LoginDto from "domain/dto/LoginDto";
 import classValidatorResolver from "~domain/helper/classValidator";
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
-import Button from "~presentation/components/Atoms/Button";
-import Input from "~presentation/components/Atoms/Input";
-import Form from "~presentation/components/Molecules/Form";
+import Button from "~presentation/components/Shared/Button";
+import Input from "~presentation/components/Shared/Input";
+import Form from "~presentation/components/Shared/Form";
 
 type Props = {};
 

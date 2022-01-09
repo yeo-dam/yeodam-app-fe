@@ -9,21 +9,16 @@ import * as React from "react";
 import { ColorSchemeName, Image } from "react-native";
 import styled from "styled-components/native";
 
-import ModalScreen from "../screens/ModalScreen";
-import NotFoundScreen from "../screens/NotFoundScreen";
-import MainScreen from "../presentation/components/Pages/Main";
-import MyPageScreen from "../presentation/components/Pages/MyPage";
-import CreateScreen from "../presentation/components/Pages/Create";
-import {
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
-} from "../types";
+import ModalScreen from "~presentation/components/Screens/ModalScreen";
+import NotFoundScreen from "~presentation/components/Screens/NotFoundScreen";
+import MainScreen from "~presentation/components/Screens/Main";
+import MyPageScreen from "~presentation/components/Screens/MyPage";
+import CreateScreen from "~presentation/components/Screens/Create";
+import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { WithLocalSvg } from "react-native-svg";
-import Typography from "~presentation/components/Atoms/Typography";
+import Typography from "~presentation/components/Shared/Typography";
 import { useState } from "react";
-import { CREATE_SCREEN_NAME } from "~presentation/components/Pages/Create";
 
 export default function Navigation({
   colorScheme,
@@ -62,31 +57,48 @@ function RootNavigator() {
   );
 }
 
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+export const BNB_SCREEN_NAME: {
+  MAIN: "BottomMain";
+  CREATE: "BottomCreateMain";
+  MYPAGE: "BottomMypage";
+} = {
+  MAIN: "BottomMain",
+  CREATE: "BottomCreateMain",
+  MYPAGE: "BottomMypage",
+};
+
+export type BnbMainNavigator = {
+  [BNB_SCREEN_NAME.MAIN]: undefined;
+  [BNB_SCREEN_NAME.CREATE]: undefined;
+  [BNB_SCREEN_NAME.MYPAGE]: undefined;
+};
+
+// BottomTabParamList란 Type들을 리스팅해주면 좋을 듯
+const BottomTab = createBottomTabNavigator<BnbMainNavigator>();
 
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="Main"
+      initialRouteName={BNB_SCREEN_NAME.MAIN}
       backBehavior="order"
       screenOptions={{
         headerShown: false,
       }}
     >
       <BottomTab.Screen
-        name="Main"
+        name={BNB_SCREEN_NAME.MAIN}
         component={MainScreen}
-        options={({ navigation }: RootTabScreenProps<"Main">) => ({
+        options={{
           tabBarLabel: () => <Typography variant="body2">피드</Typography>,
           tabBarIcon: () => (
             <WithLocalSvg asset={require("~asset/Icons/Navigation/Add.svg")} />
           ),
-        })}
+        }}
       />
       <BottomTab.Screen
-        name="CreateMain"
+        name={BNB_SCREEN_NAME.CREATE}
         component={CreateScreen}
-        options={({ navigation }: RootTabScreenProps<"CreateMain">) => ({
+        options={{
           tabBarLabel: () => <Typography variant="body2">입력</Typography>,
           tabBarIcon: () => (
             <CreateBtnBox>
@@ -95,19 +107,19 @@ function BottomTabNavigator() {
               />
             </CreateBtnBox>
           ),
-        })}
+        }}
       />
       <BottomTab.Screen
-        name="MyPage"
+        name={BNB_SCREEN_NAME.MYPAGE}
         component={MyPageScreen}
-        options={({ navigation }: RootTabScreenProps<"MyPage">) => ({
+        options={{
           tabBarLabel: () => <Typography variant="body2">마이</Typography>,
           tabBarIcon: () => (
             <WithLocalSvg
               asset={require("~asset/Icons/Navigation/Setting.svg")}
             />
           ),
-        })}
+        }}
       />
     </BottomTab.Navigator>
   );

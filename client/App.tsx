@@ -1,5 +1,5 @@
 import React from "react";
-import ViewModelProvider from "~presentation/components/Pages/Index.vm";
+import ViewModelProvider from "~presentation/components/Screens/Index.vm";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
