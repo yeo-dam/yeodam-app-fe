@@ -42,8 +42,8 @@ const MainScreen = ({
         <Nav />
         <Carousel
           pages={[
-            { id: "1", url: "https://picsum.photos/1200/500" },
-            { id: "2", url: "https://picsum.photos/1200/500" },
+            { id: "1", url: "https://picsum.photos/2000/1000" },
+            { id: "2", url: "https://picsum.photos/2000/1000" },
           ]}
           isTextImg={false}
         />

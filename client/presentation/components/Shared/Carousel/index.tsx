@@ -20,7 +20,7 @@ const Atom = ({ pages, isTextImg, noImage = false }: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const carouselRef = useRef(null);
-  const windowWidth = Dimensions.get("window").width - 30;
+  const windowWidth = Dimensions.get("window").width;
 
   const onPressHandler = (_url: string) => {
     console.log("carousel clicked", _url);
@@ -57,12 +57,12 @@ const Atom = ({ pages, isTextImg, noImage = false }: Props) => {
         onSnapToItem={(index) => setCurrentSlide(index)}
       />
 
-      <IndicatorWrapper isTextImg={isTextImg}>
+      {/* <IndicatorWrapper isTextImg={isTextImg}>
         <PageText isTextImg={isTextImg}>
-          <NowText isTextImg={isTextImg}>{currentSlide + 1}</NowText> /{" "}
+          <NowText isTextImg={isTextImg}>{currentSlide + 1}</NowText> /
           {pages.length}
         </PageText>
-      </IndicatorWrapper>
+      </IndicatorWrapper> */}
     </Container>
   );
 };
