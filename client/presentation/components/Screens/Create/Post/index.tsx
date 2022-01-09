@@ -15,7 +15,7 @@ import PostModel from "~domain/model/PostModel/model";
 import Input from "~presentation/components/Shared/Input";
 
 const CreatePost = ({ navigation }: RootTabScreenProps<"CreatePost">) => {
-  const [isFront, setIsFront] = React.useState(false);
+  const [isFront, setIsFront] = React.useState(true);
   return (
     <ContentLayout>
       <Form<PostModel> schema={PostModel}>
