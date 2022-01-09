@@ -1,24 +1,41 @@
-import { PropsWithChildren } from "react";
-import { FormProvider, UseFormReturn } from "react-hook-form";
-import styled from "styled-components";
+import { classValidatorResolver } from "@hookform/resolvers/class-validator";
+import { ClassConstructor } from "class-transformer";
+import React from "react";
+import { useEffect } from "react";
+import {
+  useForm,
+  FormProvider,
+  FieldValues,
+  UnpackNestedValue,
+  DeepPartial,
+} from "react-hook-form";
 
-const Form = styled.form``;
+export type Props<T extends FieldValues> = React.PropsWithChildren<{
+  schema: ClassConstructor<T>;
+  updatedObject?: any;
+  defaultValues?: UnpackNestedValue<DeepPartial<T>>;
+}>;
 
-export type Props<TValues> = {
-  form: UseFormReturn<TValues>;
-  onSubmit: (e: any) => void | Promise<void>;
-};
-
-function Component<TValues>({
+const Component = <T extends FieldValues>({
+  schema,
+  defaultValues,
+  updatedObject,
   children,
-  form,
-  onSubmit,
-}: PropsWithChildren<Props<TValues>>) {
-  return (
-    <FormProvider {...form}>
-      <Form onSubmit={form.handleSubmit(onSubmit)}>{children}</Form>
-    </FormProvider>
-  );
-}
+}: Props<T>) => {
+  const resolver = classValidatorResolver(schema);
+  const methods = useForm<T>({
+    resolver,
+    defaultValues,
+    mode: "all",
+    reValidateMode: "onChange",
+  });
+
+  useEffect(() => {
+    methods.reset(defaultValues);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updatedObject]);
+
+  return <FormProvider {...methods}>{children}</FormProvider>;
+};
 
 export default Component;

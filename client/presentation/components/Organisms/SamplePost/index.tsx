@@ -8,7 +8,9 @@ const SamplePost: ListRenderItem<PostModel> = ({ item }) => {
   return (
     <Wrapper>
       <Typography>{item.id}</Typography>
-      <SampleImage source={{ uri: item.images[0].filePath }}></SampleImage>
+      <ImageComponent
+        source={{ uri: item.images[0].filePath }}
+      ></ImageComponent>
       <Typography>{item.title}</Typography>
       <Typography>{item.description}</Typography>
     </Wrapper>
@@ -19,7 +21,7 @@ export default SamplePost;
 
 const Wrapper = styled.View``;
 
-const SampleImage = styled.Image`
+const ImageComponent = styled.Image`
   width: 100%;
   height: 200;
 `;

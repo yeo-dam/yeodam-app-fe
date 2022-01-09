@@ -10,12 +10,7 @@ type Props = React.PropsWithChildren<
   } & TextProps
 >;
 
-const Component = ({
-  children,
-  variant = "body1",
-  textColor,
-  ...rest
-}: Props) => {
+const Component = ({ children, variant = "body1", ...rest }: Props) => {
   return (
     <Typography variant={variant} {...rest}>
       {children}
