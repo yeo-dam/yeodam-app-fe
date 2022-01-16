@@ -2,7 +2,8 @@ import React, { FC } from "react";
 import styled from "styled-components/native";
 import Typography from "~presentation/components/Shared/Typography";
 import { WithLocalSvg } from "react-native-svg";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import TouchableIcon from "~presentation/components/Shared/TouchableIcon";
+import FlexBox from "../FlexBox";
 
 type Props = {};
 
@@ -11,18 +12,14 @@ const Component: FC<Props> = () => {
     <Wrapper>
       <InnerWrapper>
         <SearchBox>
-          <TouchableWithoutFeedback>
-            <WithLocalSvg
-              asset={require("~asset/Icons/Navigation/Search.svg")}
-            />
-          </TouchableWithoutFeedback>
+          <TouchableIcon onPress={() => console.log("Touched")}>
+            <WithLocalSvg asset={require("~asset/Icons/Search.svg")} />
+          </TouchableIcon>
         </SearchBox>
         <NotiBox>
-          <TouchableWithoutFeedback>
-            <WithLocalSvg
-              asset={require("~asset/Icons/Navigation/Notification.svg")}
-            />
-          </TouchableWithoutFeedback>
+          <TouchableIcon onPress={() => console.log("Touched")}>
+            <WithLocalSvg asset={require("~asset/Icons/Notification.svg")} />
+          </TouchableIcon>
         </NotiBox>
       </InnerWrapper>
     </Wrapper>
@@ -31,25 +28,18 @@ const Component: FC<Props> = () => {
 
 export default Component;
 
-const Flex = styled.View`
-  display: flex;
-  flex-direction: row;
-`;
-
-const Wrapper = styled(Flex)`
-  border: 1px solid orange;
-`;
+const Wrapper = styled(FlexBox)``;
 
 const InnerWrapper = styled.View`
-  width: 90%;
   flex-direction: row;
+  margin-top: 14px;
 `;
 
-const SearchBox = styled(Flex)`
+const SearchBox = styled(FlexBox)`
   justify-content: space-between;
-  background-color: black;
+  margin-right: 16px;
 `;
 
-const NotiBox = styled(Flex)`
-  background-color: black;
+const NotiBox = styled(FlexBox)`
+  margin-right: 24px;
 `;

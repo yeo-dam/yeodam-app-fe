@@ -1,6 +1,6 @@
-import React from 'react';
-import { Text } from 'react-native';
-import * as GoogleSignIn from 'expo-google-sign-in';
+import React from "react";
+import { Text } from "react-native";
+import * as GoogleSignIn from "expo-google-sign-in";
 
 export default class AuthScreen extends React.Component {
   state = { user: null };
@@ -12,7 +12,7 @@ export default class AuthScreen extends React.Component {
   initAsync = async () => {
     await GoogleSignIn.initAsync({
       // You may ommit the clientId when the firebase `googleServicesFile` is configured
-      clientId: '<YOUR_IOS_CLIENT_ID>',
+      clientId: "<YOUR_IOS_CLIENT_ID>",
     });
     this._syncUserWithStateAsync();
   };
@@ -31,11 +31,11 @@ export default class AuthScreen extends React.Component {
     try {
       await GoogleSignIn.askForPlayServicesAsync();
       const { type, user } = await GoogleSignIn.signInAsync();
-      if (type === 'success') {
+      if (type === "success") {
         this._syncUserWithStateAsync();
       }
     } catch ({ message }) {
-      alert('login: Error:' + message);
+      alert("login: Error:" + message);
     }
   };
 

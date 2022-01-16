@@ -56,7 +56,7 @@ const Atom = ({
         sliderHeight={windowHeight}
         itemWidth={windowWidth}
         autoplay
-        autoplayDelay={3000}
+        autoplayDelay={4000}
         loop
         loopClonesPerSide={pages.length}
         enableMomentum={false}
@@ -88,8 +88,9 @@ const NoImageView = styled.View`
 
 const NavSection = styled.View`
   position: absolute;
-  z-index: 1;
   top: 0;
+  right: 0;
+  z-index: 1;
 `;
 
 const IndicatorWrapper = styled.View<{ isTextImg: boolean }>`

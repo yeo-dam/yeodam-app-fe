@@ -2,7 +2,7 @@ import { toNestError, validateFieldsNatively } from "@hookform/resolvers";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 import { ValidatorOptions, validate } from "class-validator";
 import { ResolverOptions } from "react-hook-form";
-import parseErrors from "../parseError";
+import parseErrors from "../ParseError";
 
 const classValidatorResolver =
   (schema: ClassConstructor<unknown>, schemaOptions?: ValidatorOptions) =>

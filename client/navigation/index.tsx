@@ -91,7 +91,9 @@ function BottomTabNavigator() {
         options={{
           tabBarLabel: () => <Typography variant="body2">피드</Typography>,
           tabBarIcon: () => (
-            <WithLocalSvg asset={require("~asset/Icons/Navigation/Add.svg")} />
+            <WithLocalSvg
+              asset={require("~asset/Icons/Navigation/Feed/Feed.svg")}
+            />
           ),
         }}
       />
@@ -103,7 +105,7 @@ function BottomTabNavigator() {
           tabBarIcon: () => (
             <CreateBtnBox>
               <WithLocalSvg
-                asset={require("~asset/Icons/Navigation/createBtn.svg")}
+                asset={require("~asset/Icons/Navigation/Create/Create.svg")}
               />
             </CreateBtnBox>
           ),
@@ -116,7 +118,7 @@ function BottomTabNavigator() {
           tabBarLabel: () => <Typography variant="body2">마이</Typography>,
           tabBarIcon: () => (
             <WithLocalSvg
-              asset={require("~asset/Icons/Navigation/Setting.svg")}
+              asset={require("~asset/Icons/Navigation/Setting/Setting.svg")}
             />
           ),
         }}

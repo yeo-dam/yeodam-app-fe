@@ -39,27 +39,28 @@ const MainScreen = ({
 
   const renderCard = isFront ? PhotoCard : DescriptionCard;
 
+  if (vm.posts && vm.posts.length === 0) {
+    return <NoData />;
+  }
+
   return (
     <ContentLayout>
       <View>
-        {vm.posts && vm.posts.length > 0 ? (
-          <FlatList<PostModel>
-            data={vm.posts}
-            ListHeaderComponent={
-              <Carousel
-                pages={[
-                  { id: "1", url: "https://picsum.photos/2400/1240" },
-                  { id: "2", url: "https://picsum.photos/2400/1240" },
-                ]}
-                isTextImg={false}
-              />
-            }
-            renderItem={renderCard}
-            keyExtractor={(item) => item.id}
-          ></FlatList>
-        ) : (
-          <NoData />
-        )}
+        <FlatList<PostModel>
+          data={vm.posts}
+          ListHeaderComponent={
+            // TODO : 해당 요소에 대한 모델이 추가되어야 할 것임.
+            <Carousel
+              pages={[
+                { id: "1", url: "https://picsum.photos/2400/1240" },
+                { id: "2", url: "https://picsum.photos/2400/1240" },
+              ]}
+              isTextImg={false}
+            />
+          }
+          renderItem={renderCard}
+          keyExtractor={(item) => item.id}
+        ></FlatList>
       </View>
     </ContentLayout>
   );

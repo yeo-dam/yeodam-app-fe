@@ -13,7 +13,8 @@ import PlaceModel from "~domain/model/PlaceModel";
 import UserModel from "~domain/model/UserModel";
 import CommentModel from "~domain/model/CommentModel";
 import { Type } from "class-transformer";
-import TransformDate from "helper/transformDate";
+import TransformDate from "helper/TransformDate";
+import TagModel from "../TagModel";
 
 class PostModel implements PostEntity {
   @IsString()
@@ -60,6 +61,10 @@ class PostModel implements PostEntity {
   @IsArray()
   @IsOptional()
   comments?: CommentModel[];
+
+  @ValidateNested({ each: true })
+  @Type(() => TagModel)
+  tags?: TagModel[];
 }
 
 export default PostModel;

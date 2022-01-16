@@ -5,7 +5,7 @@
         "id": "1",
         "user": {
           "id": "1",
-          "name": "미키서",
+          "name": "love_trip",
           "email": "MickeySeo@gmail.com",
           "userType": "AHN",
           "createdAt": "2021-12-19T14:15:24.343Z",
@@ -75,7 +75,7 @@
             "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -99,7 +99,7 @@
             "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛.....",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -123,7 +123,7 @@
             "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -141,6 +141,20 @@
                 "filename": "sampleImage"
               }
             }
+          }
+        ],
+        "tags": [
+          {
+            "id": "1",
+            "title": "맛집"
+          },
+          {
+            "id": "2",
+            "title": "사진 찍기 좋은 곳"
+          },
+          {
+            "id": "3",
+            "title": "감성카페"
           }
         ]
       },
@@ -148,7 +162,7 @@
         "id": "2",
         "user": {
           "id": "1",
-          "name": "미키서",
+          "name": "love_trip",
           "email": "MickeySeo@gmail.com",
           "userType": "AHN",
           "createdAt": "2021-12-19T14:15:24.343Z",
@@ -218,7 +232,7 @@
             "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -242,7 +256,7 @@
             "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛.....",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -266,7 +280,7 @@
             "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -284,6 +298,20 @@
                 "filename": "sampleImage"
               }
             }
+          }
+        ],
+        "tags": [
+          {
+            "id": "1",
+            "title": "맛집"
+          },
+          {
+            "id": "2",
+            "title": "사진 찍기 좋은 곳"
+          },
+          {
+            "id": "3",
+            "title": "감성카페"
           }
         ]
       },
@@ -291,7 +319,7 @@
         "id": "3",
         "user": {
           "id": "1",
-          "name": "미키서",
+          "name": "love_trip",
           "email": "MickeySeo@gmail.com",
           "userType": "AHN",
           "createdAt": "2021-12-19T14:15:24.343Z",
@@ -361,7 +389,7 @@
             "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -385,7 +413,7 @@
             "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛.....",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -409,7 +437,7 @@
             "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -427,6 +455,20 @@
                 "filename": "sampleImage"
               }
             }
+          }
+        ],
+        "tags": [
+          {
+            "id": "1",
+            "title": "맛집"
+          },
+          {
+            "id": "2",
+            "title": "사진 찍기 좋은 곳"
+          },
+          {
+            "id": "3",
+            "title": "감성카페"
           }
         ]
       },
@@ -434,7 +476,7 @@
         "id": "4",
         "user": {
           "id": "1",
-          "name": "미키서",
+          "name": "love_trip",
           "email": "MickeySeo@gmail.com",
           "userType": "AHN",
           "createdAt": "2021-12-19T14:15:24.343Z",
@@ -504,7 +546,7 @@
             "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -528,7 +570,7 @@
             "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛.....",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -552,7 +594,7 @@
             "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ",
             "user": {
               "id": "1",
-              "name": "미키서",
+              "name": "love_trip",
               "email": "MickeySeo@gmail.com",
               "userType": "AHN",
               "createdAt": "2021-12-19T14:15:24.343Z",
@@ -570,6 +612,20 @@
                 "filename": "sampleImage"
               }
             }
+          }
+        ],
+        "tags": [
+          {
+            "id": "1",
+            "title": "맛집"
+          },
+          {
+            "id": "2",
+            "title": "사진 찍기 좋은 곳"
+          },
+          {
+            "id": "3",
+            "title": "감성카페"
           }
         ]
       }
@@ -621,20 +677,6 @@
       ],
       "createdAt": "2021-12-19T14:15:24.343Z",
       "updatedAt": "2021-12-19T14:15:24.343Z"
-    }
-  ],
-  "tags": [
-    {
-      "id": "1",
-      "title": "맛집"
-    },
-    {
-      "id": "2",
-      "title": "사진 찍기 좋은 곳"
-    },
-    {
-      "id": "3",
-      "title": "감성카페"
     }
   ],
   "playlists": [
