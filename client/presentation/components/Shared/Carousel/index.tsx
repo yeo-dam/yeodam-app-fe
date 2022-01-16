@@ -1,12 +1,9 @@
-/**
- * @copyright Copyright 2020 Corretto, Inc. All rights reserved.
- */
-
-import React, { useState, useRef } from "react";
-import { Dimensions, Platform } from "react-native";
+import React, { useState, useRef, PropsWithChildren } from "react";
+import { Dimensions, Platform, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import styled from "styled-components/native";
 import { WithLocalSvg } from "react-native-svg";
+import Nav from "~presentation/components/Shared/Nav";
 
 import Item from "./item";
 
@@ -16,11 +13,17 @@ export type Props = {
   noImage?: boolean;
 };
 
-const Atom = ({ pages, isTextImg, noImage = false }: Props) => {
+const Atom = ({
+  pages,
+  isTextImg,
+  noImage = false,
+  children,
+}: PropsWithChildren<Props>) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const carouselRef = useRef(null);
-  const windowWidth = Dimensions.get("window").width - 30;
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
 
   const onPressHandler = (_url: string) => {
     console.log("carousel clicked", _url);
@@ -42,11 +45,15 @@ const Atom = ({ pages, isTextImg, noImage = false }: Props) => {
 
   return (
     <Container>
+      <NavSection>
+        <Nav />
+      </NavSection>
       <Carousel
         ref={carouselRef}
         data={pages}
         renderItem={renderItemForIos}
         sliderWidth={windowWidth}
+        sliderHeight={windowHeight}
         itemWidth={windowWidth}
         autoplay
         autoplayDelay={3000}
@@ -57,12 +64,12 @@ const Atom = ({ pages, isTextImg, noImage = false }: Props) => {
         onSnapToItem={(index) => setCurrentSlide(index)}
       />
 
-      <IndicatorWrapper isTextImg={isTextImg}>
+      {/* <IndicatorWrapper isTextImg={isTextImg}>
         <PageText isTextImg={isTextImg}>
-          <NowText isTextImg={isTextImg}>{currentSlide + 1}</NowText> /{" "}
+          <NowText isTextImg={isTextImg}>{currentSlide + 1}</NowText> /
           {pages.length}
         </PageText>
-      </IndicatorWrapper>
+      </IndicatorWrapper> */}
     </Container>
   );
 };
@@ -77,6 +84,12 @@ const Container = styled.View`
 
 const NoImageView = styled.View`
   border-radius: 4px;
+`;
+
+const NavSection = styled.View`
+  position: absolute;
+  z-index: 1;
+  top: 0;
 `;
 
 const IndicatorWrapper = styled.View<{ isTextImg: boolean }>`

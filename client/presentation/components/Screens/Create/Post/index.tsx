@@ -10,12 +10,12 @@ import { TouchableOpacity, View } from "react-native";
 import ImageUpload from "~presentation/components/Shared/ImageUpload";
 import { useForm } from "react-hook-form";
 import Form from "~presentation/components/Shared/Form";
-import classValidatorResolver from "~domain/helper/classValidator";
+import classValidatorResolver from "helper/classValidator";
 import PostModel from "~domain/model/PostModel/model";
 import Input from "~presentation/components/Shared/Input";
 
 const CreatePost = ({ navigation }: RootTabScreenProps<"CreatePost">) => {
-  const [isFront, setIsFront] = React.useState(true);
+  const [isFront, setIsFront] = React.useState(false);
   return (
     <ContentLayout>
       <Form<PostModel> schema={PostModel}>

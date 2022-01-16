@@ -1,16 +1,12 @@
-/**
- * @copyright Copyright 2020 Corretto, Inc. All rights reserved.
- */
-
 import React from "react";
 import { Image, ImageProps, ImageSourcePropType } from "react-native";
 import styled from "styled-components/native";
 
 export type Props = {
+  source: ImageSourcePropType;
   width?: number;
   height?: number;
   hasBorderRadius?: boolean;
-  source: ImageSourcePropType;
   round?: boolean;
 } & ImageProps;
 

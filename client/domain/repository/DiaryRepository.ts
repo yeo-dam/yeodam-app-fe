@@ -1,7 +1,7 @@
 import { plainToClass } from "class-transformer";
 import PagerModel from "~domain/model/PagerModel";
 import DiaryModel from "~domain/model/StoryModel";
-import Fetcher from "~domain/helper/fetcher";
+import Fetcher from "helper/fetcher";
 import PagerEntity from "~data/entity/PagerEntity";
 import DiaryEntity from "~data/entity/DiaryEntity";
 import { validate } from "class-validator";
