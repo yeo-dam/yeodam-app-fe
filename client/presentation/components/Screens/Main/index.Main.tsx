@@ -11,8 +11,8 @@ import { getRootViewModel } from "../Index.vm";
 import MainViewModel from "./Main.vm";
 import { observer } from "mobx-react";
 import PostModel from "domain/model/PostModel/model";
-import SamplePost from "~presentation/components/Organisms/SamplePost";
-import Nav from "~presentation/components/Shared/Nav";
+import PhotoCard from "~presentation/components/Organisms/PhotoCard";
+import DescriptionCard from "~presentation/components/Organisms/DescriptionCard";
 import Carousel from "~presentation/components/Shared/Carousel";
 import { MAIN_SCREEN_NAME } from ".";
 
@@ -20,6 +20,7 @@ const MainScreen = ({
   navigation,
 }: RootTabScreenProps<typeof MAIN_SCREEN_NAME.HOME>) => {
   const vm = getRootViewModel<MainViewModel>((viewModel) => viewModel.tab.Main);
+  const [isFront, setIsFront] = React.useState<boolean>(false);
 
   useEffect(() => {
     async function loadPosts() {
@@ -36,21 +37,24 @@ const MainScreen = ({
     return <ErrorMsg />;
   }
 
+  const renderCard = isFront ? PhotoCard : DescriptionCard;
+
   return (
     <ContentLayout>
       <View>
-        <Nav />
-        <Carousel
-          pages={[
-            { id: "1", url: "https://picsum.photos/2000/1000" },
-            { id: "2", url: "https://picsum.photos/2000/1000" },
-          ]}
-          isTextImg={false}
-        />
         {vm.posts && vm.posts.length > 0 ? (
           <FlatList<PostModel>
             data={vm.posts}
-            renderItem={SamplePost}
+            ListHeaderComponent={
+              <Carousel
+                pages={[
+                  { id: "1", url: "https://picsum.photos/2400/1240" },
+                  { id: "2", url: "https://picsum.photos/2400/1240" },
+                ]}
+                isTextImg={false}
+              />
+            }
+            renderItem={renderCard}
             keyExtractor={(item) => item.id}
           ></FlatList>
         ) : (

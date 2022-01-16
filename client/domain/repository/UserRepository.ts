@@ -2,7 +2,7 @@ import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
 import PagerEntity from "~data/entity/PagerEntity";
 import UserEntity from "~data/entity/UserEntity";
-import Fetcher from "~domain/helper/fetcher";
+import Fetcher from "helper/fetcher";
 import PagerModel from "~domain/model/PagerModel/model";
 import UserModel from "~domain/model/UserModel/model";
 

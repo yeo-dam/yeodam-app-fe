@@ -13,7 +13,7 @@ import PlaceModel from "~domain/model/PlaceModel";
 import UserModel from "~domain/model/UserModel";
 import CommentModel from "~domain/model/CommentModel";
 import { Type } from "class-transformer";
-import TransformDate from "~domain/helper/transformDate";
+import TransformDate from "helper/transformDate";
 
 class PostModel implements PostEntity {
   @IsString()
