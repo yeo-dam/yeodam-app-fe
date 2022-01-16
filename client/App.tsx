@@ -1,5 +1,7 @@
 import React from "react";
-import ViewModelProvider from "~presentation/components/Screens/Index.vm";
+import ViewModelProvider, {
+  InitialData,
+} from "~presentation/components/Screens/Index.vm";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
@@ -10,11 +12,13 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
+  const { auth }: InitialData = {};
+
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <ViewModelProvider>
+      <ViewModelProvider auth={auth} >
         <SafeAreaProvider>
           <StyledSafeAreaView>
             <Navigation colorScheme={colorScheme} />

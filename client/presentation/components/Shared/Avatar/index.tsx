@@ -4,14 +4,16 @@ import { View } from "react-native";
 import Image from "~presentation/components/Shared/Image";
 import Typography from "../Typography";
 
-type Props = {};
+type Props = {
+  name: string;
+  imageSource?: string;
+};
 
-// TODO : User Profile 로 변경해줘야 함.
-const Component: FC<Props> = () => {
+const Component: FC<Props> = ({ name, imageSource }) => {
   return (
     <Wrapper>
-      <StyledImage source={require("~asset/images/avatar.png")} />
-      <Typography>user name</Typography>
+      <StyledImage source={{ uri: imageSource }} />
+      <Typography>{name}</Typography>
     </Wrapper>
   );
 };

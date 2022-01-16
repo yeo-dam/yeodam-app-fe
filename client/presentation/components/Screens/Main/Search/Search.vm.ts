@@ -1,19 +1,21 @@
-import PagerModel from "domain/model/PagerModel";
-import PostModel from "domain/model/PostModel/model";
 import { action, computed, flow, observable } from "mobx";
+import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../../BaseViewModel";
 
 export default class ThisViewModel extends BaseViewModel {
   private static _Instance: ThisViewModel;
 
-  static GetInstance() {
+  static GetInstance(args: ConstructorParameter) {
     if (!ThisViewModel._Instance) {
-      ThisViewModel._Instance = new ThisViewModel();
+      ThisViewModel._Instance = new ThisViewModel(args);
     }
     return ThisViewModel._Instance;
   }
-  private constructor() {
-    super();
+  private constructor(args: ConstructorParameter) {
+    super(args);
+    if (args.accessToken) {
+      this.setAccessToken(args.accessToken);
+    }
   }
 
   @observable
@@ -21,12 +23,6 @@ export default class ThisViewModel extends BaseViewModel {
 
   @observable
   private _isError = observable.box<boolean>(false);
-
-  @observable
-  private _pager = observable.box<PagerModel>(undefined);
-
-  @observable
-  private _posts = observable.box<PostModel[]>(undefined);
 
   @computed
   public get isLoading() {
@@ -36,16 +32,6 @@ export default class ThisViewModel extends BaseViewModel {
   @computed
   public get isError() {
     return this._isError.get();
-  }
-
-  @computed
-  public get posts() {
-    return this._posts.get();
-  }
-
-  @computed
-  public get pager() {
-    return this._pager.get();
   }
 
   @action

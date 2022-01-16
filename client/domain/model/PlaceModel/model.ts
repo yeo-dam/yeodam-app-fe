@@ -10,6 +10,10 @@ class PlaceModel {
   @IsEnum(PlaceType)
   @IsNotEmpty()
   type: PlaceType;
+
+  @IsString()
+  @IsNotEmpty()
+  address: string;
 }
 
 export default PlaceModel;

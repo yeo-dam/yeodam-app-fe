@@ -6,7 +6,7 @@ import {
   IsOptional,
   IsString,
 } from "class-validator";
-import TransformDate from "helper/transformDate";
+import TransformDate from "helper/TransformDate";
 import UserEntity from "../../../data/entity/UserEntity";
 import ProviderType from "../../enum/ProviderType";
 import UserMbtiType from "../../enum/UserMbtiType";

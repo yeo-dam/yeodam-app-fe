@@ -1,21 +1,26 @@
-import PagerModel from "domain/model/PagerModel";
-import PostModel from "domain/model/PostModel/model";
-import PostRepositoryImpl from "domain/repository/PostRepository";
+import MapRepositoryImpl from "domain/repository/MapRepository";
 import { action, computed, flow, observable } from "mobx";
+import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../../BaseViewModel";
 
 export default class MapViewModel extends BaseViewModel {
   private static _Instance: MapViewModel;
-  private readonly _PostUserCase = PostRepositoryImpl.GetInstace();
+  private readonly _MapRepo: MapRepositoryImpl;
 
-  static GetInstance() {
+  static GetInstance(args: ConstructorParameter) {
     if (!MapViewModel._Instance) {
-      MapViewModel._Instance = new MapViewModel();
+      MapViewModel._Instance = new MapViewModel(args);
     }
     return MapViewModel._Instance;
   }
-  private constructor() {
-    super();
+  private constructor(args: ConstructorParameter) {
+    super(args);
+    if (args.accessToken) {
+      this.setAccessToken(args.accessToken);
+    }
+    this._MapRepo = MapRepositoryImpl.GetInstace({
+      accessToken: args.accessToken,
+    });
   }
 
   @observable
@@ -23,12 +28,6 @@ export default class MapViewModel extends BaseViewModel {
 
   @observable
   private _isError = observable.box<boolean>(false);
-
-  @observable
-  private _pager = observable.box<PagerModel>(undefined);
-
-  @observable
-  private _posts = observable.box<PostModel[]>(undefined);
 
   @computed
   public get isLoading() {
@@ -40,25 +39,9 @@ export default class MapViewModel extends BaseViewModel {
     return this._isError.get();
   }
 
-  @computed
-  public get posts() {
-    return this._posts.get();
-  }
-
-  @computed
-  public get pager() {
-    return this._pager.get();
-  }
-
   @action
   load = flow(function* (this: MapViewModel) {
     this._isLoading.set(true);
-
-    const [pager, posts] = yield this._PostUserCase.getPostlists();
-
-    this._posts.set(posts);
-    this._pager.set(pager);
-
     this._isLoading.set(false);
   });
 }
