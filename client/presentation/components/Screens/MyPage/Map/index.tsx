@@ -5,17 +5,16 @@ import ContentLayout from "~presentation/components/Layout/ContentLayout";
 import { View } from "~presentation/components/Themed";
 import { RootTabScreenProps } from "../../../../../types";
 import ErrorMsg from "~presentation/components/Shared/ErrorMsg";
-import NoData from "~presentation/components/Shared/NoData";
 import Loadable from "~presentation/components/Shared/Loadable";
 import { getRootViewModel } from "../../Index.vm";
 import MapViewModel from "./Map.vm";
 import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
-import { MYPAGE_SCREEN_NAME } from "..";
+import { MAIN_SCREEN_NAME } from "../../Main";
 
-const MyPageScreen = ({
+const Map = ({
   navigation,
-}: RootTabScreenProps<typeof MYPAGE_SCREEN_NAME.MAP>) => {
+}: RootTabScreenProps<typeof MAIN_SCREEN_NAME.MAP>) => {
   const vm = getRootViewModel<MapViewModel>((viewModel) => viewModel.tab.Map);
 
   useEffect(() => {
@@ -42,4 +41,4 @@ const MyPageScreen = ({
   );
 };
 
-export default observer(MyPageScreen);
+export default observer(Map);

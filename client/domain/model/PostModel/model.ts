@@ -64,6 +64,7 @@ class PostModel implements PostEntity {
 
   @ValidateNested({ each: true })
   @Type(() => TagModel)
+  @IsOptional()
   tags?: TagModel[];
 }
 

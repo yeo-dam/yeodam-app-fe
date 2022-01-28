@@ -20,10 +20,10 @@ const MyPageScreen = ({
   );
 
   useEffect(() => {
-    async function loadPosts() {
+    async function loadComments() {
       await vm.load();
     }
-    loadPosts();
+    loadComments();
   }, []);
 
   if (vm.isLoading) {

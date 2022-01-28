@@ -5,21 +5,27 @@ import PostEntity from "~data/entity/PostEntity";
 import Fetcher from "helper/fetcher";
 import PagerModel from "~domain/model/PagerModel";
 import PostModel from "~domain/model/PostModel";
+import BaseRepository, { ConstructorParameter } from "./Repository";
 
 interface PostRepository {
   getPostlists(): Promise<[PagerModel, PostModel[]]>;
 }
 
-export default class PostRepositoryImpl implements PostRepository {
+export default class PostRepositoryImpl
+  extends BaseRepository
+  implements PostRepository
+{
   private static _Instance: PostRepositoryImpl;
-  static GetInstace() {
+  static GetInstace(args: ConstructorParameter) {
     if (!PostRepositoryImpl._Instance) {
-      PostRepositoryImpl._Instance = new PostRepositoryImpl();
+      PostRepositoryImpl._Instance = new PostRepositoryImpl(args);
     }
     return PostRepositoryImpl._Instance;
   }
 
-  private constructor() {}
+  private constructor(args: ConstructorParameter) {
+    super(args);
+  }
 
   public async getPostlists(): Promise<[PagerModel, PostModel[]]> {
     const postlistEntities = await Fetcher<PagerEntity<PostEntity>>("/posts");

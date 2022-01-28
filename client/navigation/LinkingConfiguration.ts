@@ -17,21 +17,23 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Main: {
             screens: {
-              MainScreen: "one",
+              MainScreen: "Main",
             },
           },
-          Create: {
+          CreateMain: {
             screens: {
-              CreateScreen: "two",
+              CreateScreen: "CreateMain",
             },
           },
-          MyPage: {
+          MyPageMain: {
             screens: {
-              MyPageScreen: "three",
+              MyPageScreen: "MyPageMain",
             },
           },
         },
       },
+      SignIn: "SignIn",
+      Welcome: "Welcome",
       Modal: "modal",
       NotFound: "*",
     },

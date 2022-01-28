@@ -3,12 +3,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { RootStackScreenProps } from "types";
 
-export default function NotFoundScreen({
+export default function WelcomScreen({
   navigation,
-}: RootStackScreenProps<"NotFound">) {
+}: RootStackScreenProps<"Welcome">) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>This screen doesn't exist.</Text>
+      <Text style={styles.title}>Welcome Screen</Text>
       <TouchableOpacity
         onPress={() => navigation.replace("Root")}
         style={styles.link}

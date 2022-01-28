@@ -2,7 +2,6 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreateMain from "./CreateMain";
 import CreatePost from "./Post";
-import CreateStory from "./Story";
 
 export const CREATE_SCREEN_NAME: {
   MAIN: "CreateMain";
@@ -27,7 +26,7 @@ const CreateScreen = () => {
     <Stack.Navigator initialRouteName={CREATE_SCREEN_NAME.MAIN}>
       <Stack.Screen name={CREATE_SCREEN_NAME.MAIN} component={CreateMain} />
       <Stack.Screen name={CREATE_SCREEN_NAME.POST} component={CreatePost} />
-      <Stack.Screen name={CREATE_SCREEN_NAME.STORY} component={CreateStory} />
+      {/* <Stack.Screen name={CREATE_SCREEN_NAME.STORY} component={CreateStory} /> */}
     </Stack.Navigator>
   );
 };

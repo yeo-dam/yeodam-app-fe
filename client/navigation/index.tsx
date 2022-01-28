@@ -5,6 +5,7 @@ import {
   DarkTheme,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import * as React from "react";
 import { ColorSchemeName, Image } from "react-native";
 import styled from "styled-components/native";
@@ -19,6 +20,8 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import { WithLocalSvg } from "react-native-svg";
 import Typography from "~presentation/components/Shared/Typography";
 import { useState } from "react";
+import SignInScreen from "~presentation/components/Screens/SignInScreen";
+import WelcomeScreen from "~presentation/components/Screens/WelcomeScreen";
 
 export default function Navigation({
   colorScheme,
@@ -38,18 +41,37 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  // TODO : Auth VM으로 변경해야 함
+  const [user, setUser] = useState<boolean>(false);
+
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Not Found!" }}
-      />
+      <React.Fragment>
+        {!user && (
+          <React.Fragment>
+            <Stack.Screen
+              name="SignIn"
+              component={SignInScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Welcome"
+              component={WelcomeScreen}
+              options={{ headerShown: false }}
+            />
+          </React.Fragment>
+        )}
+        <Stack.Screen
+          name="Root"
+          component={BottomTabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="NotFound"
+          component={NotFoundScreen}
+          options={{ title: "Not Found!" }}
+        />
+      </React.Fragment>
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>

@@ -5,21 +5,27 @@ import UserEntity from "~data/entity/UserEntity";
 import Fetcher from "helper/fetcher";
 import PagerModel from "~domain/model/PagerModel/model";
 import UserModel from "~domain/model/UserModel/model";
+import BaseRepository, { ConstructorParameter } from "./Repository";
 
 interface UserRepository {
   getUserlists(): Promise<[PagerModel, UserModel[]]>;
 }
 
-export default class UserRepositoryImpl implements UserRepository {
+export default class UserRepositoryImpl
+  extends BaseRepository
+  implements UserRepository
+{
   private static _Instance: UserRepositoryImpl;
-  static GetInstace() {
+  static GetInstace(args: ConstructorParameter) {
     if (!UserRepositoryImpl._Instance) {
-      UserRepositoryImpl._Instance = new UserRepositoryImpl();
+      UserRepositoryImpl._Instance = new UserRepositoryImpl(args);
     }
     return UserRepositoryImpl._Instance;
   }
 
-  private constructor() {}
+  private constructor(args: ConstructorParameter) {
+    super(args);
+  }
 
   public async getUserlists(): Promise<[PagerModel, UserModel[]]> {
     const userlistEntities = await Fetcher<PagerEntity<UserEntity>>("/users");

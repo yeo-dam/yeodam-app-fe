@@ -1,21 +1,28 @@
 import PagerModel from "domain/model/PagerModel";
 import PostModel from "domain/model/PostModel/model";
-import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
+import NotificationRepositoryImpl from "~domain/repository/NotificationRepository";
+import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "~presentation/components/Screens/BaseViewModel";
 
 export default class ThisViewModel extends BaseViewModel {
   private static _Instance: ThisViewModel;
-  private readonly _PostUserCase = PostRepositoryImpl.GetInstace();
+  private readonly _NotificationRepo: NotificationRepositoryImpl;
 
-  static GetInstance() {
+  static GetInstance(args: ConstructorParameter) {
     if (!ThisViewModel._Instance) {
-      ThisViewModel._Instance = new ThisViewModel();
+      ThisViewModel._Instance = new ThisViewModel(args);
     }
     return ThisViewModel._Instance;
   }
-  private constructor() {
-    super();
+  private constructor(args: ConstructorParameter) {
+    super(args);
+    if (args.accessToken) {
+      this.setAccessToken(args.accessToken);
+    }
+    this._NotificationRepo = NotificationRepositoryImpl.GetInstace({
+      accessToken: args.accessToken,
+    });
   }
 
   @observable
@@ -53,12 +60,6 @@ export default class ThisViewModel extends BaseViewModel {
   @action
   load = flow(function* (this: ThisViewModel) {
     this._isLoading.set(true);
-
-    const [pager, posts] = yield this._PostUserCase.getPostlists();
-
-    this._posts.set(posts);
-    this._pager.set(pager);
-
     this._isLoading.set(false);
   });
 }
