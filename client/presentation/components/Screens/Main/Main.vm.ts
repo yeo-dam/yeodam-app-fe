@@ -61,11 +61,17 @@ export default class MainViewModel extends BaseViewModel {
   load = flow(function* (this: MainViewModel) {
     this._isLoading.set(true);
 
-    const [pager, posts] = yield this._postRepo.getPostlists();
+    const [pager, posts] = yield this._postRepo.find();
 
     this._posts.set(posts);
     this._pager.set(pager);
 
     this._isLoading.set(false);
   });
+
+  @action
+  downloadImage() {}
+
+  @action
+  share() {}
 }

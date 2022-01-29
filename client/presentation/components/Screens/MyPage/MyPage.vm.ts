@@ -1,14 +1,11 @@
 import PagerModel from "domain/model/PagerModel";
 import PostModel from "domain/model/PostModel/model";
-import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../BaseViewModel";
 
 export default class ThisViewModel extends BaseViewModel {
   private static _Instance: ThisViewModel;
-  private readonly _PostUserCase: PostRepositoryImpl;
-
   static GetInstance(args: ConstructorParameter) {
     if (!ThisViewModel._Instance) {
       ThisViewModel._Instance = new ThisViewModel(args);
@@ -57,11 +54,6 @@ export default class ThisViewModel extends BaseViewModel {
   @action
   load = flow(function* (this: ThisViewModel) {
     this._isLoading.set(true);
-
-    const [pager, posts] = yield this._PostUserCase.getPostlists();
-
-    this._posts.set(posts);
-    this._pager.set(pager);
 
     this._isLoading.set(false);
   });

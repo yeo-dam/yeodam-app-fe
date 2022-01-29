@@ -2,13 +2,12 @@ import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
 import PagerEntity from "~data/entity/PagerEntity";
 import UserEntity from "~data/entity/UserEntity";
-import Fetcher from "helper/fetcher";
 import PagerModel from "~domain/model/PagerModel/model";
 import UserModel from "~domain/model/UserModel/model";
 import BaseRepository, { ConstructorParameter } from "./Repository";
 
 interface UserRepository {
-  getUserlists(): Promise<[PagerModel, UserModel[]]>;
+  find(): Promise<[PagerModel, UserModel[]]>;
 }
 
 export default class UserRepositoryImpl
@@ -27,26 +26,37 @@ export default class UserRepositoryImpl
     super(args);
   }
 
-  public async getUserlists(): Promise<[PagerModel, UserModel[]]> {
-    const userlistEntities = await Fetcher<PagerEntity<UserEntity>>("/users");
+  async find(): Promise<[PagerModel, UserModel[]]> {
+    const userlistEntities = await this._remote._fetcher<
+      PagerEntity<UserEntity>
+    >("/users");
     const userListInstances = userlistEntities.items.map((post) =>
       plainToClass(UserModel, {
         ...post,
       })
     );
 
-    const pagerModel = plainToClass(PagerModel, {
+    const pagerInstance = plainToClass(PagerModel, {
       count: userlistEntities.count,
       total: userlistEntities.total,
       limit: userlistEntities.limit,
       offset: userlistEntities.offset,
     });
 
-    const err = await validate(userListInstances);
-    if (err.length > 0) {
-      throw err;
+    userListInstances.forEach(async (item) => {
+      const err = await validate(item);
+      if (err.length > 0) {
+        throw err;
+      }
+    });
+
+    const pagerErrors = await validate(pagerInstance);
+    if (pagerErrors.length > 0) {
+      throw pagerErrors;
     }
 
-    return [pagerModel, userListInstances];
+    return [pagerInstance, userListInstances];
   }
+
+  async findOneById() {}
 }

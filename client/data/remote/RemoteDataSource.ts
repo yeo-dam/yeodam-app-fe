@@ -12,6 +12,7 @@ class RemoteDataSource {
     }
     return RemoteDataSource._Instance;
   }
+
   constructor(accessToken: any) {
     this.setAccessToken(accessToken);
   }

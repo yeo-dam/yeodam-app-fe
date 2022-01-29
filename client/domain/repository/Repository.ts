@@ -6,7 +6,7 @@ export type ConstructorParameter = {
 
 class BaseRepository {
   public _accessToken?: string;
-  private readonly _remote: RemoteDataSource;
+  public readonly _remote: RemoteDataSource;
 
   constructor(args?: ConstructorParameter) {
     if (!args) {

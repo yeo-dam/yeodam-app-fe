@@ -19,4 +19,6 @@ export default class NotificationRepositoryImpl
   private constructor(args: ConstructorParameter) {
     super(args);
   }
+
+  async find() {}
 }

@@ -19,8 +19,4 @@ export default class CommentRepositoryImpl
   }
 
   async find() {}
-
-  async create() {}
-
-  async upddate() {}
 }

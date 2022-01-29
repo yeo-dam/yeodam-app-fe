@@ -2,13 +2,12 @@ import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
 import PagerEntity from "~data/entity/PagerEntity";
 import PostEntity from "~data/entity/PostEntity";
-import Fetcher from "helper/fetcher";
 import PagerModel from "~domain/model/PagerModel";
 import PostModel from "~domain/model/PostModel";
 import BaseRepository, { ConstructorParameter } from "./Repository";
 
 interface PostRepository {
-  getPostlists(): Promise<[PagerModel, PostModel[]]>;
+  find(): Promise<[PagerModel, PostModel[]]>;
 }
 
 export default class PostRepositoryImpl
@@ -16,6 +15,7 @@ export default class PostRepositoryImpl
   implements PostRepository
 {
   private static _Instance: PostRepositoryImpl;
+
   static GetInstace(args: ConstructorParameter) {
     if (!PostRepositoryImpl._Instance) {
       PostRepositoryImpl._Instance = new PostRepositoryImpl(args);
@@ -27,8 +27,11 @@ export default class PostRepositoryImpl
     super(args);
   }
 
-  public async getPostlists(): Promise<[PagerModel, PostModel[]]> {
-    const postlistEntities = await Fetcher<PagerEntity<PostEntity>>("/posts");
+  /** 전체 Post 목록 불러오기 (필요 없을 수 있음) **/
+  async find(): Promise<[PagerModel, PostModel[]]> {
+    const postlistEntities = await this._remote._fetcher<
+      PagerEntity<PostEntity>
+    >("/posts");
 
     const postInstances = postlistEntities.items.map((post) =>
       plainToClass<PostModel, PostEntity>(PostModel, { ...post })
@@ -55,4 +58,5 @@ export default class PostRepositoryImpl
 
     return [pagerInstance, postInstances];
   }
+
 }
