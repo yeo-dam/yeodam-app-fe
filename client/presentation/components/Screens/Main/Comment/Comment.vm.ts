@@ -1,11 +1,15 @@
 import { action, computed, flow, observable } from "mobx";
+import CommentModel from "~domain/model/CommentModel";
+import PagerModel from "~domain/model/PagerModel";
 import CommentRepositoryImpl from "~domain/repository/CommentRepository";
+import MeRepositoryImpl from "~domain/repository/MeRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../../BaseViewModel";
 
 export default class ThisViewModel extends BaseViewModel {
   private static _Instance: ThisViewModel;
   private readonly _commentRepo: CommentRepositoryImpl;
+  private readonly _meRepo: MeRepositoryImpl;
 
   static GetInstance(args: ConstructorParameter) {
     if (!ThisViewModel._Instance) {
@@ -21,6 +25,9 @@ export default class ThisViewModel extends BaseViewModel {
     this._commentRepo = CommentRepositoryImpl.GetInstace({
       accessToken: args.accessToken,
     });
+    this._meRepo = MeRepositoryImpl.GetInstace({
+      accessToken: args.accessToken,
+    });
   }
 
   @observable
@@ -28,6 +35,12 @@ export default class ThisViewModel extends BaseViewModel {
 
   @observable
   private _isError = observable.box<boolean>(false);
+
+  @observable
+  private _pager = observable.box<PagerModel>(undefined);
+
+  @observable
+  private _comments = observable.map<string, CommentModel>(undefined);
 
   @computed
   public get isLoading() {
@@ -39,10 +52,96 @@ export default class ThisViewModel extends BaseViewModel {
     return this._isError.get();
   }
 
+  @computed
+  public get comments() {
+    return [...this._comments.values()];
+  }
+
+  @computed
+  public get pager() {
+    return this._pager.get();
+  }
+
   @action
   load = flow(function* (this: ThisViewModel) {
-    this._isLoading.set(true);
-    yield this._commentRepo.find();
-    this._isLoading.set(false);
+    try {
+      this._isLoading.set(true);
+      const [pagerInstance, commentInstances] = yield this._commentRepo.find();
+      commentInstances.forEach((item: CommentModel) => {
+        this._comments.set(item.id, item);
+      });
+      this._pager.set(pagerInstance);
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+      throw error;
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
+
+  @action
+  addComment = flow(function* (this: ThisViewModel) {
+    try {
+      this._isLoading.set(true);
+      yield this._meRepo.addComment();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
+
+  @action
+  addNestedComment = flow(function* (this: ThisViewModel) {
+    try {
+      this._isLoading.set(true);
+      yield this._meRepo.addNestedComment();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
+
+  @action
+  updateComment = flow(function* (this: ThisViewModel) {
+    try {
+      this._isLoading.set(true);
+      yield this._meRepo.updateComment();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
+
+  @action
+  deleteComment = flow(function* (this: ThisViewModel) {
+    try {
+      this._isLoading.set(true);
+      yield this._meRepo.deleteComment();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
+
+  @action
+  reportComment = flow(function* (this: ThisViewModel) {
+    try {
+      this._isLoading.set(true);
+      yield this._meRepo.reportComment();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
   });
 }

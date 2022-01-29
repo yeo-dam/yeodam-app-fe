@@ -1,13 +1,16 @@
 import PagerModel from "domain/model/PagerModel";
 import PostModel from "domain/model/PostModel/model";
-import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
+import UserModel from "~domain/model/UserModel/model";
+import MeRepositoryImpl from "~domain/repository/MeRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
+import UserRepositoryImpl from "~domain/repository/UserRepository";
 import BaseViewModel from "../../BaseViewModel";
 
 export default class ThisViewModel extends BaseViewModel {
   private static _Instance: ThisViewModel;
-  private readonly _PostUserCase: PostRepositoryImpl;
+  private readonly _userRepo: UserRepositoryImpl;
+  private readonly _meRepo: MeRepositoryImpl;
 
   static GetInstance(args: ConstructorParameter) {
     if (!ThisViewModel._Instance) {
@@ -32,7 +35,7 @@ export default class ThisViewModel extends BaseViewModel {
   private _pager = observable.box<PagerModel>(undefined);
 
   @observable
-  private _posts = observable.box<PostModel[]>(undefined);
+  private _users = observable.map<string, UserModel>(undefined);
 
   @computed
   public get isLoading() {
@@ -45,8 +48,8 @@ export default class ThisViewModel extends BaseViewModel {
   }
 
   @computed
-  public get posts() {
-    return this._posts.get();
+  public get users() {
+    return [...this._users.values()];
   }
 
   @computed
@@ -56,13 +59,47 @@ export default class ThisViewModel extends BaseViewModel {
 
   @action
   load = flow(function* (this: ThisViewModel) {
-    this._isLoading.set(true);
+    try {
+      this._isLoading.set(true);
+      const [pagerInstance, userInstances] = yield this._userRepo.find();
+      // TODO : 추후에 아래 메서드로 변경해 줄 것.
+      // const [pagerInstance, userInstances] = yield this._meRepo.findPosts();
+      userInstances.forEach((item: UserModel) => {
+        this._users.set(item.id, item);
+      });
+      this._pager.set(pagerInstance);
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+      throw error;
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
 
-    const [pager, posts] = yield this._PostUserCase.getPostlists();
+  @action
+  follow = flow(function* (this: ThisViewModel) {
+    try {
+      this._isLoading.set(true);
+      yield this._meRepo.follow();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
 
-    this._posts.set(posts);
-    this._pager.set(pager);
-
-    this._isLoading.set(false);
+  @action
+  unfollow = flow(function* (this: ThisViewModel) {
+    try {
+      this._isLoading.set(true);
+      yield this._meRepo.unfollow();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
   });
 }

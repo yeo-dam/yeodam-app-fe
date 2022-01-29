@@ -1,11 +1,14 @@
 import PagerModel from "domain/model/PagerModel";
-import PostModel from "domain/model/PostModel/model";
+import WishlistModel from "domain/model/WishlistModel";
 import { action, computed, flow, observable } from "mobx";
+import MeRepositoryImpl from "~domain/repository/MeRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../BaseViewModel";
 
 export default class ThisViewModel extends BaseViewModel {
   private static _Instance: ThisViewModel;
+  private readonly _meRepo: MeRepositoryImpl;
+
   static GetInstance(args: ConstructorParameter) {
     if (!ThisViewModel._Instance) {
       ThisViewModel._Instance = new ThisViewModel(args);
@@ -17,6 +20,9 @@ export default class ThisViewModel extends BaseViewModel {
     if (args.accessToken) {
       this.setAccessToken(args.accessToken);
     }
+    this._meRepo = MeRepositoryImpl.GetInstace({
+      accessToken: args.accessToken,
+    });
   }
 
   @observable
@@ -29,7 +35,7 @@ export default class ThisViewModel extends BaseViewModel {
   private _pager = observable.box<PagerModel>(undefined);
 
   @observable
-  private _posts = observable.box<PostModel[]>(undefined);
+  private _wishlist = observable.map<string, WishlistModel>(undefined);
 
   @computed
   public get isLoading() {
@@ -42,8 +48,8 @@ export default class ThisViewModel extends BaseViewModel {
   }
 
   @computed
-  public get posts() {
-    return this._posts.get();
+  public get wishlists() {
+    return [...this._wishlist.values()];
   }
 
   @computed
@@ -53,8 +59,19 @@ export default class ThisViewModel extends BaseViewModel {
 
   @action
   load = flow(function* (this: ThisViewModel) {
-    this._isLoading.set(true);
-
-    this._isLoading.set(false);
+    try {
+      this._isLoading.set(true);
+      const [pager, wishlistInstances] = yield this._meRepo.findWishlist();
+      wishlistInstances.forEach((item: WishlistModel) => {
+        this._wishlist.set(item.id, item);
+      });
+      this._pager.set(pager);
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+      throw error;
+    } finally {
+      this._isLoading.set(false);
+    }
   });
 }

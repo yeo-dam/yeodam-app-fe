@@ -58,5 +58,4 @@ export default class PostRepositoryImpl
 
     return [pagerInstance, postInstances];
   }
-
 }

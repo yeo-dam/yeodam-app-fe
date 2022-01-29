@@ -28,10 +28,12 @@ export default class MeRepositoryImpl
   // TODO : 복수의 이미지 추가
 
   /** 유저 ID로 Post 불러오기 **/
-  // TODO : 다양한 쿼리 추가되어야 함
   async createPost() {}
 
+  // TODO : 다양한 쿼리 추가되어야 함
   async findPosts() {}
+
+  async findPostById() {}
 
   async updatePost() {}
 
@@ -53,6 +55,11 @@ export default class MeRepositoryImpl
   async addLikes() {}
 
   async deleteLikes() {}
+
+  // TODO: 어떤 테이블이 와야할지 모르겠음.
+  async addWishlist() {}
+
+  async findWishlist() {}
 
   /** User <--> Comments <--> Post (Many to Many) **/
   // 댓글 달기

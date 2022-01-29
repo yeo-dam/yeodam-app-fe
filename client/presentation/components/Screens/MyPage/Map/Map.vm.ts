@@ -1,11 +1,15 @@
 import MapRepositoryImpl from "domain/repository/MapRepository";
 import { action, computed, flow, observable } from "mobx";
+import PagerModel from "~domain/model/PagerModel";
+import PlaceModel from "~domain/model/PlaceModel/model";
+import MeRepositoryImpl from "~domain/repository/MeRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../../BaseViewModel";
 
 export default class MapViewModel extends BaseViewModel {
   private static _Instance: MapViewModel;
   private readonly _MapRepo: MapRepositoryImpl;
+  private readonly _MeRepo: MeRepositoryImpl;
 
   static GetInstance(args: ConstructorParameter) {
     if (!MapViewModel._Instance) {
@@ -29,6 +33,12 @@ export default class MapViewModel extends BaseViewModel {
   @observable
   private _isError = observable.box<boolean>(false);
 
+  @observable
+  private _pager = observable.box<PagerModel>(undefined);
+
+  @observable
+  private _posts = observable.map<string, PlaceModel>(undefined);
+
   @computed
   public get isLoading() {
     return this._isLoading.get();
@@ -39,9 +49,46 @@ export default class MapViewModel extends BaseViewModel {
     return this._isError.get();
   }
 
+  @computed
+  public get posts() {
+    return [...this._posts.values()];
+  }
+
+  @computed
+  public get pager() {
+    return this._pager.get();
+  }
+
   @action
   load = flow(function* (this: MapViewModel) {
-    this._isLoading.set(true);
-    this._isLoading.set(false);
+    try {
+      this._isLoading.set(true);
+      const [pager, postInstances] = yield this._MeRepo.findPlaces();
+      // TODO : 추후에 아래 메서드로 변경해 줄 것.
+      // const [pager, postInstances] = yield this._meRepo.findPosts();
+      postInstances.forEach((item: PlaceModel) => {
+        this._posts.set(item.id, item);
+      });
+      this._pager.set(pager);
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+      throw error;
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
+
+  @action
+  findPlaceById = flow(function* (this: MapViewModel) {
+    try {
+      this._isLoading.set(true);
+      yield this._MeRepo.findPlaceById();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
   });
 }

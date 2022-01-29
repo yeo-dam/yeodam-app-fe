@@ -1,6 +1,8 @@
 import PagerModel from "domain/model/PagerModel";
 import PostModel from "domain/model/PostModel/model";
 import { action, computed, flow, observable } from "mobx";
+import NotificationModel from "~domain/model/NotificationModel";
+import MeRepositoryImpl from "~domain/repository/MeRepository";
 import NotificationRepositoryImpl from "~domain/repository/NotificationRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "~presentation/components/Screens/BaseViewModel";
@@ -8,6 +10,7 @@ import BaseViewModel from "~presentation/components/Screens/BaseViewModel";
 export default class ThisViewModel extends BaseViewModel {
   private static _Instance: ThisViewModel;
   private readonly _NotificationRepo: NotificationRepositoryImpl;
+  private readonly _meRepo: MeRepositoryImpl;
 
   static GetInstance(args: ConstructorParameter) {
     if (!ThisViewModel._Instance) {
@@ -23,6 +26,9 @@ export default class ThisViewModel extends BaseViewModel {
     this._NotificationRepo = NotificationRepositoryImpl.GetInstace({
       accessToken: args.accessToken,
     });
+    this._meRepo = MeRepositoryImpl.GetInstace({
+      accessToken: args.accessToken,
+    });
   }
 
   @observable
@@ -35,7 +41,7 @@ export default class ThisViewModel extends BaseViewModel {
   private _pager = observable.box<PagerModel>(undefined);
 
   @observable
-  private _posts = observable.box<PostModel[]>(undefined);
+  private _notifications = observable.map<string, NotificationModel>(undefined);
 
   @computed
   public get isLoading() {
@@ -49,7 +55,7 @@ export default class ThisViewModel extends BaseViewModel {
 
   @computed
   public get posts() {
-    return this._posts.get();
+    return [...this._notifications.values()];
   }
 
   @computed
@@ -59,7 +65,34 @@ export default class ThisViewModel extends BaseViewModel {
 
   @action
   load = flow(function* (this: ThisViewModel) {
-    this._isLoading.set(true);
-    this._isLoading.set(false);
+    try {
+      this._isLoading.set(true);
+      const [pager, postInstances] = yield this._meRepo.findNotifications();
+      // TODO : 추후에 아래 메서드로 변경해 줄 것.
+      // const [pager, postInstances] = yield this._meRepo.findPosts();
+      postInstances.forEach((item: NotificationModel) => {
+        this._notifications.set(item.id, item);
+      });
+      this._pager.set(pager);
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+      throw error;
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
+
+  @action
+  deleteNotificationById = flow(function* (this: ThisViewModel) {
+    try {
+      this._isLoading.set(true);
+      yield this._meRepo.deleteNotificationById();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
   });
 }
