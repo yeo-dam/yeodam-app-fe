@@ -18,7 +18,7 @@ export default function App() {
     return null;
   } else {
     return (
-      <ViewModelProvider auth={auth} >
+      <ViewModelProvider auth={auth}>
         <SafeAreaProvider>
           <StyledSafeAreaView>
             <Navigation colorScheme={colorScheme} />

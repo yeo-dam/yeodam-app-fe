@@ -11,8 +11,8 @@ import { getRootViewModel } from "../Index.vm";
 import MainViewModel from "./Main.vm";
 import { observer } from "mobx-react";
 import PostModel from "domain/model/PostModel/model";
-import PhotoCard from "~presentation/components/Organisms/PhotoCard";
-import DescriptionCard from "~presentation/components/Organisms/DescriptionCard";
+import PhotoCard from "~presentation/components/Local/PhotoCard";
+import DescriptionCard from "~presentation/components/Local/DescriptionCard";
 import Carousel from "~presentation/components/Shared/Carousel";
 import { MAIN_SCREEN_NAME } from ".";
 
