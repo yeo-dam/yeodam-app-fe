@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components/native";
 import { TouchableWithoutFeedback, View } from "react-native";
 import PostModel from "~domain/model/PostModel";
@@ -8,13 +8,15 @@ import PlaceTypeFormatter from "helper/Formatter/PlaceTypeFormatter";
 import FlexBox from "~presentation/components/Shared/FlexBox";
 import Divider from "~presentation/components/Shared/Divider";
 import { MAIN_SCREEN_NAME } from "~presentation/components/Screens/Main";
+import GeoDataToAddress from "helper/Formatter/GeoInfoFormatter";
 
 type Props = {
   item: PostModel;
+  setIsFront: (data: boolean) => void;
   navigation: any;
 };
 
-const Component = ({ item, navigation }: Props) => {
+const Component = ({ item, setIsFront, navigation }: Props) => {
   const renderComments = (userName?: string, content?: string) => {
     if (!userName || !content) {
       return "";
@@ -22,14 +24,20 @@ const Component = ({ item, navigation }: Props) => {
     return `${userName} ${content.substring(0, 25)}`;
   };
 
+  GeoDataToAddress({
+    latitude: item.place.latitude,
+    longitude: item.place.longitude,
+  });
+
   return (
     <Wrapper>
       <PhotoFrame>
         <PhotoBox>
-          <ContentBox>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate(MAIN_SCREEN_NAME.MAP)}
-            >
+          <TouchableWithoutFeedback onPress={() => setIsFront(true)}>
+            <ContentBox>
+              {/* <TouchableWithoutFeedback
+                onPress={() => navigation.push(MAIN_SCREEN_NAME.MAP)}
+              > */}
               <View>
                 <WhiteTitleTypo>{item.title}</WhiteTitleTypo>
                 <GreyFlexBox>
@@ -38,20 +46,22 @@ const Component = ({ item, navigation }: Props) => {
                   </GreyBlackTypo>
                   <Divider orientation="Vertical" />
                   {/* TODO : Address Formatting 관련 서버 쪽과 이야기 해봐야 할 것 */}
-                  <GreyBlackTypo>{item.place.address}</GreyBlackTypo>
+                  <GreyBlackTypo>{item.place.latitude}</GreyBlackTypo>
                   {/* TODO : 아이콘 추가 필요 */}
                   {/* <BiChevronRight color="#AAAAAA" size={12} /> */}
                 </GreyFlexBox>
               </View>
-            </TouchableWithoutFeedback>
-            <WhiteTypo>{item.description}</WhiteTypo>
-            <TagFlexBox>
-              {item.tags &&
-                item.tags.map((tag, idx) => (
-                  <TagTypo key={idx}>{`#${tag.title} `}</TagTypo>
-                ))}
-            </TagFlexBox>
-          </ContentBox>
+              {/* </TouchableWithoutFeedback> */}
+              <WhiteTypo>{item.description}</WhiteTypo>
+              <TagFlexBox>
+                {item.tags &&
+                  item.tags.map((tag, idx) => (
+                    <TagTypo key={idx}>{`#${tag.title} `}</TagTypo>
+                  ))}
+              </TagFlexBox>
+            </ContentBox>
+          </TouchableWithoutFeedback>
+
           <Divider />
           {/* TODO : 값 Counting은 서버에서 줘야 할 것 같음 */}
           <CommentBox>
