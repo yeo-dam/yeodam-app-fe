@@ -1,17 +1,14 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MapView, {
   MapViewProps,
   Marker,
   PROVIDER_GOOGLE,
-  Region,
 } from "react-native-maps";
-import { Dimensions } from "react-native";
 import styled from "styled-components/native";
-import * as Location from "expo-location";
 import { observer } from "mobx-react";
-import useIsMounted from "hooks/useIsMounted";
 import MapViewModel from "~presentation/components/Screens/MyPage/Map/Map.vm";
+import Layout from "constants/Layout";
 
 type Props = {
   vm: MapViewModel;
@@ -72,8 +69,8 @@ const Wrapper = styled.View`
 `;
 
 const StyledMapView = styled(MapView)`
-  width: ${Dimensions.get("window").width + "px"};
-  height: ${Dimensions.get("window").height + "px"};
+  width: ${Layout.window.width + "px"};
+  height: ${Layout.window.height + "px"};
 `;
 
 export default observer(GoogleMap);

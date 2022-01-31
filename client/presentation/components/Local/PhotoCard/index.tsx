@@ -1,6 +1,6 @@
 import PostModel from "domain/model/PostModel";
 import React from "react";
-import { ListRenderItem } from "react-native";
+import { ListRenderItem, TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
 import Image from "~presentation/components/Shared/Image";
 import Avatar from "~presentation/components/Shared/Avatar";
@@ -8,12 +8,16 @@ import { WithLocalSvg } from "react-native-svg";
 import Typography from "~presentation/components/Shared/Typography";
 import { dateFormatter } from "helper/Formatter/DateFormatter";
 import FlexBox from "~presentation/components/Shared/FlexBox";
+import Layout from "constants/Layout";
 
 type Props = {
   item: PostModel;
+  setIsFront: (data: boolean) => void;
 };
 
-const PhotoCard = ({ item }: Props) => {
+const PhotoCard = ({ item, setIsFront }: Props) => {
+  const { window } = Layout;
+
   return (
     <PhotoFrame>
       <PhotoContent>
@@ -51,6 +55,7 @@ const DropDownBox = styled.View`
   margin-right: 12px;
 `;
 
+// TODO : width를 비율로 변경해야 함.
 const PhotoFrame = styled.View`
   background-color: #fff;
   padding: 30px 16px 16px 16px;

@@ -40,17 +40,25 @@ const MainScreen = ({
     return <ErrorMsg />;
   }
 
-  const renderCard = (item: PostModel, navigation: any) => {
+  const renderCard = (
+    item: PostModel,
+    setFunc: (data: boolean) => void,
+    router: any
+  ) => {
     if (isFront) {
       return (
         <PhotoContainer item={item}>
-          <PhotoCard item={item} />
+          <PhotoCard item={item} setIsFront={setFunc} />
         </PhotoContainer>
       );
     } else {
       return (
         <PhotoContainer item={item}>
-          <DescriptionCard item={item} navigation={navigation} />
+          <DescriptionCard
+            item={item}
+            navigation={router}
+            setIsFront={setFunc}
+          />
         </PhotoContainer>
       );
     }
@@ -75,7 +83,7 @@ const MainScreen = ({
               isTextImg={false}
             />
           }
-          renderItem={({ item }) => renderCard(item, navigation)}
+          renderItem={({ item }) => renderCard(item, setIsFront, navigation)}
           keyExtractor={(item) => item.id}
         ></FlatList>
       </View>

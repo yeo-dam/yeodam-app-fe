@@ -1,11 +1,11 @@
 import React, { useState, useRef, PropsWithChildren } from "react";
-import { Dimensions, Platform, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import styled from "styled-components/native";
 import { WithLocalSvg } from "react-native-svg";
 import Nav from "~presentation/components/Shared/Nav";
 
 import Item from "./item";
+import Layout from "constants/Layout";
 
 export type Props = {
   pages: { id: string; url: string }[] | { url: string }[];
@@ -22,8 +22,9 @@ const Atom = ({
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const carouselRef = useRef(null);
-  const windowWidth = Dimensions.get("window").width;
-  const windowHeight = Dimensions.get("window").height;
+  const { window } = Layout;
+  const windowWidth = window.width;
+  const windowHeight = window.height;
 
   const onPressHandler = (_url: string) => {
     console.log("carousel clicked", _url);
