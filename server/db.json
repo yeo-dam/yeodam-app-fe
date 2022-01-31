@@ -25,8 +25,11 @@
         },
         "place": {
           "id": "1",
+          "title": "marker1",
+          "description": "marker1 description",
           "type": "C",
-          "address": "서울특별시 강남구 역삼동 강남대로 452"
+          "latitude": 37.28972304408989,
+          "longitude": 126.81528244167568
         },
         "title": "강남역 쉑쉑버거",
         "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
@@ -183,8 +186,11 @@
         },
         "place": {
           "id": "1",
+          "title": "marker1",
+          "description": "marker1 description",
           "type": "C",
-          "address": "서울특별시 강남구 역삼동 강남대로 452"
+          "latitude": 37.28972304408989,
+          "longitude": 126.81528244167568
         },
         "title": "강남역 쉑쉑버거",
         "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
@@ -341,8 +347,11 @@
         },
         "place": {
           "id": "1",
+          "title": "marker1",
+          "description": "marker1 description",
           "type": "C",
-          "address": "서울특별시 강남구 역삼동 강남대로 452"
+          "latitude": 37.28972304408989,
+          "longitude": 126.81528244167568
         },
         "title": "강남역 쉑쉑버거",
         "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
@@ -499,8 +508,11 @@
         },
         "place": {
           "id": "1",
+          "title": "marker1",
+          "description": "marker1 description",
           "type": "C",
-          "address": "서울특별시 강남구 역삼동 강남대로 452"
+          "latitude": 37.28972304408989,
+          "longitude": 126.81528244167568
         },
         "title": "강남역 쉑쉑버거",
         "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
@@ -639,7 +651,7 @@
     "total": 3,
     "count": 3
   },
-  "diaries": [
+  "story": [
     {
       "id": "1",
       "name": "11월 29일 일기",
@@ -694,5 +706,37 @@
       "title": "한적하고 분위기 있는 일식 맛집",
       "posts": [{ "id": "5" }, { "id": "6" }, { "id": "7" }, { "id": "8" }]
     }
-  ]
+  ],
+  "places": {
+    "items": [
+      {
+        "id": "1",
+        "title": "marker1",
+        "description": "marker1 description",
+        "type": "C",
+        "latitude": 37.28972304408989,
+        "longitude": 126.81528244167568
+      },
+      {
+        "id": "2",
+        "title": "marker2",
+        "description": "marker2 description",
+        "type": "C",
+        "latitude": 37.27972304408989,
+        "longitude": 126.80528244167568
+      },
+      {
+        "id": "3",
+        "title": "marker3",
+        "description": "marker3 description",
+        "type": "C",
+        "latitude": 37.29972304408989,
+        "longitude": 126.80528244167568
+      }
+    ],
+    "offset": 0,
+    "limit": 10,
+    "total": 3,
+    "count": 3
+  }
 }
