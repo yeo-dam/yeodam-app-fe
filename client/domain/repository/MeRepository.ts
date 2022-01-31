@@ -1,3 +1,9 @@
+import { plainToClass } from "class-transformer";
+import { validate } from "class-validator";
+import PagerEntity from "~data/entity/PagerEntity";
+import PlaceEntity from "~data/entity/PlaceEntity";
+import PagerModel from "~domain/model/PagerModel";
+import PlaceModel from "~domain/model/PlaceModel/model";
 import BaseRepository, { ConstructorParameter } from "./Repository";
 
 interface MeRepository {}
@@ -40,9 +46,41 @@ export default class MeRepositoryImpl
   async deletePost() {}
 
   /** User <--> Place (One to Many) **/
-  // TODO : 다양한 필터 추가되어야 할 것
-  async findPlaces() {}
+  async findPlaces(): Promise<[PagerModel, PlaceModel[]]> {
+    const placeEntities = await this._remote._fetcher<PagerEntity<PlaceEntity>>(
+      "/places"
+    );
 
+    console.log(
+      `TCL ~ [MeRepository.ts] ~ line ~ 54 ~ placeEntities`,
+      placeEntities
+    );
+
+    const placeInstances = placeEntities.items.map((place) =>
+      plainToClass<PlaceModel, PlaceEntity>(PlaceModel, { ...place })
+    );
+
+    const pagerInstance = plainToClass(PagerModel, {
+      count: placeEntities.count,
+      total: placeEntities.total,
+      limit: placeEntities.limit,
+      offset: placeEntities.offset,
+    });
+
+    placeInstances.forEach(async (item) => {
+      const postError = await validate(item);
+      if (postError.length > 0) {
+        throw postError;
+      }
+    });
+
+    const pagerErrors = await validate(pagerInstance);
+    if (pagerErrors.length > 0) {
+      throw pagerErrors;
+    }
+
+    return [pagerInstance, placeInstances];
+  }
   // 장소를 클릭했을 때 부를 것
   async findPlaceById() {}
 
