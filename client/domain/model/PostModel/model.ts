@@ -5,6 +5,8 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  Max,
+  MaxLength,
   ValidateNested,
 } from "class-validator";
 import PostEntity from "~data/entity/PostEntity";
@@ -12,9 +14,10 @@ import ImageFileModel from "~domain/model/ImageFileModel/model";
 import PlaceModel from "~domain/model/PlaceModel";
 import UserModel from "~domain/model/UserModel";
 import CommentModel from "~domain/model/CommentModel";
-import { Type } from "class-transformer";
+import { Exclude, Type } from "class-transformer";
 import TransformDate from "helper/TransformDate";
 import TagModel from "../TagModel";
+import { observable } from "mobx";
 
 class PostModel implements PostEntity {
   @IsString()
@@ -35,6 +38,7 @@ class PostModel implements PostEntity {
   @IsNotEmpty()
   title: string;
 
+  @MaxLength(5)
   @IsString()
   @IsNotEmpty()
   description: string;
@@ -66,6 +70,17 @@ class PostModel implements PostEntity {
   @Type(() => TagModel)
   @IsOptional()
   tags?: TagModel[];
+
+  @observable
+  @Exclude()
+  isFront: boolean;
+
+  @Exclude()
+  setFront = (data: boolean) => {
+    this.isFront = data;
+    console.log(`TCL ~ [model.ts] ~ line ~ 76 ~ data`, data);
+    return this.isFront;
+  };
 }
 
 export default PostModel;
