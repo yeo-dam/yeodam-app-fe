@@ -6,11 +6,11 @@ import UserEntity from "../UserEntity";
 export default interface Entity {
   id: string;
   user: UserEntity;
-  place: PlaceEntity;
+  // place: PlaceEntity;
   title: string;
   description: string;
   createdAt: Date;
   updatedAt?: Date;
-  images: ImageFileEntity[];
-  comments?: CommentEntity[];
+  // images: ImageFileEntity[];
+  // comments?: CommentEntity[];
 }

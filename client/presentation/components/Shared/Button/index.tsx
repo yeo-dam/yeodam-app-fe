@@ -1,13 +1,17 @@
 import React, { FC } from "react";
-import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { TouchableOpacity, TouchableOpacityProps, Text } from "react-native";
 
-type Props = {
+export type Props = {
   label: string;
+  onPressEvent?: () => void;
 } & TouchableOpacityProps;
 
-const Component: FC<Props> = ({ label }) => {
-  const onPress = (data: any) => console.log(data);
-  return <TouchableOpacity onPress={onPress}>{label}</TouchableOpacity>;
+const Component: FC<Props> = ({ label, onPressEvent }) => {
+  return (
+    <TouchableOpacity onPress={onPressEvent}>
+      <Text>{label}</Text>
+    </TouchableOpacity>
+  );
 };
 
 export default Component;

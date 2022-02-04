@@ -9452,6 +9452,11 @@ unpipe@~1.0.0:
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
   integrity sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=
 
+unsafe-class-transformer@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/unsafe-class-transformer/-/unsafe-class-transformer-0.4.0.tgz#8dbf84318c8d8b93d706d3b3ec758eddf2b34e6d"
+  integrity sha512-kzK8+ZGDhPrNaPTee1ceI1/F5NGvNMJDb9VYX74qUcTHO7MKvIFalH5wWPcaM7r5U/6yT3vThRzVVAK8Mm8hzQ==
+
 unset-value@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unset-value/-/unset-value-1.0.0.tgz#8376873f7d2335179ffb1e6fc3a8ed0dfc8ab559"
