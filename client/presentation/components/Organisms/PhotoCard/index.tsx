@@ -15,32 +15,16 @@ type Props = {
 
 const PhotoCard = ({ item }: Props) => {
   return (
-    <Wrapper>
-      <PhotoHeader>
-        <Avatar
-          name={item.user.name}
-          imageSource={item.user.avatar?.filePath}
-        />
-        <IconSection>
-          <IconBox>
-            <WithLocalSvg asset={require("~asset/Icons/wishlist.svg")} />
-          </IconBox>
-          <DropDownBox>
-            <WithLocalSvg asset={require("~asset/Icons/dropdown.svg")} />
-          </DropDownBox>
-        </IconSection>
-      </PhotoHeader>
-      <PhotoFrame>
-        <PhotoContent>
-          <MainImage source={{ uri: item.images[0].filePath }} />
-          <PhotoDate>
-            <Typography textType="Number" textColor="#777">
-              {dateFormatter(item.createdAt)}
-            </Typography>
-          </PhotoDate>
-        </PhotoContent>
-      </PhotoFrame>
-    </Wrapper>
+    <PhotoFrame>
+      <PhotoContent>
+        <MainImage source={{ uri: item.images[0].filePath }} />
+        <PhotoDate>
+          <Typography textType="Number" textColor="#777">
+            {dateFormatter(item.createdAt)}
+          </Typography>
+        </PhotoDate>
+      </PhotoContent>
+    </PhotoFrame>
   );
 };
 

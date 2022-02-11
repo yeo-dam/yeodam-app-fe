@@ -15,6 +15,7 @@ import PhotoCard from "~presentation/components/Organisms/PhotoCard";
 import DescriptionCard from "~presentation/components/Organisms/DescriptionCard";
 import Carousel from "~presentation/components/Shared/Carousel";
 import { MAIN_SCREEN_NAME } from ".";
+import PhotoContainer from "~presentation/components/Organisms/PhotoContainer";
 
 const MainScreen = ({
   navigation,
@@ -41,9 +42,17 @@ const MainScreen = ({
 
   const renderCard = (item: PostModel, navigation: any) => {
     if (isFront) {
-      return <PhotoCard item={item} />;
+      return (
+        <PhotoContainer item={item}>
+          <PhotoCard item={item} />
+        </PhotoContainer>
+      );
     } else {
-      return <DescriptionCard item={item} navigation={navigation} />;
+      return (
+        <PhotoContainer item={item}>
+          <DescriptionCard item={item} navigation={navigation} />
+        </PhotoContainer>
+      );
     }
   };
 

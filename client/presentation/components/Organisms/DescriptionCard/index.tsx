@@ -23,61 +23,54 @@ const Component = ({ item, navigation }: Props) => {
   };
 
   return (
-    <Wrapper>
-      <PhotoFrame>
-        <PhotoBox>
-          <ContentBox>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate(MAIN_SCREEN_NAME.MAP)}
-            >
-              <View>
-                <WhiteTitleTypo>{item.title}</WhiteTitleTypo>
-                <GreyFlexBox>
-                  <GreyBlackTypo>
-                    {PlaceTypeFormatter(item.place.type)}
-                  </GreyBlackTypo>
-                  <Divider orientation="Vertical" />
-                  {/* TODO : Address Formatting 관련 서버 쪽과 이야기 해봐야 할 것 */}
-                  <GreyBlackTypo>{item.place.address}</GreyBlackTypo>
-                  {/* TODO : 아이콘 추가 필요 */}
-                  {/* <BiChevronRight color="#AAAAAA" size={12} /> */}
-                </GreyFlexBox>
-              </View>
-            </TouchableWithoutFeedback>
-            <WhiteTypo>{item.description}</WhiteTypo>
-            <TagFlexBox>
-              {item.tags &&
-                item.tags.map((tag, idx) => (
-                  <TagTypo key={idx}>{`#${tag.title} `}</TagTypo>
-                ))}
-            </TagFlexBox>
-          </ContentBox>
-          <Divider />
-          {/* TODO : 값 Counting은 서버에서 줘야 할 것 같음 */}
-          <CommentBox>
-            <GreyTypo>{FollowerNum()} 명</GreyTypo>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate(MAIN_SCREEN_NAME.COMMENT)}
-            >
-              <GreyTypo>
-                {item.comments &&
-                  renderComments(
-                    item.comments[0].user.name,
-                    item.comments[0].content
-                  )}
-              </GreyTypo>
-            </TouchableWithoutFeedback>
-          </CommentBox>
-        </PhotoBox>
-      </PhotoFrame>
-    </Wrapper>
+    <PhotoFrame>
+      <PhotoBox>
+        <ContentBox>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate(MAIN_SCREEN_NAME.MAP)}
+          >
+            <View>
+              <WhiteTitleTypo>{item.title}</WhiteTitleTypo>
+              <GreyFlexBox>
+                <GreyBlackTypo>
+                  {PlaceTypeFormatter(item.place.type)}
+                </GreyBlackTypo>
+                <Divider orientation="Vertical" />
+                {/* TODO : Address Formatting 관련 서버 쪽과 이야기 해봐야 할 것 */}
+                <GreyBlackTypo>{item.place.address}</GreyBlackTypo>
+                {/* TODO : 아이콘 추가 필요 */}
+                {/* <BiChevronRight color="#AAAAAA" size={12} /> */}
+              </GreyFlexBox>
+            </View>
+          </TouchableWithoutFeedback>
+          <WhiteTypo>{item.description}</WhiteTypo>
+          <TagFlexBox>
+            {item.tags &&
+              item.tags.map((tag, idx) => (
+                <TagTypo key={idx}>{`#${tag.title} `}</TagTypo>
+              ))}
+          </TagFlexBox>
+        </ContentBox>
+        <Divider />
+        {/* TODO : 값 Counting은 서버에서 줘야 할 것 같음 */}
+        <CommentBox>
+          <GreyTypo>{FollowerNum()} 명</GreyTypo>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate(MAIN_SCREEN_NAME.COMMENT)}
+          >
+            <GreyTypo>
+              {item.comments &&
+                renderComments(
+                  item.comments[0].user.name,
+                  item.comments[0].content
+                )}
+            </GreyTypo>
+          </TouchableWithoutFeedback>
+        </CommentBox>
+      </PhotoBox>
+    </PhotoFrame>
   );
 };
-
-const Wrapper = styled.View`
-  background-color: #f1f1f1;
-  padding: 32px 12px 32px 12px;
-`;
 
 const PhotoFrame = styled.View`
   background-color: #fff;
