@@ -1,4 +1,3 @@
-import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
 import MeRepositoryImpl from "~domain/repository/MeRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
@@ -45,6 +44,19 @@ export default class ThisViewModel extends BaseViewModel {
     try {
       this._isLoading.set(true);
       yield this._meRepo.createPost();
+    } catch (error) {
+      console.error(error);
+      this._isError.set(true);
+    } finally {
+      this._isLoading.set(false);
+    }
+  });
+
+  @action
+  uploadImages = flow(function* (this: ThisViewModel, data: any) {
+    try {
+      this._isLoading.set(true);
+      yield this._meRepo.uploadImages(data);
     } catch (error) {
       console.error(error);
       this._isError.set(true);

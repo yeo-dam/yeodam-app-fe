@@ -5,8 +5,6 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
-  Max,
-  MaxLength,
   ValidateNested,
 } from "class-validator";
 import PostEntity from "~data/entity/PostEntity";
@@ -38,7 +36,6 @@ class PostModel implements PostEntity {
   @IsNotEmpty()
   title: string;
 
-  @MaxLength(5)
   @IsString()
   @IsNotEmpty()
   description: string;
@@ -71,6 +68,8 @@ class PostModel implements PostEntity {
   @IsOptional()
   tags?: TagModel[];
 
+  // TODO : 여러 count 추가 : LikeCount, CommentCount, isReported 등등
+
   @observable
   @Exclude()
   isFront: boolean;
@@ -78,7 +77,6 @@ class PostModel implements PostEntity {
   @Exclude()
   setFront = (data: boolean) => {
     this.isFront = data;
-    console.log(`TCL ~ [model.ts] ~ line ~ 76 ~ data`, data);
     return this.isFront;
   };
 }

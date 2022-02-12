@@ -14,6 +14,8 @@ class CommentModel {
   @Type(() => UserModel)
   @IsNotEmpty()
   user: UserModel;
+
+  // TODO : 변경사항
 }
 
 export default CommentModel;

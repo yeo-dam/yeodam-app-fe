@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components/native";
-import { View } from "react-native";
 import FlexBox from "~presentation/components/Shared/FlexBox";
 import { WithLocalSvg } from "react-native-svg";
 import Avatar from "~presentation/components/Shared/Avatar";
 import PostModel from "~domain/model/PostModel";
+import DropDownMenu from "~presentation/components/Shared/DropDownMenu";
+import { TouchableWithoutFeedback } from "react-native";
 
 type Props = {
   item: PostModel;
@@ -22,9 +23,7 @@ const Component: FC<Props> = ({ item, children }) => {
           <IconBox>
             <WithLocalSvg asset={require("~asset/Icons/wishlist.svg")} />
           </IconBox>
-          <DropDownBox>
-            <WithLocalSvg asset={require("~asset/Icons/dropdown.svg")} />
-          </DropDownBox>
+          <DropDownMenu />
         </IconSection>
       </PhotoHeader>
       {children}

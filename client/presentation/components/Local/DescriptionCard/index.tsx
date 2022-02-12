@@ -9,12 +9,11 @@ import FlexBox from "~presentation/components/Shared/FlexBox";
 import Divider from "~presentation/components/Shared/Divider";
 import { MAIN_SCREEN_NAME } from "~presentation/components/Screens/Main";
 import GeoDataToAddress from "helper/Formatter/GeoInfoFormatter";
+import { Props as PhotoCardProps } from "../PhotoCard";
 
-type Props = {
-  item: PostModel;
-  setIsFront: (data: boolean) => void;
+export type Props = {
   navigation: any;
-};
+} & PhotoCardProps;
 
 const Component = ({ item, setIsFront, navigation }: Props) => {
   const renderComments = (userName?: string, content?: string) => {

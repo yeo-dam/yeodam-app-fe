@@ -10,7 +10,7 @@ type Props = {
 
 const Component: FC<Props> = ({ label, onSubmit }) => {
   const { handleSubmit } = useFormContext();
-  return <Button label={label} onPressEvent={handleSubmit(onSubmit)} />;
+  return <Button label={label} onPress={handleSubmit(onSubmit)} />;
 };
 
 export default Component;

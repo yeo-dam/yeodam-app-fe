@@ -11,11 +11,9 @@ import { getRootViewModel } from "../Index.vm";
 import MainViewModel from "./Main.vm";
 import { observer } from "mobx-react";
 import PostModel from "domain/model/PostModel/model";
-import PhotoCard from "~presentation/components/Local/PhotoCard";
-import DescriptionCard from "~presentation/components/Local/DescriptionCard";
 import Carousel from "~presentation/components/Shared/Carousel";
 import { MAIN_SCREEN_NAME } from ".";
-import PhotoContainer from "~presentation/components/Organisms/PhotoContainer";
+import MainItemCard from "~presentation/components/Local/MainItemCard";
 
 const MainScreen = ({
   navigation,
@@ -40,30 +38,6 @@ const MainScreen = ({
     return <ErrorMsg />;
   }
 
-  const renderCard = (
-    item: PostModel,
-    setFunc: (data: boolean) => void,
-    router: any
-  ) => {
-    if (isFront) {
-      return (
-        <PhotoContainer item={item}>
-          <PhotoCard item={item} setIsFront={setFunc} />
-        </PhotoContainer>
-      );
-    } else {
-      return (
-        <PhotoContainer item={item}>
-          <DescriptionCard
-            item={item}
-            navigation={router}
-            setIsFront={setFunc}
-          />
-        </PhotoContainer>
-      );
-    }
-  };
-
   if (vm.posts && vm.posts.length === 0) {
     return <NoData />;
   }
@@ -83,7 +57,9 @@ const MainScreen = ({
               isTextImg={false}
             />
           }
-          renderItem={({ item }) => renderCard(item, setIsFront, navigation)}
+          renderItem={({ item }) => (
+            <MainItemCard item={item} navigation={navigation} />
+          )}
           keyExtractor={(item) => item.id}
         ></FlatList>
       </View>

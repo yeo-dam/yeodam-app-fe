@@ -10,7 +10,7 @@ import { dateFormatter } from "helper/Formatter/DateFormatter";
 import FlexBox from "~presentation/components/Shared/FlexBox";
 import Layout from "constants/Layout";
 
-type Props = {
+export type Props = {
   item: PostModel;
   setIsFront: (data: boolean) => void;
 };
@@ -21,7 +21,9 @@ const PhotoCard = ({ item, setIsFront }: Props) => {
   return (
     <PhotoFrame>
       <PhotoContent>
-        <MainImage source={{ uri: item.images[0].filePath }} />
+        <TouchableWithoutFeedback onPress={() => setIsFront(false)}>
+          <MainImage source={{ uri: item.images[0].filePath }} />
+        </TouchableWithoutFeedback>
         <PhotoDate>
           <Typography textType="Number" textColor="#777">
             {dateFormatter(item.createdAt)}

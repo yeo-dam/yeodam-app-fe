@@ -25,6 +25,7 @@
         },
         "place": {
           "id": "1",
+          "name": "place",
           "title": "marker1",
           "description": "marker1 description",
           "type": "C",
@@ -186,6 +187,7 @@
         },
         "place": {
           "id": "1",
+          "name": "place",
           "title": "marker1",
           "description": "marker1 description",
           "type": "C",
@@ -347,6 +349,7 @@
         },
         "place": {
           "id": "1",
+          "name": "place",
           "title": "marker1",
           "description": "marker1 description",
           "type": "C",
@@ -508,6 +511,7 @@
         },
         "place": {
           "id": "1",
+          "name": "place",
           "title": "marker1",
           "description": "marker1 description",
           "type": "C",

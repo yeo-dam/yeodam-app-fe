@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { KeyboardAvoidingView, Platform, View } from "react-native";
+import { Platform, View } from "react-native";
 import styled from "styled-components/native";
 
 type Props = {};

@@ -8,7 +8,7 @@ class PlaceModel {
 
   @IsString()
   @IsNotEmpty()
-  title: string;
+  name: string;
 
   @IsString()
   @IsNotEmpty()
@@ -21,7 +21,7 @@ class PlaceModel {
   @IsNumber()
   @IsNotEmpty()
   latitude: number;
- 
+
   @IsNumber()
   @IsNotEmpty()
   longitude: number;

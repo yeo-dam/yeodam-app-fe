@@ -36,6 +36,10 @@ export default class MeRepositoryImpl
   /** 유저 ID로 Post 불러오기 **/
   async createPost() {}
 
+  async uploadImages(data: any) {
+    console.log("data", data);
+  }
+
   // TODO : 다양한 쿼리 추가되어야 함
   async findPosts() {}
 
@@ -49,11 +53,6 @@ export default class MeRepositoryImpl
   async findPlaces(): Promise<[PagerModel, PlaceModel[]]> {
     const placeEntities = await this._remote._fetcher<PagerEntity<PlaceEntity>>(
       "/places"
-    );
-
-    console.log(
-      `TCL ~ [MeRepository.ts] ~ line ~ 54 ~ placeEntities`,
-      placeEntities
     );
 
     const placeInstances = placeEntities.items.map((place) =>

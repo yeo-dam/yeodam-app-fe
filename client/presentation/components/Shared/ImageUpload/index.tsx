@@ -2,6 +2,7 @@ import React, { useState, PropsWithChildren } from "react";
 import { Image, View, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
+import styled from "styled-components/native";
 
 type Props<T extends FieldValues> = {
   name: Path<T>;
@@ -20,7 +21,7 @@ const Component = <T extends FieldValues>({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 3,
     });
 
     console.log(result);
@@ -33,8 +34,8 @@ const Component = <T extends FieldValues>({
 
   return (
     <Controller<T>
-      control={methods.control}
       name={name}
+      control={methods.control}
       render={({ field: { onChange } }) => {
         return (
           <View
@@ -60,3 +61,5 @@ const Component = <T extends FieldValues>({
 };
 
 export default Component;
+
+const ImageUploadWrapepr = styled.View``;
