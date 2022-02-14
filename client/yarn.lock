@@ -4831,6 +4831,7 @@ expo-permissions@~12.1.1:
   dependencies:
     expo-modules-core "~0.2.0"
 
+<<<<<<< HEAD
 expo-screen-orientation@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/expo-screen-orientation/-/expo-screen-orientation-3.3.0.tgz#790ca327af7d949e44734c861c09457fe1e00d52"
@@ -4838,6 +4839,8 @@ expo-screen-orientation@^3.0.0:
   dependencies:
     "@expo/config-plugins" "^3.0.0"
 
+=======
+>>>>>>> fa02e8492c8e8796c0ccd2e8239865011fa023f1
 expo-splash-screen@0.11.2:
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.11.2.tgz#70c69052981cc982d12030f2a1df5b35af7ee752"

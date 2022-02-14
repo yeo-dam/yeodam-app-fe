@@ -25,7 +25,6 @@ class PlaceModel {
   @IsNumber()
   @IsNotEmpty()
   latitude: number;
-
   @IsNumber()
   @IsNotEmpty()
   longitude: number;

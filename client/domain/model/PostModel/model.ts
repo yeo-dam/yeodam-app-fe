@@ -5,6 +5,8 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  Max,
+  MaxLength,
   ValidateNested,
 } from "class-validator";
 import PostEntity from "~data/entity/PostEntity";
@@ -36,6 +38,7 @@ class PostModel implements PostEntity {
   @IsNotEmpty()
   title: string;
 
+  @MaxLength(5)
   @IsString()
   @IsNotEmpty()
   description: string;

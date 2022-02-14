@@ -91,18 +91,27 @@ export default observer(CreatePost);
 
 const Wrapper = styled.View<{ isFront?: boolean }>`
   margin: 0 auto;
+
   background-color: ${({ isFront }) => (isFront ? "#fff" : "#121212")};
+
   width: 351px;
+
   height: 526px;
 `;
 
 const ImageUploadSection = styled.View`
   justify-content: center;
+
   align-items: center;
+
   margin: 0 auto;
+
   margin-top: 32px;
+
   width: 319px;
+
   height: 390px;
+
   background-color: #ededed;
 `;
 

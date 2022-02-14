@@ -23,10 +23,16 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
     return `${userName} ${content.substring(0, 25)}`;
   };
 
+  GeoDataToAddress({
+    latitude: item.place.latitude,
+    longitude: item.place.longitude,
+  });
+
   return (
     <TouchableWithoutFeedback onPress={() => setIsFront(true)}>
       <PhotoFrame>
         <PhotoBox>
+<<<<<<< HEAD:client/presentation/components/Local/DescriptionCard/index.tsx
           <ContentBox>
             {/* <TouchableWithoutFeedback
                 onPress={() => navigation.push(MAIN_SCREEN_NAME.MAP)}
@@ -53,6 +59,36 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
                 ))}
             </TagFlexBox>
           </ContentBox>
+=======
+          <TouchableWithoutFeedback onPress={() => setIsFront(true)}>
+            <ContentBox>
+              {/* <TouchableWithoutFeedback
+                onPress={() => navigation.push(MAIN_SCREEN_NAME.MAP)}
+              > */}
+              <View>
+                <WhiteTitleTypo>{item.title}</WhiteTitleTypo>
+                <GreyFlexBox>
+                  <GreyBlackTypo>
+                    {PlaceTypeFormatter(item.place.type)}
+                  </GreyBlackTypo>
+                  <Divider orientation="Vertical" />
+                  {/* TODO : Address Formatting 관련 서버 쪽과 이야기 해봐야 할 것 */}
+                  <GreyBlackTypo>{item.place.latitude}</GreyBlackTypo>
+                  {/* TODO : 아이콘 추가 필요 */}
+                  {/* <BiChevronRight color="#AAAAAA" size={12} /> */}
+                </GreyFlexBox>
+              </View>
+              {/* </TouchableWithoutFeedback> */}
+              <WhiteTypo>{item.description}</WhiteTypo>
+              <TagFlexBox>
+                {item.tags &&
+                  item.tags.map((tag, idx) => (
+                    <TagTypo key={idx}>{`#${tag.title} `}</TagTypo>
+                  ))}
+              </TagFlexBox>
+            </ContentBox>
+          </TouchableWithoutFeedback>
+>>>>>>> fa02e8492c8e8796c0ccd2e8239865011fa023f1:client/presentation/components/Organisms/DescriptionCard/index.tsx
 
           <Divider />
           {/* TODO : 값 Counting은 서버에서 줘야 할 것 같음 */}
