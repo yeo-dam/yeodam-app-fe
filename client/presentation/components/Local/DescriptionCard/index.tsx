@@ -23,15 +23,10 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
     return `${userName} ${content.substring(0, 25)}`;
   };
 
-  GeoDataToAddress({
-    latitude: item.place.latitude,
-    longitude: item.place.longitude,
-  });
-
   return (
-    <PhotoFrame>
-      <PhotoBox>
-        <TouchableWithoutFeedback onPress={() => setIsFront(true)}>
+    <TouchableWithoutFeedback onPress={() => setIsFront(true)}>
+      <PhotoFrame>
+        <PhotoBox>
           <ContentBox>
             {/* <TouchableWithoutFeedback
                 onPress={() => navigation.push(MAIN_SCREEN_NAME.MAP)}
@@ -58,26 +53,26 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
                 ))}
             </TagFlexBox>
           </ContentBox>
-        </TouchableWithoutFeedback>
 
-        <Divider />
-        {/* TODO : 값 Counting은 서버에서 줘야 할 것 같음 */}
-        <CommentBox>
-          <GreyTypo>{FollowerNum()} 명</GreyTypo>
-          <TouchableWithoutFeedback
-            onPress={() => navigation.navigate(MAIN_SCREEN_NAME.COMMENT)}
-          >
-            <GreyTypo>
-              {item.comments &&
-                renderComments(
-                  item.comments[0].user.name,
-                  item.comments[0].content
-                )}
-            </GreyTypo>
-          </TouchableWithoutFeedback>
-        </CommentBox>
-      </PhotoBox>
-    </PhotoFrame>
+          <Divider />
+          {/* TODO : 값 Counting은 서버에서 줘야 할 것 같음 */}
+          <CommentBox>
+            <GreyTypo>{FollowerNum()} 명</GreyTypo>
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate(MAIN_SCREEN_NAME.COMMENT)}
+            >
+              <GreyTypo>
+                {item.comments &&
+                  renderComments(
+                    item.comments[0].user.name,
+                    item.comments[0].content
+                  )}
+              </GreyTypo>
+            </TouchableWithoutFeedback>
+          </CommentBox>
+        </PhotoBox>
+      </PhotoFrame>
+    </TouchableWithoutFeedback>
   );
 };
 

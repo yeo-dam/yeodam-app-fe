@@ -12,6 +12,10 @@ class PlaceModel {
 
   @IsString()
   @IsNotEmpty()
+  title: string;
+
+  @IsString()
+  @IsNotEmpty()
   description: string;
 
   @IsEnum(PlaceType)

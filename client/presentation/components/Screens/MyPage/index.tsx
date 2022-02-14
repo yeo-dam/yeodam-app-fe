@@ -32,7 +32,10 @@ const CreateScreen = () => {
   const Stack = createNativeStackNavigator<BnbCreateNavigator>();
 
   return (
-    <Stack.Navigator initialRouteName={MYPAGE_SCREEN_NAME.MAIN}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={MYPAGE_SCREEN_NAME.MAIN}
+    >
       <Stack.Screen name={MYPAGE_SCREEN_NAME.MAIN} component={MyPageMain} />
       <Stack.Screen name={MYPAGE_SCREEN_NAME.LIKE} component={Likes} />
       <Stack.Screen name={MYPAGE_SCREEN_NAME.MAP} component={Map} />

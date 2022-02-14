@@ -23,13 +23,16 @@ const CreatePost = ({
 }: RootTabScreenProps<"CreatePost">) => {
   const [isFront, setIsFront] = React.useState(true);
   const [Photo, setPhoto] = React.useState();
-  const vm = getRootViewModel<CreatePostViewModel>((viewModel) => viewModel.tab.Post);
+  const vm = getRootViewModel<CreatePostViewModel>(
+    (viewModel) => viewModel.tab.Post
+  );
 
   // 여기서
   useEffect(() => {
     const { params } = route;
     if (params) {
       const { photos } = params;
+      console.log(`TCL ~ [index.tsx] ~ line ~ 33 ~ photos`, photos);
       vm.uploadImages(photos);
       if (photos) setPhoto(photos);
       delete params.photos;

@@ -9,6 +9,7 @@ import styled from "styled-components/native";
 import { observer } from "mobx-react";
 import MapViewModel from "~presentation/components/Screens/MyPage/Map/Map.vm";
 import Layout from "constants/Layout";
+import GeoDataToAddress from "helper/Formatter/GeoInfoFormatter";
 
 type Props = {
   vm: MapViewModel;
@@ -31,6 +32,14 @@ const GoogleMap = ({
     return () => console.log("cleanup");
   }, []);
 
+  useEffect(() => {
+    const fetchMaps = async () => {
+      const result = await GeoDataToAddress({ latitude, longitude });
+      console.log(`TCL ~ [index.tsx] ~ line ~ 38 ~ result`, result);
+    };
+    fetchMaps();
+  }, []);
+
   return (
     <Wrapper>
       <StyledMapView
@@ -44,14 +53,15 @@ const GoogleMap = ({
         }}
         onRegionChange={onRegionChange}
       >
-        {vm.places.map((item) => {
+        {vm.places.map((item, inx) => {
           return (
             <Marker
+              key={inx}
               coordinate={{
                 latitude: item.latitude,
                 longitude: item.longitude,
               }}
-              title={item.title}
+              title={item.name}
               description={item.description}
             />
           );

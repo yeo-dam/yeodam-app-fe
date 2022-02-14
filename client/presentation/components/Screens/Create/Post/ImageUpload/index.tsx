@@ -38,6 +38,7 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
             type: "image/jpg",
           });
         }
+        console.log(`TCL ~ [index.tsx] ~ line ~ 41 ~ cPhotos`, cPhotos);
         navigation.navigate("CreatePost", { photos: cPhotos });
       })
       .catch((e) => console.log(e));
@@ -63,7 +64,7 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
     <FormLayout>
       <View>
         <ImageBrowser
-          max={3}
+          max={2}
           onChange={updateHandler}
           callback={ImagesCallback}
         />

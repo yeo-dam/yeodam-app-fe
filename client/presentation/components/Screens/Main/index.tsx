@@ -28,7 +28,10 @@ const MainScreen = () => {
   const Stack = createNativeStackNavigator<BnbMainNavigator>();
 
   return (
-    <Stack.Navigator initialRouteName={MAIN_SCREEN_NAME.HOME}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={MAIN_SCREEN_NAME.HOME}
+    >
       <Stack.Screen name={MAIN_SCREEN_NAME.HOME} component={Main} />
       <Stack.Screen name={MAIN_SCREEN_NAME.COMMENT} component={Comment} />
       <Stack.Screen name={MAIN_SCREEN_NAME.SEARCH} component={Search} />

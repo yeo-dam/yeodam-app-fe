@@ -4,7 +4,7 @@ import {
   DefaultTheme,
   DarkTheme,
 } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import * as React from "react";
 import { ColorSchemeName, Image } from "react-native";
@@ -38,14 +38,16 @@ export default function Navigation({
   );
 }
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   // TODO : Auth VM으로 변경해야 함
   const [user, setUser] = useState<boolean>(false);
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{ headerMode: "screen", headerShown: false }}
+    >
       <React.Fragment>
         {!user && (
           <React.Fragment>

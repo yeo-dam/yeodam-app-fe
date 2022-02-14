@@ -715,6 +715,7 @@
     "items": [
       {
         "id": "1",
+        "name": "name1",
         "title": "marker1",
         "description": "marker1 description",
         "type": "C",
@@ -723,6 +724,7 @@
       },
       {
         "id": "2",
+        "name": "name2",
         "title": "marker2",
         "description": "marker2 description",
         "type": "C",
@@ -731,6 +733,7 @@
       },
       {
         "id": "3",
+        "name": "name3",
         "title": "marker3",
         "description": "marker3 description",
         "type": "C",
