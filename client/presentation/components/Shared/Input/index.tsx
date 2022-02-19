@@ -6,10 +6,11 @@ import Typography from "../Typography";
 
 export type Props = {
   name: string;
+  hidden?: boolean;
   errMsg?: string;
 } & TextInputProps;
 
-const Component: FC<Props> = ({ name, errMsg, ...rest }) => {
+const Component: FC<Props> = ({ name, errMsg, hidden = false, ...rest }) => {
   const { control, formState } = useFormContext();
   const error = get(formState.errors, name);
 
@@ -22,20 +23,26 @@ const Component: FC<Props> = ({ name, errMsg, ...rest }) => {
   };
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field: { onChange, value } }) => (
-        <>
-          <StyledTextInput onChangeText={onChange} value={value} />
-          {Boolean(error) && <ErrMsg>{renderErrMsg(errMsg)}</ErrMsg>}
-        </>
-      )}
-    />
+    <InputWrapper hidden={hidden}>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <>
+            <StyledTextInput onChangeText={onChange} value={value} />
+            {Boolean(error) && <ErrMsg>{renderErrMsg(errMsg)}</ErrMsg>}
+          </>
+        )}
+      />
+    </InputWrapper>
   );
 };
 
 export default Component;
+
+const InputWrapper = styled.View<{ hidden: boolean }>`
+  display: ${({ hidden }) => (hidden ? "none" : "flex")};
+`;
 
 const StyledTextInput = styled.TextInput`
   width: 100px;

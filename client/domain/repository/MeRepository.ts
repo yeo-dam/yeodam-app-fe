@@ -33,22 +33,6 @@ export default class MeRepositoryImpl
   // TODO : Map에 데이터 추가
   // TODO : 복수의 이미지 추가
 
-  /** 유저 ID로 Post 불러오기 **/
-  async createPost() {}
-
-  async uploadImages(data: any) {
-    console.log("data", data);
-  }
-
-  // TODO : 다양한 쿼리 추가되어야 함
-  async findPosts() {}
-
-  async findPostById() {}
-
-  async updatePost() {}
-
-  async deletePost() {}
-
   /** User <--> Place (One to Many) **/
   async findPlaces(): Promise<[PagerModel, PlaceModel[]]> {
     const placeEntities = await this._remote._fetcher<PagerEntity<PlaceEntity>>(

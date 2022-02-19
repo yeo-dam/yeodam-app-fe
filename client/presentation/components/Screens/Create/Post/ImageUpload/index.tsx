@@ -8,8 +8,15 @@ import { ActivityIndicator, TouchableOpacity, View, Text } from "react-native";
 import { ImageBrowser } from "expo-image-picker-multiple";
 import FormLayout from "~presentation/components/Layout/FormLayout";
 import * as ImageManipulator from "expo-image-manipulator";
+import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
+import CreatePostViewModel from "../CreatePost.vm";
+import { CREATE_SCREEN_NAME } from "../..";
 
 const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
+  const vm = getRootViewModel<CreatePostViewModel>(
+    (viewModel) => viewModel.tab.Post
+  );
+
   const _getHeaderLoader = () => {
     return <ActivityIndicator size="small" color={"#0580FF"} />;
   };
@@ -22,13 +29,13 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
     );
   };
 
-  const ImagesCallback = (callback) => {
+  const ImagesCallback = (callback: any) => {
     navigation.setOptions({
       headerRight: () => _getHeaderLoader(),
     });
 
     callback
-      .then(async (photos) => {
+      .then(async (photos: any) => {
         const cPhotos = [];
         for (let photo of photos) {
           const pPhoto = await _processImageAsync(photo.uri);
@@ -38,13 +45,15 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
             type: "image/jpg",
           });
         }
-        console.log(`TCL ~ [index.tsx] ~ line ~ 41 ~ cPhotos`, cPhotos);
-        navigation.navigate("CreatePost", { photos: cPhotos });
+        vm.uploadImages(cPhotos);
+        navigation.navigate(CREATE_SCREEN_NAME.POST, {
+          photos: cPhotos,
+        } as any);
       })
-      .catch((e) => console.log(e));
+      .catch((e: any) => console.log(e));
   };
 
-  const _renderDoneButton = (count, onSubmit) => {
+  const _renderDoneButton = (count: any, onSubmit: any) => {
     if (!count) return null;
     return (
       <TouchableOpacity onPress={onSubmit}>
@@ -53,7 +62,7 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
     );
   };
 
-  const updateHandler = (count, onSubmit) => {
+  const updateHandler = (count: number, onSubmit: any) => {
     navigation.setOptions({
       title: `Selected ${count} files`,
       headerRight: () => _renderDoneButton(count, onSubmit),

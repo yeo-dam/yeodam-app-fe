@@ -48,7 +48,6 @@ const Fetcher = async <T>(
       Expires: "-1",
       Pragma: "no-cache",
     };
-    3;
   }
   // 바디 체크[E]
   if (options?.body !== undefined) {

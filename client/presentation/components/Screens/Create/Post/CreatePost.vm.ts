@@ -1,11 +1,11 @@
 import { action, computed, flow, observable } from "mobx";
-import MeRepositoryImpl from "~domain/repository/MeRepository";
+import PostRepositoryImpl from "~domain/repository/PostRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../../BaseViewModel";
 
 export default class ThisViewModel extends BaseViewModel {
   private static _Instance: ThisViewModel;
-  private readonly _meRepo: MeRepositoryImpl;
+  private readonly _postRepo: PostRepositoryImpl;
 
   static GetInstance(args: ConstructorParameter) {
     if (!ThisViewModel._Instance) {
@@ -18,7 +18,7 @@ export default class ThisViewModel extends BaseViewModel {
     if (args.accessToken) {
       this.setAccessToken(args.accessToken);
     }
-    this._meRepo = MeRepositoryImpl.GetInstace({
+    this._postRepo = PostRepositoryImpl.GetInstace({
       accessToken: args.accessToken,
     });
   }
@@ -28,6 +28,9 @@ export default class ThisViewModel extends BaseViewModel {
 
   @observable
   private _isError = observable.box<boolean>(false);
+
+  @observable
+  private _uploadedImages = observable.box<any[]>();
 
   @computed
   public get isLoading() {
@@ -39,11 +42,16 @@ export default class ThisViewModel extends BaseViewModel {
     return this._isError.get();
   }
 
+  @computed
+  public get uploadedImages() {
+    return this._uploadedImages.get();
+  }
+
   @action
   createPost = flow(function* (this: ThisViewModel) {
     try {
       this._isLoading.set(true);
-      yield this._meRepo.createPost();
+      yield this._postRepo.createPost();
     } catch (error) {
       console.error(error);
       this._isError.set(true);
@@ -56,7 +64,10 @@ export default class ThisViewModel extends BaseViewModel {
   uploadImages = flow(function* (this: ThisViewModel, data: any) {
     try {
       this._isLoading.set(true);
-      yield this._meRepo.uploadImages(data);
+      const res = yield this._postRepo.uploadImages(data);
+      if (res.success) {
+        this._uploadedImages.set(data);
+      }
     } catch (error) {
       console.error(error);
       this._isError.set(true);

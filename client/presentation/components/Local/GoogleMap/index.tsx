@@ -9,10 +9,7 @@ import styled from "styled-components/native";
 import { observer } from "mobx-react";
 import MapViewModel from "~presentation/components/Screens/MyPage/Map/Map.vm";
 import Layout from "constants/Layout";
-<<<<<<< HEAD
 import GeoDataToAddress from "helper/Formatter/GeoInfoFormatter";
-=======
->>>>>>> fa02e8492c8e8796c0ccd2e8239865011fa023f1
 
 type Props = {
   vm: MapViewModel;

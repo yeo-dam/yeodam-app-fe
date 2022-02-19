@@ -27,11 +27,12 @@ const CreateScreen = () => {
   const Stack = createNativeStackNavigator<BnbCreateNavigator>();
 
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName={CREATE_SCREEN_NAME.MAIN}
-    >
-      <Stack.Screen name={CREATE_SCREEN_NAME.MAIN} component={CreateMain} />
+    <Stack.Navigator initialRouteName={CREATE_SCREEN_NAME.MAIN}>
+      <Stack.Screen
+        name={CREATE_SCREEN_NAME.MAIN}
+        options={{ headerShown: false }}
+        component={CreateMain}
+      />
       <Stack.Screen name={CREATE_SCREEN_NAME.POST} component={CreatePost} />
       <Stack.Screen name={CREATE_SCREEN_NAME.UPLOAD} component={ImageUpload} />
     </Stack.Navigator>

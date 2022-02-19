@@ -67,8 +67,6 @@ export default class MainViewModel extends BaseViewModel {
     try {
       this._isLoading.set(true);
       const [pager, postInstances] = yield this._postRepo.find();
-      // TODO : 추후에 아래 메서드로 변경해 줄 것.
-      // const [pager, postInstances] = yield this._meRepo.findPosts();
       postInstances.forEach((item: PostModel) => {
         this._posts.set(item.id, item);
       });

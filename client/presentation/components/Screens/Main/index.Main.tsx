@@ -41,6 +41,12 @@ const MainScreen = ({
   if (vm.posts && vm.posts.length === 0) {
     return <NoData />;
   }
+  const handleLoadMore = () => {
+    console.log("더 불러옵니다.");
+  };
+  const handleRefresh = () => {
+    console.log("이 지점에서부터 refresh 합니다.");
+  };
 
   // TODO : 해당 요소에 대한 모델이 추가되어야 할 것임.
   return (
@@ -61,6 +67,8 @@ const MainScreen = ({
             <MainItemCard item={item} navigation={navigation} />
           )}
           keyExtractor={(item) => item.id}
+          // onEndReached={handleLoadMore}
+          // onRefresh={handleRefresh}
         ></FlatList>
       </View>
     </ContentLayout>

@@ -187,10 +187,7 @@
         },
         "place": {
           "id": "1",
-<<<<<<< HEAD
           "name": "place",
-=======
->>>>>>> fa02e8492c8e8796c0ccd2e8239865011fa023f1
           "title": "marker1",
           "description": "marker1 description",
           "type": "C",
@@ -352,10 +349,7 @@
         },
         "place": {
           "id": "1",
-<<<<<<< HEAD
           "name": "place",
-=======
->>>>>>> fa02e8492c8e8796c0ccd2e8239865011fa023f1
           "title": "marker1",
           "description": "marker1 description",
           "type": "C",
@@ -517,10 +511,7 @@
         },
         "place": {
           "id": "1",
-<<<<<<< HEAD
           "name": "place",
-=======
->>>>>>> fa02e8492c8e8796c0ccd2e8239865011fa023f1
           "title": "marker1",
           "description": "marker1 description",
           "type": "C",
@@ -724,10 +715,7 @@
     "items": [
       {
         "id": "1",
-<<<<<<< HEAD
         "name": "name1",
-=======
->>>>>>> fa02e8492c8e8796c0ccd2e8239865011fa023f1
         "title": "marker1",
         "description": "marker1 description",
         "type": "C",
@@ -736,10 +724,7 @@
       },
       {
         "id": "2",
-<<<<<<< HEAD
         "name": "name2",
-=======
->>>>>>> fa02e8492c8e8796c0ccd2e8239865011fa023f1
         "title": "marker2",
         "description": "marker2 description",
         "type": "C",
@@ -748,10 +733,7 @@
       },
       {
         "id": "3",
-<<<<<<< HEAD
         "name": "name3",
-=======
->>>>>>> fa02e8492c8e8796c0ccd2e8239865011fa023f1
         "title": "marker3",
         "description": "marker3 description",
         "type": "C",

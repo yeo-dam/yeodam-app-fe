@@ -15,7 +15,8 @@ import CreatePostDto from "domain/dto/CreatePostDto";
 import Button from "~presentation/components/Shared/Button";
 import { useEffect } from "react";
 import { getRootViewModel } from "../../Index.vm";
-import CreatePostViewModel from "./Post.vm";
+import CreatePostViewModel from "./CreatePost.vm";
+import { useFormContext } from "react-hook-form";
 
 const CreatePost = ({
   navigation,
@@ -27,37 +28,46 @@ const CreatePost = ({
     (viewModel) => viewModel.tab.Post
   );
 
-  // 여기서
   useEffect(() => {
     const { params } = route;
+    console.log(`TCL ~ [index.tsx] ~ line ~ 34 ~ route`, route, route.params);
     if (params) {
       const { photos } = params;
       console.log(`TCL ~ [index.tsx] ~ line ~ 33 ~ photos`, photos);
-      vm.uploadImages(photos);
       if (photos) setPhoto(photos);
-      delete params.photos;
+      delete (params as any).photos;
     }
   }, []);
 
-  const onSubmit = (data: any) => console.log(data);
+  console.log(
+    `TCL ~ [index.tsx] ~ line ~ 50 ~ vm.uploadedImages`,
+    vm.uploadedImages
+  );
+
+  const onSubmit = (data: any) => console.log("이건가??", data);
 
   const renderForm = () => {
     if (isFront) {
-      return (
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate("ImageUpload")}
-        >
-          <ImageUploadSection>
-            <WithLocalSvg
-              asset={require("~asset/images/No_image.svg")}
-            ></WithLocalSvg>
-            <ImageUploadText>이미지를 넣어주세요!</ImageUploadText>
-          </ImageUploadSection>
-        </TouchableWithoutFeedback>
-      );
+      if (!vm.uploadedImages) {
+        return (
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate("ImageUpload")}
+          >
+            <ImageUploadSection>
+              <WithLocalSvg
+                asset={require("~asset/images/No_image.svg")}
+              ></WithLocalSvg>
+              <ImageUploadText>이미지를 넣어주세요!</ImageUploadText>
+            </ImageUploadSection>
+          </TouchableWithoutFeedback>
+        );
+      } else {
+        return <Image source={vm.uploadedImages[0].uri} />;
+      }
     } else {
       return (
         <>
+          <Input name="images" />
           <Input name="title" />
           <Input name="description" />
           <SubmitButton label="전송" onSubmit={onSubmit} />
