@@ -1,59 +1,58 @@
 import React, { FC, useRef, useState } from "react";
-import {
-  Animated,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { Animated, TouchableWithoutFeedback, View } from "react-native";
 import styled from "styled-components/native";
 
 type Props = {
   delay: number;
+  setIsFront: (data: boolean) => void;
   animatedValue: Animated.Value | Animated.ValueXY;
 };
 
-const Component: FC<Props> = ({ delay = 300, animatedValue, children }) => {
+const Component: FC<Props> = ({
+  delay = 1000,
+  setIsFront,
+  animatedValue,
+  children,
+}) => {
   const [like, setLike] = useState<boolean>(false);
-
+  const renderedTime = Date.now();
+  console.log(`TCL ~ [index.tsx] ~ line ~ 19 ~ like`, like);
   const handleToggleLike = () => {
-    setLike(!like);
-    // FIXME : Animation 값이 변경 안되고 있음
-    if (like) {
-      Animated.sequence([
-        Animated.spring(animatedValue, { toValue: 1, useNativeDriver: true }),
-        Animated.spring(animatedValue, { toValue: 0, useNativeDriver: true }),
-      ]).start();
-    }
+    Animated.sequence([
+      Animated.spring(animatedValue, { toValue: 1, useNativeDriver: true }),
+      Animated.spring(animatedValue, { toValue: 0, useNativeDriver: true }),
+    ]).start();
   };
 
-  let lastTap: any = null;
+  let lastTapTime: any = null;
 
   const handleDoubleTap = () => {
-    const now = Date.now();
-    if (lastTap && now - lastTap < delay) {
+    const tappedTime = Date.now();
+    console.log(`TCL ~ [index.tsx] ~ line ~ 36 ~ delay`, delay);
+    if (lastTapTime && tappedTime - lastTapTime < delay) {
+      console.log(
+        `TCL ~ [index.tsx] ~ line ~ 33 ~ tappedTime - lastTapTime`,
+        tappedTime - lastTapTime
+      );
       handleToggleLike();
     } else {
-      lastTap = now;
+      lastTapTime = Date.now();
+      console.log(`TCL ~ [index.tsx] ~ line ~ 36 ~ tappedTime`, tappedTime);
+      console.log(`TCL ~ [index.tsx] ~ line ~ 36 ~ lastTapTime`, lastTapTime);
+      if (tappedTime - renderedTime > delay) {
+        console.log(
+          `TCL ~ [index.tsx] ~ line ~ 43 ~ tappedTime - renderedTime`,
+          tappedTime - renderedTime
+        );
+        setIsFront(false);
+      }
     }
   };
 
   return (
-    <>
-      <TouchableWithoutFeedback onPress={handleDoubleTap}>
-        <View>{children}</View>
-      </TouchableWithoutFeedback>
-      {/* <IconWrapper>
-        <TouchableOpacity onPress={handleDoubleTap}>
-          <HeartImage
-            source={
-              like
-                ? require("./images/heart.png")
-                : require("./images/heart-outline.png")
-            }
-            resizeMode="cover"
-          />
-        </TouchableOpacity>
-      </IconWrapper> */}
-    </>
+    <TouchableWithoutFeedback onPress={handleDoubleTap}>
+      <View>{children}</View>
+    </TouchableWithoutFeedback>
   );
 };
 
