@@ -43,7 +43,6 @@ const Component: FC<Props> = ({ item, navigation }) => {
 
   const renderCard = (postItem: PostModel, router: any) => {
     if (isFront) {
-      console.log(`TCL ~ [index.tsx] ~ line ~ 60 ~ isFront`, isFront);
       return (
         <PhotoContainer item={item}>
           <DoubleTap

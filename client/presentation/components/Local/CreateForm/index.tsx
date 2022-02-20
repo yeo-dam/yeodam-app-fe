@@ -11,7 +11,7 @@ import Input from "~presentation/components/Shared/Input";
 import FormLayout from "~presentation/components/Layout/FormLayout";
 import SubmitButton from "~presentation/components/Shared/SubmitButton";
 import Form from "~presentation/components/Shared/Form";
-import CreatePostDto from "domain/dto/CreatePostDto";
+import CreatePostDto from "~domain/dto/CreatePostDto";
 import ImageUpload from "~presentation/components/Shared/ImageUpload";
 
 type Props = {};

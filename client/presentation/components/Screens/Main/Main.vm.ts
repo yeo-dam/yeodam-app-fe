@@ -2,6 +2,7 @@ import PagerModel from "domain/model/PagerModel";
 import PostModel from "domain/model/PostModel/model";
 import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
+import FindDto from "~domain/dto/FindPostDto";
 import MeRepositoryImpl from "~domain/repository/MeRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../BaseViewModel";
@@ -63,10 +64,10 @@ export default class MainViewModel extends BaseViewModel {
   }
 
   @action
-  load = flow(function* (this: MainViewModel) {
+  load = flow(function* (this: MainViewModel, query: FindDto) {
     try {
       this._isLoading.set(true);
-      const [pager, postInstances] = yield this._postRepo.find();
+      const [pager, postInstances] = yield this._postRepo.find({ query });
       postInstances.forEach((item: PostModel) => {
         this._posts.set(item.id, item);
       });

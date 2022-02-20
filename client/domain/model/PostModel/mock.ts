@@ -9,7 +9,7 @@ import { genTagMockObject } from "../TagModel/mock";
 
 export const genPostMockObject = (): PostEntity => {
   return {
-    id: "1",
+    id: String((Math.random()* 1000)),
     user: genUserMockObject(),
     place: genPlaceMockObject(),
     title: "강남역 쉑쉑버거",
@@ -28,5 +28,5 @@ export const genPostMockObject = (): PostEntity => {
 };
 
 export const genPostMockInstance = (): PostModel => {
-  return plainToClass(PostModel, { ...genPostMockObject() });
+  return plainToClass(PostModel, genPostMockObject());
 };

@@ -1,4 +1,5 @@
 import { action, computed, flow, observable } from "mobx";
+import FindDto from "~domain/dto/FindPostDto";
 import CommentModel from "~domain/model/CommentModel";
 import PagerModel from "~domain/model/PagerModel";
 import CommentRepositoryImpl from "~domain/repository/CommentRepository";
@@ -63,10 +64,12 @@ export default class ThisViewModel extends BaseViewModel {
   }
 
   @action
-  load = flow(function* (this: ThisViewModel) {
+  load = flow(function* (this: ThisViewModel, query: FindDto) {
     try {
       this._isLoading.set(true);
-      const [pagerInstance, commentInstances] = yield this._commentRepo.find();
+      const [pagerInstance, commentInstances] = yield this._commentRepo.find({
+        query,
+      });
       commentInstances.forEach((item: CommentModel) => {
         this._comments.set(item.id, item);
       });

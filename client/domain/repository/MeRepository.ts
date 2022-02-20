@@ -1,6 +1,6 @@
 import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
-import PagerEntity from "~data/entity/PagerEntity";
+import ListEntity from "~data/entity/ListEntity";
 import PlaceEntity from "~data/entity/PlaceEntity";
 import PagerModel from "~domain/model/PagerModel";
 import PlaceModel from "~domain/model/PlaceModel/model";
@@ -35,7 +35,7 @@ export default class MeRepositoryImpl
 
   /** User <--> Place (One to Many) **/
   async findPlaces(): Promise<[PagerModel, PlaceModel[]]> {
-    const placeEntities = await this._remote._fetcher<PagerEntity<PlaceEntity>>(
+    const placeEntities = await this._remote._fetcher<ListEntity<PlaceEntity>>(
       "/places"
     );
 

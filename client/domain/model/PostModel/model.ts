@@ -67,18 +67,7 @@ class PostModel implements PostEntity {
   @Type(() => TagModel)
   @IsOptional()
   tags?: TagModel[];
-
   // TODO : 여러 count 추가 : LikeCount, CommentCount, isReported 등등
-
-  @observable
-  @Exclude()
-  isFront: boolean;
-
-  @Exclude()
-  setFront = (data: boolean) => {
-    this.isFront = data;
-    return this.isFront;
-  };
 }
 
 export default PostModel;

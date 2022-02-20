@@ -10,6 +10,7 @@ type Props = React.PropsWithChildren<
     variant?: Variant;
     textType?: TextType;
     textColor?: string;
+    textSize?: string;
   } & TextProps
 >;
 
@@ -18,6 +19,7 @@ const Component = ({
   textColor,
   textType = "Korean",
   variant = "body1",
+  textSize = "14px",
   ...rest
 }: Props) => {
   return (
@@ -25,6 +27,7 @@ const Component = ({
       variant={variant}
       textType={textType}
       textColor={textColor}
+      textSize={textSize}
       {...rest}
     >
       {children}
@@ -32,16 +35,13 @@ const Component = ({
   );
 };
 
-const Typography = styled.Text<{
-  variant: Variant;
-  textType: TextType;
-  textColor?: string;
-}>`
+const Typography = styled.Text<Props>`
   font-family: ${({ textType }) =>
     textType === "Korean" || textType === "Number"
       ? "Spoqa-Han-Sans-Neo"
       : "Montserrat"};
   ${({ variant }) => variantStyles[variant]};
+  font-size: ${({ textSize }) => textSize};
   color: ${({ textColor }) => (textColor ? textColor : "#121212")};
 `;
 

@@ -58,7 +58,6 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
                 ))}
             </TagFlexBox>
           </ContentBox>
-
           <Divider />
           {/* TODO : 값 Counting은 서버에서 줘야 할 것 같음 */}
           <CommentBox>
@@ -66,6 +65,7 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
             <TouchableWithoutFeedback
               onPress={() => navigation.navigate(MAIN_SCREEN_NAME.COMMENT)}
             >
+              {/* FIXME : Comment 갯수를 세어 줄 것 */}
               <GreyTypo>
                 {item.comments &&
                   renderComments(

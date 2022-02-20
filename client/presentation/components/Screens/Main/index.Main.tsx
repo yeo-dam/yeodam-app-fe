@@ -12,12 +12,9 @@ import MainViewModel from "./Main.vm";
 import { observer } from "mobx-react";
 import PostModel from "domain/model/PostModel/model";
 import Carousel from "~presentation/components/Shared/Carousel";
-import Image from "~presentation/components/Shared/Image";
 
 import { MAIN_SCREEN_NAME } from ".";
 import MainItemCard from "~presentation/components/Local/MainItemCard";
-import DoubleTap from "~presentation/components/Shared/DoubleTap";
-import styled from "styled-components/native";
 
 const MainScreen = ({
   navigation,
@@ -25,11 +22,14 @@ const MainScreen = ({
   const vm = getRootViewModel<MainViewModel>((viewModel) => viewModel.tab.Main);
   const w = Dimensions.get("window");
 
-  // TODO : 여기서 에러가 발생하고 있는 듯..
+  async function loadPosts(limit?: number, offset?: number) {
+    await vm.load({
+      limit: limit || 4,
+      offset: offset || 0,
+    });
+  }
+
   useEffect(() => {
-    async function loadPosts() {
-      await vm.load();
-    }
     loadPosts();
     return () => console.log("cleanup");
   }, []);
@@ -47,13 +47,15 @@ const MainScreen = ({
   }
 
   const handleLoadMore = () => {
-    console.log("더 불러옵니다.");
+    const pagerNum = vm.pager.offset + vm.pager.limit;
+    const limitNum = vm.pager.limit;
+    loadPosts(limitNum, pagerNum);
   };
+
   const handleRefresh = () => {
     console.log("이 지점에서부터 refresh 합니다.");
   };
 
-  // TODO : 해당 요소에 대한 모델이 추가되어야 할 것임.
   return (
     <ContentLayout>
       <View>
@@ -72,7 +74,8 @@ const MainScreen = ({
             <MainItemCard item={item} navigation={navigation} />
           )}
           keyExtractor={(item) => item.id}
-          // onEndReached={handleLoadMore}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.3}
           // onRefresh={handleRefresh}
         ></FlatList>
       </View>
@@ -81,4 +84,3 @@ const MainScreen = ({
 };
 
 export default observer(MainScreen);
-

@@ -1,6 +1,6 @@
 import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
-import PagerEntity from "~data/entity/PagerEntity";
+import ListEntity from "~data/entity/ListEntity";
 import UserEntity from "~data/entity/UserEntity";
 import PagerModel from "~domain/model/PagerModel/model";
 import UserModel from "~domain/model/UserModel/model";
@@ -28,7 +28,7 @@ export default class UserRepositoryImpl
 
   async find(): Promise<[PagerModel, UserModel[]]> {
     const userlistEntities = await this._remote._fetcher<
-      PagerEntity<UserEntity>
+      ListEntity<UserEntity>
     >("/users");
     const userListInstances = userlistEntities.items.map((post) =>
       plainToClass(UserModel, {
