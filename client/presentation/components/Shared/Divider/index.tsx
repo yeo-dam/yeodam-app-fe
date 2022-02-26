@@ -3,25 +3,38 @@ import styled, { css } from "styled-components/native";
 
 type Props = {
   orientation?: "Horizontal" | "Vertical";
+  border?: string;
+  height?: string;
+  color?: string;
 };
 
-const Component: FC<Props> = ({ orientation = "Horizontal" }) => {
-  return <Divider orientation={orientation}></Divider>;
+const Component: FC<Props> = ({
+  orientation = "Horizontal",
+  color,
+  border,
+  height = "2px",
+}) => {
+  return (
+    <Divider
+      orientation={orientation}
+      color={color}
+      border={border}
+      height={height}
+    ></Divider>
+  );
 };
 
 export default Component;
 
-const Divider = styled.View<{ orientation?: string }>`
+const Divider = styled.View<Props>`
   ${({ orientation }) =>
     orientation === "Horizontal"
       ? css`
-          width: 100%;
           height: 1px;
         `
       : css`
           width: 1px;
-          height: 100%;
         `}
-
-  background: #555555;
+  height: ${({ height }) => height};
+  background: ${({ color }) => (color ? color : "#999")};
 `;

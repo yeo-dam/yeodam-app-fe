@@ -33,23 +33,23 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
       <PhotoFrame>
         <PhotoBox>
           <ContentBox>
-            {/* <TouchableWithoutFeedback
-                onPress={() => navigation.push(MAIN_SCREEN_NAME.MAP)}
-              > */}
-            <View>
-              <WhiteTitleTypo>{item.title}</WhiteTitleTypo>
-              <GreyFlexBox>
-                <GreyBlackTypo>
-                  {PlaceTypeFormatter(item.place.type)}
-                </GreyBlackTypo>
-                <Divider orientation="Vertical" />
-                {/* TODO : Address Formatting 관련 서버 쪽과 이야기 해봐야 할 것 */}
-                <GreyBlackTypo>{item.place.latitude}</GreyBlackTypo>
-                {/* TODO : 아이콘 추가 필요 */}
-                {/* <BiChevronRight color="#AAAAAA" size={12} /> */}
-              </GreyFlexBox>
-            </View>
-            {/* </TouchableWithoutFeedback> */}
+            <TouchableWithoutFeedback
+              onPress={() => navigation.push(MAIN_SCREEN_NAME.MAP)}
+            >
+              <View>
+                <WhiteTitleTypo>{item.title}</WhiteTitleTypo>
+                <GreyFlexBox>
+                  <GreyBlackTypo>
+                    {PlaceTypeFormatter(item.place.type)}
+                  </GreyBlackTypo>
+                  <Divider orientation="Vertical" />
+                  {/* TODO : Address Formatting 관련 서버 쪽과 이야기 해봐야 할 것. 위경도 데이터를 주소 형태로 변형해줄 수 있을지 따져봐야 함 */}
+                  <GreyBlackTypo>{item.place.latitude}</GreyBlackTypo>
+                  {/* TODO : 아이콘 추가 필요 */}
+                  {/* <BiChevronRight color="#AAAAAA" size={12} /> */}
+                </GreyFlexBox>
+              </View>
+            </TouchableWithoutFeedback>
             <WhiteTypo>{item.description}</WhiteTypo>
             <TagFlexBox>
               {item.tags &&
@@ -65,7 +65,7 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
             <TouchableWithoutFeedback
               onPress={() => navigation.navigate(MAIN_SCREEN_NAME.COMMENT)}
             >
-              {/* FIXME : Comment 갯수를 세어 줄 것 */}
+              {/* FIXME : Comment 갯수를 세어 줄 것. + 댓글을 표현하는 순서가 변경되어야 할 것임. */}
               <GreyTypo>
                 {item.comments &&
                   renderComments(

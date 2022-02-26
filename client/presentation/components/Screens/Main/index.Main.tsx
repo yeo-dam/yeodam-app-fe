@@ -62,6 +62,7 @@ const MainScreen = ({
         <FlatList<PostModel>
           data={vm.posts}
           ListHeaderComponent={
+            // FIXME : 샘플 이미지에서 새로운 이미지로 변경 필요함
             <Carousel
               pages={[
                 { id: "1", url: "https://picsum.photos/2400/1240" },

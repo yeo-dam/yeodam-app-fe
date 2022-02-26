@@ -5,11 +5,13 @@ import Image from "~presentation/components/Shared/Image";
 import Typography from "../Typography";
 
 type Props = {
-  name: string;
+  name?: string;
   imageSource?: string;
 };
 
 const Component: FC<Props> = ({ name, imageSource }) => {
+  console.log(`TCL ~ [index.tsx] ~ line ~ 14 ~ imageSource`, imageSource);
+
   return (
     <Wrapper>
       <StyledImage source={{ uri: imageSource }} />

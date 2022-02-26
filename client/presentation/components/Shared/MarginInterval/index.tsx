@@ -27,11 +27,9 @@ export default Component;
 const Wrapper = styled.View``;
 
 const VerticalInterval = styled.View<Props>`
-  width: 100%;
   height: ${({ height }) => (height ? height : "100%")};
 `;
 
 const HorizontalInterval = styled.View<Props>`
-  height: 100%;
   width: ${({ width }) => (width ? width : "100%")};
 `;

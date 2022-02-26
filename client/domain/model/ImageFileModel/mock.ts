@@ -1,5 +1,5 @@
 export const genImageFileMockObject = () => {
-  return ({
+  return {
     id: "11",
     width: 200,
     height: 200,
@@ -10,5 +10,5 @@ export const genImageFileMockObject = () => {
     downloadable: false,
     filePath: "https://picsum.photos/200/300",
     filename: "sampleImage",
-  })
-}
+  };
+};
