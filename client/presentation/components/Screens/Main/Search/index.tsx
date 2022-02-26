@@ -2,7 +2,6 @@ import * as React from "react";
 import { useEffect } from "react";
 
 import ContentLayout from "~presentation/components/Layout/ContentLayout";
-import { View } from "~presentation/components/Themed";
 import { RootTabScreenProps } from "../../../../../types";
 import ErrorMsg from "~presentation/components/Shared/ErrorMsg";
 import Loadable from "~presentation/components/Shared/Loadable";
@@ -10,7 +9,8 @@ import { getRootViewModel } from "../../Index.vm";
 import SearchViewModel from "./Search.vm";
 import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
-import { MAIN_SCREEN_NAME } from "..";
+import { View } from "react-native";
+import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 const MyPageScreen = ({
   navigation,

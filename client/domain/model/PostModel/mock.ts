@@ -1,7 +1,7 @@
 import { plainToClass } from "class-transformer";
 import PostEntity from "~data/entity/PostEntity";
 import { genUserMockObject } from "~domain/model/UserModel/mock";
-import PostModel from ".";
+import PostModel from "./model";
 import { genCommentMockObject } from "../CommentModel/mock";
 import { genImageFileMockObject } from "../ImageFileModel/mock";
 import { genPlaceMockObject } from "../PlaceModel/mock";

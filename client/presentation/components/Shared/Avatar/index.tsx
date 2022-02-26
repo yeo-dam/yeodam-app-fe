@@ -10,12 +10,10 @@ type Props = {
 };
 
 const Component: FC<Props> = ({ name, imageSource }) => {
-  console.log(`TCL ~ [index.tsx] ~ line ~ 14 ~ imageSource`, imageSource);
-
   return (
     <Wrapper>
       <StyledImage source={{ uri: imageSource }} />
-      <Typography>{name}</Typography>
+      <UserName>{name}</UserName>
     </Wrapper>
   );
 };
@@ -30,4 +28,9 @@ const StyledImage = styled(Image)`
   width: 24px;
   height: 24px;
   margin-right: 8px;
+  border-radius: 24px;
+`;
+
+const UserName = styled(Typography).attrs({ variant: "english-regular" })`
+  color: ${({ theme }) => theme.colors.grey.black};
 `;

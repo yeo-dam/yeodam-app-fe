@@ -8,7 +8,6 @@ import { getRootViewModel } from "../../Index.vm";
 import CommentViewModel from "./Comment.vm";
 import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
-import { MAIN_SCREEN_NAME } from "../index";
 import { RootTabScreenProps } from "types";
 import { View, Text } from "react-native";
 import styled from "styled-components/native";
@@ -18,6 +17,8 @@ import DropDownMenu from "~presentation/components/Shared/DropDownMenu";
 import Divider from "~presentation/components/Shared/Divider";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import MarginInterval from "~presentation/components/Shared/MarginInterval";
+import timeForToday from "helper/Formatter/CalculateDayBefore";
+import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 const MyPageScreen = ({
   navigation,
@@ -26,16 +27,6 @@ const MyPageScreen = ({
     (viewModel) => viewModel.tab.Comment
   );
 
-  useEffect(() => {
-    async function loadComments() {
-      await vm.load({
-        offset: 0,
-        limit: 4,
-      });
-    }
-    loadComments();
-  }, []);
-
   if (vm.isLoading) {
     return <Loadable />;
   }
@@ -43,8 +34,6 @@ const MyPageScreen = ({
   if (vm.isError) {
     return <ErrorMsg />;
   }
-
-  console.log(`TCL ~ [index.tsx] ~ line ~ 40 ~ vm.comments`, vm.comments);
 
   return (
     <CommentLayout
@@ -55,7 +44,7 @@ const MyPageScreen = ({
       <CommentBox>
         {vm.comments.map((item) => {
           return (
-            <>
+            <View key={item.id}>
               <Flex>
                 <LeftContentBox>
                   {/* TODO : Avatar 이미지가 nullable인가? */}
@@ -67,8 +56,7 @@ const MyPageScreen = ({
                     <Flex>
                       <Text>{item.user.name}</Text>
                       <MarginInterval width="8px" />
-                      {/* FIXME : Comment createDateTime 추가해야 할 것 */}
-                      <Text>{new Date().toString().slice(0, 4)}</Text>
+                      <GreyTypo>{timeForToday(item.createDateTime)}</GreyTypo>
                     </Flex>
                     <View>
                       <DropDownMenu />
@@ -76,13 +64,11 @@ const MyPageScreen = ({
                   </UserFlexBox>
                   {/* FIXME : Comment 줄바꿈 */}
                   <CommentContentBox>
-                    {/* <Comment> */}
                     <Text>{item.content}</Text>
-                    {/* </Comment> */}
                   </CommentContentBox>
                   {/* TODO : 서버에서 값을 뿌려줘야 함 */}
                   <LikeContentBox>
-                    <Text>좋아요 --개</Text>
+                    <GreyTypo>좋아요 --개</GreyTypo>
                     <MarginInterval width="6px" />
                     <Divider orientation="Vertical" />
                     <MarginInterval width="6px" />
@@ -90,7 +76,7 @@ const MyPageScreen = ({
                     <TouchableWithoutFeedback
                       onPress={() => console.log("답글쓰기")}
                     >
-                      <Text>답글쓰기</Text>
+                      <GreyTypo>답글쓰기</GreyTypo>
                     </TouchableWithoutFeedback>
                   </LikeContentBox>
                 </RightContentBox>
@@ -98,7 +84,7 @@ const MyPageScreen = ({
               <MarginInterval height="16px" />
               <Divider orientation="Horizontal" color="#F9F9F9" />
               <MarginInterval height="16px" />
-            </>
+            </View>
           );
         })}
       </CommentBox>
@@ -114,6 +100,10 @@ const CommentLayout = styled(ContentLayout)`
   background-color: white;
 `;
 
+const GreyTypo = styled(Typography)`
+  color: ${({ theme }) => theme.colors.grey[99]};
+`;
+
 const CommentBox = styled.ScrollView``;
 
 const LeftContentBox = styled.View``;
@@ -126,7 +116,6 @@ const UserFlexBox = styled(Flex)`
 
 const CommentContentBox = styled(Flex)`
   margin: 8px 12px 8px 0px;
-  border: 1px solid blue;
 `;
 
 const LikeContentBox = styled(Flex)``;

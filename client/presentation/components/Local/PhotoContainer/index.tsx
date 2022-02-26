@@ -5,7 +5,6 @@ import { WithLocalSvg } from "react-native-svg";
 import Avatar from "~presentation/components/Shared/Avatar";
 import PostModel from "~domain/model/PostModel";
 import DropDownMenu from "~presentation/components/Shared/DropDownMenu";
-import { TouchableWithoutFeedback } from "react-native";
 
 type Props = {
   item: PostModel;

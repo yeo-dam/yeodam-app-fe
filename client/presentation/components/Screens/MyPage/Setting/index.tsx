@@ -6,22 +6,7 @@ import Notice from "./Notice";
 import Notification from "./Notification";
 import Policy from "./Policy";
 import ProfileEdit from "./ProfileEdit";
-
-export const SETTING_SCREEN_NAME: {
-  MAIN: "SettingMain";
-  EVENT: "SettingEvent";
-  NOTICE: "SettingNotice";
-  NOTIFICATION: "SettingNotification";
-  POLICY: "SettingPolicy";
-  PROFILE_EDIT: "SettingProfileEdit";
-} = {
-  MAIN: "SettingMain",
-  EVENT: "SettingEvent",
-  NOTICE: "SettingNotice",
-  NOTIFICATION: "SettingNotification",
-  POLICY: "SettingPolicy",
-  PROFILE_EDIT: "SettingProfileEdit",
-};
+import { SETTING_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 export type BnbSettingNavigator = {
   [SETTING_SCREEN_NAME.MAIN]: undefined;

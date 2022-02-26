@@ -10,7 +10,7 @@ import FormLayout from "~presentation/components/Layout/FormLayout";
 import * as ImageManipulator from "expo-image-manipulator";
 import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
 import CreatePostViewModel from "../CreatePost.vm";
-import { CREATE_SCREEN_NAME } from "../..";
+import { CREATE_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
   const vm = getRootViewModel<CreatePostViewModel>(
@@ -25,7 +25,7 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
     return ImageManipulator.manipulateAsync(
       uri,
       [{ resize: { width: 1000 } }],
-      { compress: 0.8, format: ImageManipulator.SaveFormat.JPEG }
+      { base64: true }
     );
   };
 
@@ -37,18 +37,22 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
     callback
       .then(async (photos: any) => {
         const cPhotos = [];
+
         for (let photo of photos) {
           const pPhoto = await _processImageAsync(photo.uri);
+          const data = `data:image/png;base64,${pPhoto.base64}`;
+          // FIXME: base64 => blob 변경 실패
+          const res = await fetch(data).then((item) => item.blob());
+
           cPhotos.push({
             uri: pPhoto.uri,
             name: photo.filename,
             type: "image/jpg",
           });
         }
+
         vm.uploadImages(cPhotos);
-        navigation.navigate(CREATE_SCREEN_NAME.POST, {
-          photos: cPhotos,
-        } as any);
+        navigation.navigate(CREATE_SCREEN_NAME.POST);
       })
       .catch((e: any) => console.log(e));
   };

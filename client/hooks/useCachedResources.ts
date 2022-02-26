@@ -17,6 +17,7 @@ export default function useCachedResources() {
           ...FontAwesome.font,
           "Spoqa-Han-Sans-Neo": require("../assets/fonts/SpoqaHanSansNeo-Regular.ttf"),
           Montserrat: require("../assets/fonts/Montserrat-Regular.ttf"),
+          "Digit-Numbers": require("../assets/fonts/DigitalNumbers-Regular.ttf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

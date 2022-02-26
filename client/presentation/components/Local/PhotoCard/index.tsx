@@ -3,8 +3,6 @@ import React from "react";
 import { ListRenderItem, TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
 import Image from "~presentation/components/Shared/Image";
-import Avatar from "~presentation/components/Shared/Avatar";
-import { WithLocalSvg } from "react-native-svg";
 import Typography from "~presentation/components/Shared/Typography";
 import { dateFormatter } from "helper/Formatter/DateFormatter";
 import FlexBox from "~presentation/components/Shared/FlexBox";
@@ -16,8 +14,6 @@ export type Props = {
 };
 
 const PhotoCard = ({ item, setIsFront }: Props) => {
-  const { window } = Layout;
-
   return (
     <PhotoFrame>
       <PhotoContent>
@@ -25,9 +21,9 @@ const PhotoCard = ({ item, setIsFront }: Props) => {
           <MainImage source={{ uri: item.images[0].filePath }} />
         </TouchableWithoutFeedback>
         <PhotoDate>
-          <Typography textType="Number" textColor="#777">
+          <PhotoDateTypo type="Number" variant="digit">
             {dateFormatter(item.createdAt)}
-          </Typography>
+          </PhotoDateTypo>
         </PhotoDate>
       </PhotoContent>
     </PhotoFrame>
@@ -78,4 +74,8 @@ const MainImage = styled(Image)`
 const PhotoDate = styled.View`
   margin-left: auto;
   margin-top: 73px;
+`;
+
+const PhotoDateTypo = styled(Typography)`
+  color: ${({ theme }) => theme.colors.grey[77]};
 `;

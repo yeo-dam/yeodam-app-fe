@@ -22,6 +22,7 @@ import Typography from "~presentation/components/Shared/Typography";
 import { useState } from "react";
 import SignInScreen from "~presentation/components/Screens/SignInScreen";
 import WelcomeScreen from "~presentation/components/Screens/WelcomeScreen";
+import { BNB_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 export default function Navigation({
   colorScheme,
@@ -81,16 +82,6 @@ function RootNavigator() {
   );
 }
 
-export const BNB_SCREEN_NAME: {
-  MAIN: "BottomMain";
-  CREATE: "BottomCreateMain";
-  MYPAGE: "BottomMypage";
-} = {
-  MAIN: "BottomMain",
-  CREATE: "BottomCreateMain",
-  MYPAGE: "BottomMypage",
-};
-
 export type BnbMainNavigator = {
   [BNB_SCREEN_NAME.MAIN]: undefined;
   [BNB_SCREEN_NAME.CREATE]: undefined;
@@ -113,7 +104,7 @@ function BottomTabNavigator() {
         name={BNB_SCREEN_NAME.MAIN}
         component={MainScreen}
         options={{
-          tabBarLabel: () => <Typography variant="body2">피드</Typography>,
+          tabBarLabel: () => <BottomBarTypo>피드</BottomBarTypo>,
           tabBarIcon: () => (
             <WithLocalSvg
               asset={require("~asset/Icons/Navigation/Feed/Feed.svg")}
@@ -125,7 +116,7 @@ function BottomTabNavigator() {
         name={BNB_SCREEN_NAME.CREATE}
         component={CreateScreen}
         options={{
-          tabBarLabel: () => <Typography variant="body2">입력</Typography>,
+          tabBarLabel: () => <BottomBarTypo>입력</BottomBarTypo>,
           tabBarIcon: () => (
             <CreateBtnBox>
               <WithLocalSvg
@@ -139,7 +130,7 @@ function BottomTabNavigator() {
         name={BNB_SCREEN_NAME.MYPAGE}
         component={MyPageScreen}
         options={{
-          tabBarLabel: () => <Typography variant="body2">마이</Typography>,
+          tabBarLabel: () => <BottomBarTypo>마이</BottomBarTypo>,
           tabBarIcon: () => (
             <WithLocalSvg
               asset={require("~asset/Icons/Navigation/Setting/Setting.svg")}
@@ -160,5 +151,11 @@ const CloseIcon = styled(Image)`
 `;
 
 const CreateBtnBox = styled.View`
-  padding-top: 8;
+  padding-top: 8px;
+`;
+
+const BottomBarTypo = styled(Typography).attrs({
+  textSize: "10px",
+})`
+  color: ${({ theme }) => theme.colors.grey.AA};
 `;

@@ -4,23 +4,15 @@ import Main from "./index.Main";
 import Comment from "./Comment";
 import Search from "./Search";
 import Map from "../MyPage/Map";
-import { Text, TouchableWithoutFeedback } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 import { WithLocalSvg } from "react-native-svg";
 import Typography from "~presentation/components/Shared/Typography";
 import styled from "styled-components/native";
 import MarginInterval from "~presentation/components/Shared/MarginInterval";
-
-export const MAIN_SCREEN_NAME: {
-  HOME: "Main";
-  COMMENT: "Comment";
-  SEARCH: "Search";
-  MAP: "Map";
-} = {
-  HOME: "Main",
-  COMMENT: "Comment",
-  SEARCH: "Search",
-  MAP: "Map",
-};
+import { getRootViewModel } from "../Index.vm";
+import CommentViewModel from "./Comment/Comment.vm";
+import { useEffect } from "react";
+import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 export type BnbMainNavigator = {
   [MAIN_SCREEN_NAME.HOME]: undefined;
@@ -29,8 +21,21 @@ export type BnbMainNavigator = {
   [MAIN_SCREEN_NAME.MAP]: undefined;
 };
 
-const MainScreen = () => {
+const MainScreen = ({ navigation }: any) => {
   const Stack = createNativeStackNavigator<BnbMainNavigator>();
+  const vm = getRootViewModel<CommentViewModel>(
+    (viewModel) => viewModel.tab.Comment
+  );
+
+  useEffect(() => {
+    async function loadComments() {
+      await vm.load({
+        offset: 0,
+        limit: 4,
+      });
+    }
+    loadComments();
+  }, []);
 
   return (
     <Stack.Navigator
@@ -46,14 +51,16 @@ const MainScreen = () => {
             return (
               <>
                 <TouchableWithoutFeedback
-                  onPress={() => console.log("clicked")}
+                  onPress={() => navigation.navigate("Main")}
                 >
                   <WithLocalSvg
                     asset={require("~asset/Icons/Back.svg")}
                   ></WithLocalSvg>
                 </TouchableWithoutFeedback>
                 <MarginInterval width="12px" />
-                <CommentHeaderTypo>댓글 22개</CommentHeaderTypo>
+                <CommentHeaderTypo>
+                  댓글 {vm.comments.length}개
+                </CommentHeaderTypo>
               </>
             );
           },
@@ -73,4 +80,6 @@ const MainScreen = () => {
 
 export default MainScreen;
 
-const CommentHeaderTypo = styled(Typography).attrs({ textSize: "16px" })``;
+const CommentHeaderTypo = styled(Typography).attrs({
+  variant: "subhead-regular",
+})``;

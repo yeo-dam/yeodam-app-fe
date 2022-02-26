@@ -17,13 +17,8 @@ const ContentLayout: FC<Props> = ({
   children,
   ...rest
 }) => {
-  console.log(
-    `TCL ~ [ContentLayout.tsx] ~ line ~ 20 ~ justifyContent`,
-    justifyContent
-  );
-
   return (
-    <Wrapper alignItems={alignItems} {...rest}>
+    <Wrapper alignItems={alignItems} justifyContent={justifyContent} {...rest}>
       <View>{children}</View>
     </Wrapper>
   );
@@ -33,9 +28,6 @@ export default ContentLayout;
 
 const Wrapper = styled.View<Props>`
   flex: 1;
-  /* align-items: center; */
   align-items: ${({ alignItems }) => alignItems};
-  /* justify-content: flex-start; */
-  justify-content: ${({ justifyContent }) =>
-    justifyContent ? justifyContent : "flex-start"};
+  justify-content: ${({ justifyContent }) => justifyContent};
 `;

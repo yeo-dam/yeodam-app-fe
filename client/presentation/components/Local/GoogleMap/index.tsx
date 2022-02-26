@@ -35,7 +35,6 @@ const GoogleMap = ({
   useEffect(() => {
     const fetchMaps = async () => {
       const result = await GeoDataToAddress({ latitude, longitude });
-      console.log(`TCL ~ [index.tsx] ~ line ~ 38 ~ result`, result);
     };
     fetchMaps();
   }, []);

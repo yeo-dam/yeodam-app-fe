@@ -26,13 +26,6 @@ const Atom = ({
   const windowWidth = window.width;
   const windowHeight = window.height;
 
-  console.log(
-    `TCL ~ [index.tsx] ~ line ~ 29 ~ windowWidth
-windowHeight`,
-    windowWidth,
-    windowHeight
-  );
-
   const onPressHandler = (_url: string) => {
     console.log("carousel clicked", _url);
   };

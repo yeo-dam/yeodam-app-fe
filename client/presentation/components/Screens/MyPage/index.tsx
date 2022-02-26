@@ -5,20 +5,7 @@ import Map from "./Map";
 import Setting from "./Setting";
 import User from "./Users";
 import MyPageMain from "./MyPage.Main";
-
-export const MYPAGE_SCREEN_NAME: {
-  MAIN: "MyPageMain";
-  LIKE: "MyPageLikes";
-  MAP: "MyPageMap";
-  SETTING: "MyPageSetting";
-  USER: "MyPageUser";
-} = {
-  MAIN: "MyPageMain",
-  LIKE: "MyPageLikes",
-  MAP: "MyPageMap",
-  SETTING: "MyPageSetting",
-  USER: "MyPageUser",
-};
+import { MYPAGE_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 export type BnbCreateNavigator = {
   [MYPAGE_SCREEN_NAME.MAIN]: undefined;

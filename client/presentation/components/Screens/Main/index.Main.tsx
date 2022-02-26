@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Animated, Dimensions, FlatList, Text } from "react-native";
-import { useEffect, useState } from "react";
+import { Dimensions, FlatList } from "react-native";
+import { useEffect } from "react";
 import ContentLayout from "~presentation/components/Layout/ContentLayout";
 import { View } from "../../Themed";
 import { RootTabScreenProps } from "../../../../types";
@@ -13,8 +13,8 @@ import { observer } from "mobx-react";
 import PostModel from "domain/model/PostModel/model";
 import Carousel from "~presentation/components/Shared/Carousel";
 
-import { MAIN_SCREEN_NAME } from ".";
 import MainItemCard from "~presentation/components/Local/MainItemCard";
+import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 const MainScreen = ({
   navigation,

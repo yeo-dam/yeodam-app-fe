@@ -1,8 +1,9 @@
 import { Type } from "class-transformer";
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsDate, IsNotEmpty, IsString } from "class-validator";
+import CommentEntity from "~data/entity/CommentEntity";
 import UserModel from "../UserModel/model";
 
-class CommentModel {
+class CommentModel implements CommentEntity {
   @IsString()
   @IsNotEmpty()
   id: string;
@@ -15,7 +16,9 @@ class CommentModel {
   @IsNotEmpty()
   user: UserModel;
 
-  // TODO : 변경사항
+  @IsDate()
+  @IsNotEmpty()
+  createDateTime: Date;
 }
 
 export default CommentModel;

@@ -2,17 +2,17 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 
 import ContentLayout from "~presentation/components/Layout/ContentLayout";
-import { View } from "~presentation/components/Themed";
 import { RootTabScreenProps } from "../../../../../types";
 import ErrorMsg from "~presentation/components/Shared/ErrorMsg";
 import Loadable from "~presentation/components/Shared/Loadable";
 import { getRootViewModel } from "../../Index.vm";
 import MapViewModel from "./Map.vm";
-import { MAIN_SCREEN_NAME } from "../../Main";
 import GoogleMap from "~presentation/components/Local/GoogleMap";
 import * as Location from "expo-location";
 import useIsMounted from "hooks/useIsMounted";
 import { Region } from "react-native-maps";
+import { View } from "react-native";
+import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 const Map = ({
   navigation,
@@ -57,7 +57,6 @@ const Map = ({
           latitude={location?.latitude}
           longitude={location?.longitude}
           onRegionChange={(region) => {
-            // console.log(`TCL ~ [index.tsx] ~ line ~ 60 ~ region`, region);
             // setLocation(region);
           }}
         />

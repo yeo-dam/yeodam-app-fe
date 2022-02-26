@@ -1,6 +1,5 @@
 import * as React from "react";
 import Image from "~presentation/components/Shared/Image";
-import ContentLayout from "~presentation/components/Layout/ContentLayout";
 import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
 import styled from "styled-components/native";
@@ -16,7 +15,6 @@ import Button from "~presentation/components/Shared/Button";
 import { useEffect } from "react";
 import { getRootViewModel } from "../../Index.vm";
 import CreatePostViewModel from "./CreatePost.vm";
-import { useFormContext } from "react-hook-form";
 
 const CreatePost = ({
   navigation,
@@ -26,22 +24,6 @@ const CreatePost = ({
   const [Photo, setPhoto] = React.useState();
   const vm = getRootViewModel<CreatePostViewModel>(
     (viewModel) => viewModel.tab.Post
-  );
-
-  useEffect(() => {
-    const { params } = route;
-    console.log(`TCL ~ [index.tsx] ~ line ~ 34 ~ route`, route, route.params);
-    if (params) {
-      const { photos } = params;
-      console.log(`TCL ~ [index.tsx] ~ line ~ 33 ~ photos`, photos);
-      if (photos) setPhoto(photos);
-      delete (params as any).photos;
-    }
-  }, []);
-
-  console.log(
-    `TCL ~ [index.tsx] ~ line ~ 50 ~ vm.uploadedImages`,
-    vm.uploadedImages
   );
 
   const onSubmit = (data: any) => console.log("이건가??", data);
@@ -62,7 +44,13 @@ const CreatePost = ({
           </TouchableWithoutFeedback>
         );
       } else {
-        return <Image source={vm.uploadedImages[0].uri} />;
+        return (
+          <Image
+            width={300}
+            height={300}
+            source={{ uri: vm.uploadedImages[0].uri }}
+          />
+        );
       }
     } else {
       return (
@@ -76,6 +64,7 @@ const CreatePost = ({
     }
   };
 
+  console.log("CreatePost");
   return (
     <FormLayout>
       <View>
