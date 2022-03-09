@@ -69,7 +69,7 @@ const ImageUploadSection = styled.View`
   margin-top: 32px;
   width: 319px;
   height: 390px;
-  background-color: #ededed;
+  background-color: ${({ theme }) => theme.colors.grey.ED};
 `;
 
 const ImageUploadText = styled(Typography)`

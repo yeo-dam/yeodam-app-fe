@@ -3,15 +3,15 @@ import PostRepositoryImpl from "~domain/repository/PostRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../../BaseViewModel";
 
-export default class ThisViewModel extends BaseViewModel {
-  private static _Instance: ThisViewModel;
+export default class CreatePostViewModel extends BaseViewModel {
+  private static _Instance: CreatePostViewModel;
   private readonly _postRepo: PostRepositoryImpl;
 
   static GetInstance(args: ConstructorParameter) {
-    if (!ThisViewModel._Instance) {
-      ThisViewModel._Instance = new ThisViewModel(args);
+    if (!CreatePostViewModel._Instance) {
+      CreatePostViewModel._Instance = new CreatePostViewModel(args);
     }
-    return ThisViewModel._Instance;
+    return CreatePostViewModel._Instance;
   }
   private constructor(args: ConstructorParameter) {
     super(args);
@@ -32,6 +32,9 @@ export default class ThisViewModel extends BaseViewModel {
   @observable
   private _uploadedImages = observable.box<any[]>();
 
+  @observable
+  private _isFront = observable.box<boolean>(true);
+
   @computed
   public get isLoading() {
     return this._isLoading.get();
@@ -47,8 +50,18 @@ export default class ThisViewModel extends BaseViewModel {
     return this._uploadedImages.get();
   }
 
+  @computed
+  public get isFront() {
+    return this._isFront.get();
+  }
+
   @action
-  createPost = flow(function* (this: ThisViewModel) {
+  setFront(bool: boolean) {
+    this._isFront.set(bool);
+  }
+
+  @action
+  createPost = flow(function* (this: CreatePostViewModel) {
     try {
       this._isLoading.set(true);
       yield this._postRepo.createPost();
@@ -61,7 +74,7 @@ export default class ThisViewModel extends BaseViewModel {
   });
 
   @action
-  uploadImages = flow(function* (this: ThisViewModel, data: any) {
+  uploadImages = flow(function* (this: CreatePostViewModel, data: any) {
     try {
       this._isLoading.set(true);
       const res = yield this._postRepo.uploadImages(data);

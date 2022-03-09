@@ -1,10 +1,15 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import styled from "styled-components/native";
 import FlexBox from "~presentation/components/Shared/FlexBox";
 import { WithLocalSvg } from "react-native-svg";
 import Avatar from "~presentation/components/Shared/Avatar";
 import PostModel from "~domain/model/PostModel";
 import DropDownMenu from "~presentation/components/Shared/DropDownMenu";
+import DropDownContainer from "~presentation/components/Shared/DropDownContainer";
+import Flex from "~presentation/components/Shared/FlexBox";
+import MarginInterval from "~presentation/components/Shared/MarginInterval";
+import Typography from "~presentation/components/Shared/Typography";
+import { View } from "react-native";
 
 type Props = {
   item: PostModel;
@@ -22,7 +27,37 @@ const Component: FC<Props> = ({ item, children }) => {
           <IconBox>
             <WithLocalSvg asset={require("~asset/Icons/wishlist.svg")} />
           </IconBox>
-          <DropDownMenu />
+          <DropDownContainer
+            content={
+              <View>
+                <Flex>
+                  <WithLocalSvg
+                    asset={require("~asset/Icons/Popup/Share.svg")}
+                  />
+                  <MarginInterval width="24px" />
+                  <DropDownTypo>공유</DropDownTypo>
+                </Flex>
+                <MarginInterval height="24px" />
+                <Flex>
+                  <WithLocalSvg
+                    asset={require("~asset/Icons/Popup/Download.svg")}
+                  />
+                  <MarginInterval width="24px" />
+                  <DropDownTypo>이미지 저장</DropDownTypo>
+                </Flex>
+                <MarginInterval height="24px" />
+                <Flex>
+                  <WithLocalSvg
+                    asset={require("~asset/Icons/Popup/Report.svg")}
+                  />
+                  <MarginInterval width="24px" />
+                  <DropDownTypo>신고</DropDownTypo>
+                </Flex>
+              </View>
+            }
+          >
+            <DropDownMenu />
+          </DropDownContainer>
         </IconSection>
       </PhotoHeader>
       {children}
@@ -51,3 +86,5 @@ const IconBox = styled.View`
 const DropDownBox = styled.View`
   margin-right: 12px;
 `;
+
+const DropDownTypo = styled(Typography).attrs({ variant: "subhead-regular" })``;

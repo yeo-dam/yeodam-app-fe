@@ -58,7 +58,7 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
             <TouchableWithoutFeedback
               onPress={() => navigation.navigate(MAIN_SCREEN_NAME.COMMENT)}
             >
-              {/* FIXME : Comment 갯수를 세어 줄 것. + 댓글을 표현하는 순서가 변경되어야 할 것임. */}
+              {/* FIXME : 댓글을 표현하는 순서가 변경되어야 할 것임. */}
               <GreyTypo>
                 {item.comments &&
                   `${(item.comments[0].user.name, item.comments[0].content)}`}

@@ -2,7 +2,6 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Main from "./index.Main";
 import Comment from "./Comment";
-import Search from "./Search";
 import Map from "../MyPage/Map";
 import { TouchableWithoutFeedback } from "react-native";
 import { WithLocalSvg } from "react-native-svg";
@@ -17,7 +16,6 @@ import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 export type BnbMainNavigator = {
   [MAIN_SCREEN_NAME.HOME]: undefined;
   [MAIN_SCREEN_NAME.COMMENT]: undefined;
-  [MAIN_SCREEN_NAME.SEARCH]: undefined;
   [MAIN_SCREEN_NAME.MAP]: undefined;
 };
 
@@ -67,11 +65,6 @@ const MainScreen = ({ navigation }: any) => {
           headerTitle: "",
         }}
         component={Comment}
-      />
-      <Stack.Screen
-        name={MAIN_SCREEN_NAME.SEARCH}
-        options={{ headerShown: true }}
-        component={Search}
       />
       <Stack.Screen name={MAIN_SCREEN_NAME.MAP} component={Map} />
     </Stack.Navigator>

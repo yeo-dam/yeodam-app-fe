@@ -14,6 +14,7 @@ export const uiColors = {
     AA: "#AAAAAA",
     CC: "#CCCCCC",
     EE: "#EEEEEE",
+    ED: "#EDEDED",
     black: "#121212",
     ["33"]: "#333333",
     ["55"]: "#555555",

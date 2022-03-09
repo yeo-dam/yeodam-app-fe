@@ -16,7 +16,6 @@ export type Props<T extends FieldValues> = React.PropsWithChildren<{
   defaultValues?: UnpackNestedValue<DeepPartial<T>>;
 }>;
 
-// TODO : Resolver 나중에 추가 할 것
 const Component = <T extends FieldValues>({
   schema,
   defaultValues,

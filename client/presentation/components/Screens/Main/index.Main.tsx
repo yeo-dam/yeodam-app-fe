@@ -15,6 +15,7 @@ import Carousel from "~presentation/components/Shared/Carousel";
 
 import MainItemCard from "~presentation/components/Local/MainItemCard";
 import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
+import Modal from "~presentation/components/Shared/DropDownContainer";
 
 const MainScreen = ({
   navigation,
