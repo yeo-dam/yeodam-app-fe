@@ -5,34 +5,43 @@ import styled from "styled-components/native";
 
 type Props = {
   content: JSX.Element;
+  modalVisible: boolean;
+  setModalVisible: (data: boolean) => void;
 };
 
 const Component: React.FC<PropsWithChildren<Props>> = ({
   content,
   children,
+  modalVisible,
+  setModalVisible,
 }) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  // if(modalVisible){
+  //   return null;
+  // }
+  // FIXME : modal 바깥쪽 클릭했을 때, 모달창이 닫혀야 하는 문제
   return (
     <Wrapper>
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
+        // onRequestClose={() => {
+        // Alert.alert("Modal has been closed.");
+        // setModalVisible(false);
+        // }}
       >
         <ModalSafeAreaView />
         <ModalBackground />
         <DropDownBox>
-          <PressableBox onPress={() => setModalVisible(!modalVisible)}>
+          <PressableBox onPress={() => setModalVisible(false)}>
             {content}
           </PressableBox>
           <BottomSafeAreaView />
         </DropDownBox>
       </Modal>
-      <Pressable onPress={() => setModalVisible(true)}>{children}</Pressable>
+      <PressableBox onPress={() => setModalVisible(true)}>
+        {children}
+      </PressableBox>
     </Wrapper>
   );
 };
@@ -50,7 +59,7 @@ const BottomSafeAreaView = styled(SafeAreaView)`
   background-color: white;
 `;
 
-const ModalBackground = styled.View`
+const ModalBackground = styled(View)`
   flex: 1;
   justify-content: flex-end;
   align-items: center;

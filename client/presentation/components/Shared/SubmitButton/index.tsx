@@ -1,16 +1,21 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
-import { View } from "react-native";
 import Button, { Props as ButtonProps } from "../Button";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, FieldValues } from "react-hook-form";
 
 type Props = {
   onSubmit: (data: any) => void;
 } & ButtonProps;
 
-const Component: FC<Props> = ({ label, onSubmit }) => {
+const Component = ({ label, onSubmit }: Props) => {
   const { handleSubmit } = useFormContext();
-  return <Button label={label} onPress={handleSubmit(onSubmit)} />;
+  return <StyledButton label={label} onPress={handleSubmit(onSubmit)} />;
 };
 
 export default Component;
+
+const StyledButton = styled(Button)`
+  width: 100%;
+  flex: 1;
+  background-color: grey;
+`;

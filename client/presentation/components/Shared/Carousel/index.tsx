@@ -80,7 +80,6 @@ const Container = styled.View`
   width: 100%;
   justify-content: center;
   align-items: flex-end;
-  border: 1px solid red;
 `;
 
 const NoImageView = styled.View`
@@ -99,10 +98,8 @@ const IndicatorWrapper = styled.View<{ isTextImg: boolean }>`
   width: 48px;
   height: 22px;
   bottom: 12px;
-  right: 12px;
+  left: 12px;
   border-radius: 12px;
-  background-color: ${({ isTextImg }) =>
-    isTextImg ? "transparent" : "rgba(33, 37, 41, 0.5)"};
   justify-content: center;
   align-items: center;
 `;

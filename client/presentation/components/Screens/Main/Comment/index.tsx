@@ -16,7 +16,7 @@ import Avatar from "~presentation/components/Shared/Avatar";
 import DropDownMenu from "~presentation/components/Shared/DropDownMenu";
 import Divider from "~presentation/components/Shared/Divider";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import MarginInterval from "~presentation/components/Shared/MarginInterval";
+import Interval from "~presentation/components/Shared/Interval";
 import timeForToday from "helper/Formatter/CalculateDayBefore";
 import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 
@@ -50,12 +50,12 @@ const MyPageScreen = ({
                   {/* TODO : Avatar 이미지가 nullable인가? */}
                   <Avatar imageSource={item.user.avatar?.filePath || ""} />
                 </LeftContentBox>
-                <MarginInterval width="8px" />
+                <Interval width="8px" />
                 <RightContentBox>
                   <UserFlexBox>
                     <Flex>
                       <Text>{item.user.name}</Text>
-                      <MarginInterval width="8px" />
+                      <Interval width="8px" />
                       <GreyTypo>{timeForToday(item.createDateTime)}</GreyTypo>
                     </Flex>
                     <View>
@@ -69,9 +69,9 @@ const MyPageScreen = ({
                   {/* TODO : 서버에서 값을 뿌려줘야 함 */}
                   <LikeContentBox>
                     <GreyTypo>좋아요 --개</GreyTypo>
-                    <MarginInterval width="6px" />
+                    <Interval width="6px" />
                     <Divider orientation="Vertical" />
-                    <MarginInterval width="6px" />
+                    <Interval width="6px" />
                     {/* TODO : 기능 연결 필요*/}
                     <TouchableWithoutFeedback
                       onPress={() => console.log("답글쓰기")}
@@ -81,9 +81,9 @@ const MyPageScreen = ({
                   </LikeContentBox>
                 </RightContentBox>
               </Flex>
-              <MarginInterval height="16px" />
+              <Interval height="16px" />
               <Divider orientation="Horizontal" color="#F9F9F9" />
-              <MarginInterval height="16px" />
+              <Interval height="16px" />
             </View>
           );
         })}

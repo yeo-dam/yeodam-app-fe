@@ -13,9 +13,8 @@ import PlaceModel from "~domain/model/PlaceModel";
 import UserModel from "~domain/model/UserModel";
 import CommentModel from "~domain/model/CommentModel";
 import { Exclude, Type } from "class-transformer";
-import TransformDate from "helper/TransformDate";
+import TransformDate from "helper/transformDate";
 import TagModel from "../TagModel";
-import { observable } from "mobx";
 
 class PostModel implements PostEntity {
   @IsString()

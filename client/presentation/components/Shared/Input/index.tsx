@@ -1,6 +1,7 @@
+import { renderErrMsg } from "helper/Formatter/ErrorMessage";
 import React, { FC } from "react";
 import { Controller, get, useFormContext } from "react-hook-form";
-import { TextInputProps } from "react-native";
+import { TextInput, TextInputProps } from "react-native";
 import styled from "styled-components/native";
 import Typography from "../Typography";
 
@@ -8,7 +9,10 @@ export type Props = {
   name: string;
   hidden?: boolean;
   errMsg?: string;
-  placeholderSize?: string;
+  fontSize?: string;
+  placeholderTextColor?: string;
+  color?: string;
+  disabled?: boolean;
 } & TextInputProps;
 
 const Component: FC<Props> = ({
@@ -16,24 +20,16 @@ const Component: FC<Props> = ({
   errMsg,
   hidden = false,
   placeholder,
-  placeholderSize = "14px",
+  fontSize,
+  color,
+  disabled = false,
+  placeholderTextColor,
   ...rest
 }) => {
   const { control, formState } = useFormContext();
   const error = get(formState.errors, name);
 
-  console.log(
-    `TCL ~ [index.tsx] ~ line ~ 25 ~ placeholderSize`,
-    placeholderSize
-  );
-
-  const renderErrMsg = (msg?: string) => {
-    // 에러메세지가 없으면, error 객체의 message를 발송해준다.
-    if (!msg) {
-      return error.message;
-    }
-    return msg;
-  };
+  console.log(`TCL ~ [index.tsx] ~ line ~ 32 ~ error`, error);
 
   return (
     <InputWrapper hidden={hidden}>
@@ -43,13 +39,19 @@ const Component: FC<Props> = ({
         render={({ field: { onChange, value } }) => (
           <>
             <StyledTextInput
-              onChangeText={onChange}
+              name={name}
+              onChangeText={(e) => {
+                onChange(e);
+              }}
               value={value}
               placeholder={placeholder}
-              placeholderSize={placeholderSize}
+              placeholderTextColor={placeholderTextColor}
+              fontSize={fontSize}
+              editable={!disabled}
+              color={color}
               {...rest}
             />
-            {Boolean(error) && <ErrMsg>{renderErrMsg(errMsg)}</ErrMsg>}
+            {error && <ErrMsg>{renderErrMsg(error, errMsg)}</ErrMsg>}
           </>
         )}
       />
@@ -66,12 +68,11 @@ const InputWrapper = styled.View<{ hidden: boolean }>`
   /* border: 1px solid blue; */
 `;
 
-// FIXME : placeholderSize를 지정해줘야 함. 근데 잘 지정이 안됨.
-const StyledTextInput = styled.TextInput<Props>`
-  &::placeholder {
-    font-size: 14px;
-    /* font-size: ${({ placeholderSize }) => placeholderSize}; */
-  }
+const StyledTextInput = styled(TextInput)<Props>`
+  color: ${({ color }) => (color ? color : "black")};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "14px")};
 `;
 
-const ErrMsg = styled(Typography)``;
+const ErrMsg = styled(Typography)`
+  color: red;
+`;

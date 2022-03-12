@@ -25,9 +25,14 @@ class PlaceModel {
   @IsNumber()
   @IsNotEmpty()
   latitude: number;
+
   @IsNumber()
   @IsNotEmpty()
   longitude: number;
+
+  @IsString()
+  @IsNotEmpty()
+  formattedAddress: string;
 }
 
 export default PlaceModel;

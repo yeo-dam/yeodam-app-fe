@@ -66,7 +66,6 @@ export default class MainViewModel extends BaseViewModel {
   @action
   load = flow(function* (this: MainViewModel, query: FindDto) {
     try {
-      this._isLoading.set(true);
       const [pager, postInstances] = yield this._postRepo.find({ query });
       postInstances.forEach((item: PostModel) => {
         this._posts.set(item.id, item);
@@ -76,71 +75,69 @@ export default class MainViewModel extends BaseViewModel {
       console.error(error);
       this._isError.set(true);
       throw error;
-    } finally {
-      this._isLoading.set(false);
     }
   });
 
   @action
   addWishlist = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
       yield this._meRepo.addWishlist();
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 
   @action
   addLikes = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
       yield this._meRepo.addLikes();
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 
   @action
   deleteLikes = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
       yield this._meRepo.deleteLikes();
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 
   @action
   downloadImage = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 
   @action
   share = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 }

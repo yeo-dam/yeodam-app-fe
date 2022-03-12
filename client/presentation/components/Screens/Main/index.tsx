@@ -7,7 +7,7 @@ import { TouchableWithoutFeedback } from "react-native";
 import { WithLocalSvg } from "react-native-svg";
 import Typography from "~presentation/components/Shared/Typography";
 import styled from "styled-components/native";
-import MarginInterval from "~presentation/components/Shared/MarginInterval";
+import Interval from "~presentation/components/Shared/Interval";
 import { getRootViewModel } from "../Index.vm";
 import CommentViewModel from "./Comment/Comment.vm";
 import { useEffect } from "react";
@@ -32,7 +32,7 @@ const MainScreen = ({ navigation }: any) => {
         limit: 4,
       });
     }
-    loadComments();
+    // loadComments();
   }, []);
 
   return (
@@ -55,7 +55,7 @@ const MainScreen = ({ navigation }: any) => {
                     asset={require("~asset/Icons/Back.svg")}
                   ></WithLocalSvg>
                 </TouchableWithoutFeedback>
-                <MarginInterval width="12px" />
+                <Interval width="12px" />
                 <CommentHeaderTypo>
                   댓글 {vm.comments.length}개
                 </CommentHeaderTypo>

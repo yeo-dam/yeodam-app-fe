@@ -34,7 +34,7 @@ const GoogleMap = ({
 
   useEffect(() => {
     const fetchMaps = async () => {
-      const result = await GeoDataToAddress({ latitude, longitude });
+      await GeoDataToAddress({ latitude, longitude });
     };
     fetchMaps();
   }, []);

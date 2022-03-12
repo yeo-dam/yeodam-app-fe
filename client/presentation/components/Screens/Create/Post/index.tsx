@@ -2,36 +2,71 @@ import * as React from "react";
 import Image from "~presentation/components/Shared/Image";
 import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
+import * as MediaLibrary from "expo-media-library";
 import styled from "styled-components/native";
 import { RootTabScreenProps } from "types";
 import { WithLocalSvg } from "react-native-svg";
-import { TouchableWithoutFeedback, Text, Pressable, View } from "react-native";
+import {
+  TouchableWithoutFeedback,
+  Pressable,
+  View,
+  Text,
+  InputAccessoryView,
+} from "react-native";
 import Input from "~presentation/components/Shared/Input";
 import FormLayout from "~presentation/components/Layout/FormLayout";
-import SubmitButton from "~presentation/components/Shared/SubmitButton";
 import Form from "~presentation/components/Shared/Form";
 import CreatePostDto from "~domain/dto/CreatePostDto";
 import { getRootViewModel } from "../../Index.vm";
 import CreatePostViewModel from "./CreatePost.vm";
-import MarginInterval from "~presentation/components/Shared/MarginInterval";
+import Interval from "~presentation/components/Shared/Interval";
 import Flex from "~presentation/components/Shared/FlexBox";
-import DropDownContainer from "~presentation/components/Shared/DropDownContainer";
 import Divider from "~presentation/components/Shared/Divider";
+import PlaceType from "~domain/enum/PlaceType";
+import { CREATE_SCREEN_NAME } from "constants/SCREEN_NAME";
+import SubmitButton from "~presentation/components/Shared/SubmitButton";
+import theme from "themes";
+import Tags from "~presentation/components/Shared/Tags";
+import PlaceTypeSelector from "~presentation/components/Local/PlaceTypeSelector";
+import Carousel from "~presentation/components/Shared/Carousel";
+import DescriptionForm from "~presentation/components/Local/DescriptionForm";
 
-const CreatePost = ({ navigation }: RootTabScreenProps<"CreatePost">) => {
+const CreatePost = ({
+  navigation,
+}: RootTabScreenProps<typeof CREATE_SCREEN_NAME.POST>) => {
   const vm = getRootViewModel<CreatePostViewModel>(
     (viewModel) => viewModel.tab.Post
   );
 
-  const onSubmit = (data: any) => console.log("이건가??", data);
+  const onSubmit = async (data: CreatePostDto) => {
+    const dateTime = data.inputDateTime;
+    const year = dateTime.slice(0, 4);
+    const month = dateTime.slice(4, 6);
+    const day = dateTime.slice(6, 8);
+    const transformed = new Date(`${year}-${month}-${day}`);
 
-  const onSelect = (data: string) => {
+    const newDto: any = {
+      ...data,
+      date: transformed,
+    };
+
+    console.log(`TCL ~ [index.tsx] ~ line ~ 57 ~ newDto`, newDto);
+
+    try {
+      await vm.createPost(newDto);
+      // navigation.push("Root");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onSelect = (data: PlaceType) => {
     console.log("data", data);
   };
 
   const renderForm = () => {
     if (vm.isFront) {
-      if (!vm.uploadedImages) {
+      if (vm.uploadedImages.length === 0) {
         return (
           <ImageUploadWrapper>
             <TouchableWithoutFeedback
@@ -41,107 +76,19 @@ const CreatePost = ({ navigation }: RootTabScreenProps<"CreatePost">) => {
                 <WithLocalSvg
                   asset={require("~asset/images/No_image.svg")}
                 ></WithLocalSvg>
-                <MarginInterval height="10px" />
+                <Interval height="10px" />
                 <ImageUploadText>이미지를 넣어주세요!</ImageUploadText>
               </ImageUploadSection>
             </TouchableWithoutFeedback>
           </ImageUploadWrapper>
         );
       } else {
-        return (
-          <Image
-            width={300}
-            height={300}
-            source={{ uri: vm.uploadedImages[0].uri }}
-          />
-        );
+        return <Carousel pages={vm.uploadedImages} isTextImg={false} />;
       }
     } else {
       return (
         <DescriptionBox>
-          <DescriptionInnerBox>
-            <Input name="imageIds" hidden />
-            <Input name="description" hidden />
-            <Input
-              name="title"
-              placeholder="장소이름을 입력하세요"
-              placeholderTextColor="#999999"
-              placeholderSize="18px"
-            />
-            <Flex>
-              <DropDownContainer
-                content={
-                  <View>
-                    {/* // FIXME : 장소타입 내용들은 변경될 예정임 */}
-                    <TitleBox>
-                      <Typography variant="subhead-regular">
-                        장소종류를 선택하세요
-                      </Typography>
-                    </TitleBox>
-                    <Divider orientation="Horizontal" />
-                    <MarginInterval height="45px" />
-                    <PlaceTypeBox>
-                      <Pressable onPress={() => onSelect("레스토랑")}>
-                        <DropDownTypo>레스토랑</DropDownTypo>
-                      </Pressable>
-                      <Divider orientation="Vertical" />
-                      <Pressable onPress={() => onSelect("레스토랑")}>
-                        <DropDownTypo>레스토랑</DropDownTypo>
-                      </Pressable>
-                    </PlaceTypeBox>
-                    <MarginInterval height="31px" />
-                    <PlaceTypeBox>
-                      <Pressable onPress={() => onSelect("레스토랑")}>
-                        <DropDownTypo>레스토랑</DropDownTypo>
-                      </Pressable>
-                      <Divider orientation="Vertical" />
-                      <Pressable onPress={() => onSelect("레스토랑")}>
-                        <DropDownTypo>레스토랑</DropDownTypo>
-                      </Pressable>
-                    </PlaceTypeBox>
-                    <MarginInterval height="31px" />
-                    <PlaceTypeBox>
-                      <Pressable onPress={() => onSelect("레스토랑")}>
-                        <DropDownTypo>레스토랑</DropDownTypo>
-                      </Pressable>
-                      <Divider orientation="Vertical" />
-                      <Pressable onPress={() => onSelect("레스토랑")}>
-                        <DropDownTypo>레스토랑</DropDownTypo>
-                      </Pressable>
-                    </PlaceTypeBox>
-                    <MarginInterval height="31px" />
-                    <PlaceTypeBox>
-                      <Pressable onPress={() => onSelect("레스토랑")}>
-                        <DropDownTypo>레스토랑</DropDownTypo>
-                      </Pressable>
-                      <Divider orientation="Vertical" />
-                      <Pressable onPress={() => onSelect("레스토랑")}>
-                        <DropDownTypo>레스토랑</DropDownTypo>
-                      </Pressable>
-                    </PlaceTypeBox>
-                    <MarginInterval height="31px" />
-                  </View>
-                }
-              >
-                <GreyTypo>장소</GreyTypo>
-              </DropDownContainer>
-              <MarginInterval width="4px" />
-              <Divider orientation="Vertical" />
-              <MarginInterval width="4px" />
-              <Pressable onPress={() => navigation.navigate("Search")}>
-                <GreyTypo>위치를 입력하세요</GreyTypo>
-              </Pressable>
-            </Flex>
-            <MarginInterval height="14px" />
-            <Input
-              name="content"
-              placeholder="내용을 입력하세요"
-              numberOfLines={10}
-              placeholderTextColor="#999999"
-            />
-            {/* FIXME : 전송버튼 추가될 필요 있음 */}
-            {/* <SubmitButton label="전송" onSubmit={onSubmit} /> */}
-          </DescriptionInnerBox>
+          <DescriptionForm navigation={navigation} onSubmit={onSubmit} />
         </DescriptionBox>
       );
     }
@@ -149,12 +96,30 @@ const CreatePost = ({ navigation }: RootTabScreenProps<"CreatePost">) => {
 
   return (
     <FormLayout>
-      <Form schema={CreatePostDto}>
+      <Form<CreatePostDto>
+        schema={CreatePostDto}
+        defaultValues={{
+          place: {
+            name: "쉑쉑버거",
+            type: PlaceType.FOOD,
+            formattedAddress: "서울특별시 강남구 논현동",
+          },
+          description: "여기 진짜 맛있어요!",
+          tags: ["#맛집", "#카페"],
+          inputDateTime: "20111222",
+        }}
+      >
         <Wrapper>
           <InnerWrapper>
             {renderForm()}
             <DateFlexBox>
-              <DateInput name="date" placeholder="날짜를 선택해주세요" keyboardType="number-pad" />
+              <DateInput
+                maxLength={8}
+                name="inputDateTime"
+                placeholder="날짜(YYYY-MM-DD)를 입력해주세요"
+                keyboardType="number-pad"
+                inputAccessoryViewID={CREATE_SCREEN_NAME.POST}
+              />
             </DateFlexBox>
           </InnerWrapper>
         </Wrapper>
@@ -191,7 +156,7 @@ const TitleBox = styled(Flex)`
 
 const ImageUploadWrapper = styled.View``;
 
-const ImageUploadSection = styled.View`
+const ImageUploadSection = styled(View)`
   justify-content: center;
   align-items: center;
   width: 319px;
@@ -199,7 +164,7 @@ const ImageUploadSection = styled.View`
   background-color: ${({ theme }) => theme.colors.grey.ED};
 `;
 
-const DescriptionBox = styled.View`
+const DescriptionBox = styled(View)`
   justify-content: center;
   width: 319px;
   height: 390px;
@@ -224,4 +189,16 @@ const PlaceTypeBox = styled(Flex)`
 
 const GreyTypo = styled(Typography).attrs({ variant: "caption-light" })`
   color: ${({ theme }) => theme.colors.grey[99]};
+`;
+
+const ContentInputBox = styled.View`
+  width: 100%;
+  height: 117px;
+  background-color: #2f2f2f;
+`;
+
+const TagInputBox = styled.View`
+  width: 100%;
+  height: 19px;
+  background-color: #2f2f2f;
 `;

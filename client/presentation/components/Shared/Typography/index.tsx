@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextProps } from "react-native";
+import { Text, TextProps } from "react-native";
 import styled from "styled-components/native";
 import { variantStyles } from "./style";
 import { Variant } from "./types";
@@ -25,7 +25,7 @@ const Component = ({
   );
 };
 
-const Typography = styled.Text<{
+const Typography = styled(Text)<{
   variant: Variant;
   type?: type;
   textSize?: string;

@@ -5,4 +5,5 @@ export default interface Entity {
   content: string;
   user: UserEntity;
   createDateTime: Date;
+  likeCount: number;
 }

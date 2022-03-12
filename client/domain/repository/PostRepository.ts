@@ -6,11 +6,9 @@ import PagerModel from "~domain/model/PagerModel";
 import PostModel from "~domain/model/PostModel";
 import BaseRepository, { ConstructorParameter } from "./Repository";
 import { isDevelopmentMode } from "utils/detectMode";
-import {
-  genPostMockInstance,
-  genPostMockObject,
-} from "~domain/model/PostModel/mock";
+import { genPostMockObject } from "~domain/model/PostModel/mock";
 import FindDto from "~domain/dto/FindPostDto";
+import CreatePostDto from "~domain/dto/CreatePostDto";
 
 export default class PostRepositoryImpl extends BaseRepository {
   private static _Instance: PostRepositoryImpl;
@@ -97,15 +95,26 @@ export default class PostRepositoryImpl extends BaseRepository {
     }
   }
 
-  /** 유저 ID로 Post 불러오기 **/
-  async createPost() {}
-
-  async uploadImages(data: any) {
+  async createPost(dto: { body: CreatePostDto }) {
     try {
-      console.log("이미지 데이터가 전송됩니다", data);
-      return { success: true };
+      return await this._remote._fetcher("/post/new", {
+        method: "PUT",
+        body: JSON.stringify(dto.body),
+      });
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async uploadImages(dto: { body: FormData }) {
+    try {
+      const res = await this._remote._fetcher("/image/upload/multiple", {
+        method: "POST",
+        body: dto.body,
+      });
+      return res;
     } catch (error) {
-      throw new Error("Error occured during network request");
+      throw error;
     }
   }
 

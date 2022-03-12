@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Dimensions, FlatList } from "react-native";
+import { Dimensions, FlatList, View } from "react-native";
 import { useEffect } from "react";
 import ContentLayout from "~presentation/components/Layout/ContentLayout";
-import { View } from "../../Themed";
 import { RootTabScreenProps } from "../../../../types";
 import NoData from "~presentation/components/Shared/NoData";
 import ErrorMsg from "~presentation/components/Shared/ErrorMsg";
@@ -16,6 +15,7 @@ import Carousel from "~presentation/components/Shared/Carousel";
 import MainItemCard from "~presentation/components/Local/MainItemCard";
 import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 import Modal from "~presentation/components/Shared/DropDownContainer";
+import Fetcher from "helper/fetcher";
 
 const MainScreen = ({
   navigation,
@@ -30,26 +30,37 @@ const MainScreen = ({
     });
   }
 
+  // async function testFucn() {
+  //   const res = await Fetcher("/");
+  //   console.log(`TCL ~ [index.Main.tsx] ~ line ~ 35 ~ res`, res);
+  // }
+
   useEffect(() => {
-    loadPosts();
+    // loadPosts();
+    // testFucn();
     return () => console.log("cleanup");
   }, []);
 
-  if (vm.isLoading) {
-    return <Loadable />;
-  }
+  // TODO : 초기 페이지 렌더링 시, 로더블은 필요해보임.
+  // if (vm.isLoading) {
+  //   return <Loadable />;
+  // }
 
   if (vm.isError) {
     return <ErrorMsg />;
   }
 
-  if (vm.posts && vm.posts.length === 0) {
-    return <NoData />;
-  }
+  const renderNodata = (item: PostModel) => {
+    if (vm.posts && vm.posts.length === 0) {
+      return <NoData />;
+    } else {
+      <MainItemCard item={item} navigation={navigation} />;
+    }
+  };
 
   const handleLoadMore = () => {
-    const pagerNum = vm.pager.offset + vm.pager.limit;
     const limitNum = vm.pager.limit;
+    const pagerNum = vm.pager.offset + vm.pager.limit;
     loadPosts(limitNum, pagerNum);
   };
 

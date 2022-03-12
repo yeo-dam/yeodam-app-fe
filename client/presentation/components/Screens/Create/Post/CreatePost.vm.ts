@@ -1,8 +1,13 @@
 import { action, computed, flow, observable } from "mobx";
+import CreatePostDto from "~domain/dto/CreatePostDto";
 import PostRepositoryImpl from "~domain/repository/PostRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../../BaseViewModel";
 
+type ImageType = {
+  id: string;
+  url: string;
+};
 export default class CreatePostViewModel extends BaseViewModel {
   private static _Instance: CreatePostViewModel;
   private readonly _postRepo: PostRepositoryImpl;
@@ -30,7 +35,7 @@ export default class CreatePostViewModel extends BaseViewModel {
   private _isError = observable.box<boolean>(false);
 
   @observable
-  private _uploadedImages = observable.box<any[]>();
+  private _uploadedImages = observable.map<string, ImageType>([]);
 
   @observable
   private _isFront = observable.box<boolean>(true);
@@ -47,7 +52,7 @@ export default class CreatePostViewModel extends BaseViewModel {
 
   @computed
   public get uploadedImages() {
-    return this._uploadedImages.get();
+    return [...this._uploadedImages.values()];
   }
 
   @computed
@@ -61,10 +66,15 @@ export default class CreatePostViewModel extends BaseViewModel {
   }
 
   @action
-  createPost = flow(function* (this: CreatePostViewModel) {
+  createPost = flow(function* (
+    this: CreatePostViewModel,
+    dto: { body: CreatePostDto }
+  ) {
     try {
       this._isLoading.set(true);
-      yield this._postRepo.createPost();
+      yield this._postRepo.createPost({
+        body: dto.body,
+      });
     } catch (error) {
       console.error(error);
       this._isError.set(true);
@@ -74,12 +84,20 @@ export default class CreatePostViewModel extends BaseViewModel {
   });
 
   @action
-  uploadImages = flow(function* (this: CreatePostViewModel, data: any) {
+  uploadImages = flow(function* (
+    this: CreatePostViewModel,
+    dto: { body: FormData }
+  ) {
     try {
       this._isLoading.set(true);
-      const res = yield this._postRepo.uploadImages(data);
-      if (res.success) {
-        this._uploadedImages.set(data);
+      const res = yield this._postRepo.uploadImages({
+        body: dto.body,
+      });
+
+      console.log(`TCL ~ [CreatePost.vm.ts] ~ line ~ 97 ~ res`, res);
+
+      if (res) {
+        this._uploadedImages.set(res[0].id, res[0]);
       }
     } catch (error) {
       console.error(error);

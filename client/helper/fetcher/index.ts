@@ -54,20 +54,20 @@ const Fetcher = async <T>(
     mergedOpt.body = options?.body;
   }
 
-  const requestUrl = `${process.env.HOSTNAME}:${process.env.PORTNUMBER}${url}`;
+  const requestUrl = `${process.env.HOSTNAME}${url}`;
 
-  console.log("Input >>>> ", requestUrl);
+  console.log("Input >>>>> ", requestUrl);
 
   const response = await fetch(requestUrl, mergedOpt);
-  const data = await response.json();
+  const responseJson = await response.json();
+
+  console.log(responseJson);
 
   if (!response.ok) {
-    throw new Error(`${data.err.message}`);
-  } else {
-    console.log("Output >>>>>> ", data);
+    throw new Error(responseJson.error);
   }
 
-  return data;
+  return responseJson.data;
 };
 
 export default Fetcher;

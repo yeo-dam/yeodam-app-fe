@@ -7,7 +7,6 @@ import { RootTabScreenProps } from "types";
 import { ActivityIndicator, TouchableOpacity, View, Text } from "react-native";
 import { ImageBrowser } from "expo-image-picker-multiple";
 import FormLayout from "~presentation/components/Layout/FormLayout";
-import * as ImageManipulator from "expo-image-manipulator";
 import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
 import CreatePostViewModel from "../CreatePost.vm";
 import { CREATE_SCREEN_NAME } from "constants/SCREEN_NAME";
@@ -21,14 +20,6 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
     return <ActivityIndicator size="small" color={"#0580FF"} />;
   };
 
-  const _processImageAsync = (uri: string) => {
-    return ImageManipulator.manipulateAsync(
-      uri,
-      [{ resize: { width: 1000 } }],
-      { base64: true }
-    );
-  };
-
   const ImagesCallback = (callback: any) => {
     navigation.setOptions({
       headerRight: () => _getHeaderLoader(),
@@ -36,22 +27,26 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
 
     callback
       .then(async (photos: any) => {
-        const cPhotos = [];
-
         for (let photo of photos) {
-          const pPhoto = await _processImageAsync(photo.uri);
-          const data = `data:image/png;base64,${pPhoto.base64}`;
-          // FIXME: base64 => blob 변경 실패
-          const res = await fetch(data).then((item) => item.blob());
+          let localUri = photo.uri;
+          let filename = photo.filename;
+          let match = localUri.match(/&ext=(\w+)$/);
+          let type = match ? `image/${match[1]}` : `image`;
 
-          cPhotos.push({
-            uri: pPhoto.uri,
-            name: photo.filename,
-            type: "image/jpg",
+          const formdata: FormData = new FormData();
+          const imageObj = {
+            name: filename,
+            uri: localUri,
+            type,
+          };
+
+          formdata.append("images", imageObj as any);
+
+          await vm.uploadImages({
+            body: formdata,
           });
         }
 
-        vm.uploadImages(cPhotos);
         navigation.navigate(CREATE_SCREEN_NAME.POST);
       })
       .catch((e: any) => console.log(e));
@@ -95,7 +90,7 @@ const Wrapper = styled.View<{ isFront?: boolean }>`
   height: 526px;
 `;
 
-const ImageUploadSection = styled.View`
+const ImageUploadSection = styled(View)`
   justify-content: center;
   align-items: center;
   margin: 0 auto;

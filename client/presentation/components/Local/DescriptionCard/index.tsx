@@ -7,7 +7,7 @@ import PlaceTypeFormatter from "helper/Formatter/PlaceTypeFormatter";
 import FlexBox from "~presentation/components/Shared/FlexBox";
 import Divider from "~presentation/components/Shared/Divider";
 import { Props as PhotoCardProps } from "../PhotoCard";
-import MarginInterval from "~presentation/components/Shared/MarginInterval";
+import Interval from "~presentation/components/Shared/Interval";
 import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 export type Props = {
@@ -25,14 +25,14 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
             >
               <View>
                 <WhiteTitleTypo>{item.title}</WhiteTitleTypo>
-                <MarginInterval height="8px" />
+                <Interval height="8px" />
                 <GreyFlexBox>
                   <GreyBlackTypo>
                     {PlaceTypeFormatter(item.place.type)}
                   </GreyBlackTypo>
-                  <MarginInterval width="4px" />
+                  <Interval width="4px" />
                   <Divider orientation="Vertical" />
-                  <MarginInterval width="4px" />
+                  <Interval width="4px" />
                   {/* TODO : Address Formatting 관련 서버 쪽과 이야기 해봐야 할 것. 위경도 데이터를 주소 형태로 변형해줄 수 있을지 따져봐야 함 */}
                   <GreyBlackTypo>{item.place.latitude}</GreyBlackTypo>
                   {/* TODO : 아이콘 추가 필요 */}
@@ -40,9 +40,9 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
                 </GreyFlexBox>
               </View>
             </TouchableWithoutFeedback>
-            <MarginInterval height="20px" />
+            <Interval height="20px" />
             <WhiteTypo>{item.description}</WhiteTypo>
-            <MarginInterval height="8px" />
+            <Interval height="8px" />
             <TagFlexBox>
               {item.tags &&
                 item.tags.map((tag, idx) => (
@@ -54,7 +54,7 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
           {/* TODO : 값 Counting은 서버에서 줘야 할 것 같음 */}
           <CommentBox>
             <GreyTypo>{FollowerNum()} 명</GreyTypo>
-            <MarginInterval height="6px" />
+            <Interval height="6px" />
             <TouchableWithoutFeedback
               onPress={() => navigation.navigate(MAIN_SCREEN_NAME.COMMENT)}
             >
@@ -71,12 +71,12 @@ const Component = ({ item, setIsFront, navigation }: Props) => {
   );
 };
 
-const PhotoFrame = styled.View`
+const PhotoFrame = styled(View)`
   background-color: ${({ theme }) => theme.colors.background.paper};
   padding: 30px 16px 16px 16px;
 `;
 
-const PhotoBox = styled.View<{ isFront?: boolean }>`
+const PhotoBox = styled(View)<{ isFront?: boolean }>`
   display: flex;
   justify-content: flex-end;
   width: 100%;

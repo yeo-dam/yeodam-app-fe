@@ -9,14 +9,15 @@ import Typography from "~presentation/components/Shared/Typography";
 import { getRootViewModel } from "../Index.vm";
 import CreatePostViewModel from "./Post/CreatePost.vm";
 import styled from "styled-components/native";
-import MarginInterval from "~presentation/components/Shared/MarginInterval";
+import Interval from "~presentation/components/Shared/Interval";
 import { observer } from "mobx-react";
-import { runInAction } from "mobx";
 import Flex from "~presentation/components/Shared/FlexBox";
 import Search from "./Post/Search";
 import Input from "~presentation/components/Shared/Input";
 import Form from "~presentation/components/Shared/Form";
 import FindPostDto from "~domain/dto/FindPostDto";
+import { useCallback } from "react";
+import { runInAction } from "mobx";
 
 export type BnbCreateNavigator = {
   [CREATE_SCREEN_NAME.POST]: undefined;
@@ -31,7 +32,12 @@ const CreateScreen = ({ navigation }: any) => {
     (viewModel) => viewModel.tab.Post
   );
 
-  console.log(`TCL ~ [index.tsx] ~ line ~ 30 ~ vm.isFront`, vm.isFront);
+  const handleClick = useCallback(
+    (bool: boolean) => {
+      runInAction(() => vm.setFront(bool));
+    },
+    [vm.isFront]
+  );
 
   return (
     <Stack.Navigator initialRouteName={CREATE_SCREEN_NAME.POST}>
@@ -51,11 +57,11 @@ const CreateScreen = ({ navigation }: any) => {
           ),
           headerRight: () => (
             <HeaderView>
-              <Pressable onPress={() => runInAction(() => vm.setFront(true))}>
+              <Pressable onPress={() => handleClick(true)}>
                 <CreateHeaderTypo isFront={vm.isFront}>앞면</CreateHeaderTypo>
               </Pressable>
-              <MarginInterval width="7px" />
-              <Pressable onPress={() => runInAction(() => vm.setFront(false))}>
+              <Interval width="7px" />
+              <Pressable onPress={() => handleClick(false)}>
                 <CreateHeaderTypo isFront={!vm.isFront}>뒷면</CreateHeaderTypo>
               </Pressable>
             </HeaderView>
@@ -79,14 +85,14 @@ const CreateScreen = ({ navigation }: any) => {
                     asset={require("~asset/Icons/Back.svg")}
                   ></WithLocalSvg>
                 </TouchableWithoutFeedback>
-                <MarginInterval width="10px" />
+                <Interval width="10px" />
                 <Form schema={FindPostDto}>
                   <SearchBox>
                     <View>
                       <WithLocalSvg
                         asset={require("~asset/Icons/Search.svg")}
                       />
-                      <MarginInterval width="8px" />
+                      <Interval width="8px" />
                       <Input
                         name="placeName"
                         placeholderTextColor="#999999"

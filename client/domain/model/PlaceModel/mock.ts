@@ -6,7 +6,7 @@ export const genPlaceMockObject = () => {
     name: "place",
     title: "marker1",
     description: "marker1 description",
-    type: PlaceType.ACTIVITY,
+    type: PlaceType.CONVINIENCE,
     latitude: 37.28972304408989,
     longitude: 126.81528244167568,
   };
