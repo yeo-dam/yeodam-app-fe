@@ -1,5 +1,4 @@
-export default interface Entity<T> {
-  items: T[];
+export default interface Entity {
   total: number;
   count: number;
   limit: number;

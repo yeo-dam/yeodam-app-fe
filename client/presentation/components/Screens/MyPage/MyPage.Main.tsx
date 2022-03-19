@@ -2,7 +2,6 @@ import * as React from "react";
 import { useEffect } from "react";
 
 import ContentLayout from "~presentation/components/Layout/ContentLayout";
-import { View } from "~presentation/components/Themed";
 import { RootTabScreenProps } from "../../../../types";
 import ErrorMsg from "~presentation/components/Shared/ErrorMsg";
 import Loadable from "~presentation/components/Shared/Loadable";
@@ -10,7 +9,10 @@ import { getRootViewModel } from "../Index.vm";
 import MyPageViewModel from "./MyPage.vm";
 import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
-import { MYPAGE_SCREEN_NAME } from ".";
+import TouchableIcon from "~presentation/components/Shared/TouchableIcon";
+import { WithLocalSvg } from "react-native-svg";
+import { View } from "react-native";
+import { MYPAGE_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 const MyPageScreen = ({
   navigation,
@@ -38,6 +40,9 @@ const MyPageScreen = ({
     <ContentLayout title="Tab Three">
       <View>
         <Typography>마이페이지</Typography>
+        <TouchableIcon onPress={() => navigation.navigate("Map")}>
+          <WithLocalSvg asset={require("~asset/Icons/Map.svg")}></WithLocalSvg>
+        </TouchableIcon>
       </View>
     </ContentLayout>
   );

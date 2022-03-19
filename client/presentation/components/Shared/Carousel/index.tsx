@@ -1,11 +1,11 @@
 import React, { useState, useRef, PropsWithChildren } from "react";
-import { Dimensions, Platform, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import styled from "styled-components/native";
 import { WithLocalSvg } from "react-native-svg";
 import Nav from "~presentation/components/Shared/Nav";
 
 import Item from "./item";
+import Layout from "constants/Layout";
 
 export type Props = {
   pages: { id: string; url: string }[] | { url: string }[];
@@ -22,8 +22,9 @@ const Atom = ({
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const carouselRef = useRef(null);
-  const windowWidth = Dimensions.get("window").width;
-  const windowHeight = Dimensions.get("window").height;
+  const { window } = Layout;
+  const windowWidth = window.width;
+  const windowHeight = window.height;
 
   const onPressHandler = (_url: string) => {
     console.log("carousel clicked", _url);
@@ -64,12 +65,12 @@ const Atom = ({
         onSnapToItem={(index) => setCurrentSlide(index)}
       />
 
-      {/* <IndicatorWrapper isTextImg={isTextImg}>
+      <IndicatorWrapper isTextImg={isTextImg}>
         <PageText isTextImg={isTextImg}>
           <NowText isTextImg={isTextImg}>{currentSlide + 1}</NowText> /
           {pages.length}
         </PageText>
-      </IndicatorWrapper> */}
+      </IndicatorWrapper>
     </Container>
   );
 };
@@ -79,7 +80,6 @@ const Container = styled.View`
   width: 100%;
   justify-content: center;
   align-items: flex-end;
-  border: 1px solid red;
 `;
 
 const NoImageView = styled.View`
@@ -98,10 +98,8 @@ const IndicatorWrapper = styled.View<{ isTextImg: boolean }>`
   width: 48px;
   height: 22px;
   bottom: 12px;
-  right: 12px;
+  left: 12px;
   border-radius: 12px;
-  background-color: ${({ isTextImg }) =>
-    isTextImg ? "transparent" : "rgba(33, 37, 41, 0.5)"};
   justify-content: center;
   align-items: center;
 `;

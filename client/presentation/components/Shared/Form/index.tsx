@@ -32,7 +32,6 @@ const Component = <T extends FieldValues>({
 
   useEffect(() => {
     methods.reset(defaultValues);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updatedObject]);
 
   return <FormProvider {...methods}>{children}</FormProvider>;

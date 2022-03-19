@@ -12,8 +12,8 @@ import ImageFileModel from "~domain/model/ImageFileModel/model";
 import PlaceModel from "~domain/model/PlaceModel";
 import UserModel from "~domain/model/UserModel";
 import CommentModel from "~domain/model/CommentModel";
-import { Type } from "class-transformer";
-import TransformDate from "helper/TransformDate";
+import { Exclude, Type } from "class-transformer";
+import TransformDate from "helper/transformDate";
 import TagModel from "../TagModel";
 
 class PostModel implements PostEntity {
@@ -66,6 +66,7 @@ class PostModel implements PostEntity {
   @Type(() => TagModel)
   @IsOptional()
   tags?: TagModel[];
+  // TODO : 여러 count 추가 : LikeCount, CommentCount, isReported 등등
 }
 
 export default PostModel;

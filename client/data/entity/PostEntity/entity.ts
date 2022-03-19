@@ -1,6 +1,7 @@
 import CommentEntity from "../CommentEntity";
 import ImageFileEntity from "../ImageFileEntity";
 import PlaceEntity from "../PlaceEntity";
+import TagEntity from "../TagEntity";
 import UserEntity from "../UserEntity";
 
 export default interface Entity {
@@ -13,4 +14,5 @@ export default interface Entity {
   updatedAt?: Date;
   images: ImageFileEntity[];
   comments?: CommentEntity[];
+  tags?: TagEntity[];
 }

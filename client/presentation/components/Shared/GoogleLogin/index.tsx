@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as WebBrowser from "expo-web-browser";
 import { Button } from "react-native";
-import { MAIN_SCREEN_NAME } from "~presentation/components/Screens/Main";
+import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 WebBrowser.maybeCompleteAuthSession();
 

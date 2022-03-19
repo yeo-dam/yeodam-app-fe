@@ -2,7 +2,6 @@ import * as React from "react";
 import { useEffect } from "react";
 
 import ContentLayout from "~presentation/components/Layout/ContentLayout";
-import { View } from "~presentation/components/Themed";
 import { RootTabScreenProps } from "../../../../../types";
 import ErrorMsg from "~presentation/components/Shared/ErrorMsg";
 import NoData from "~presentation/components/Shared/NoData";
@@ -11,10 +10,11 @@ import { getRootViewModel } from "../../Index.vm";
 import UserListViewModel from "./UserList.vm";
 import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
+import { View } from "react-native";
 
-const UserListScreen = ({ navigation }: RootTabScreenProps<"UserList">) => {
+const UserListScreen = ({ navigation }: RootTabScreenProps<"MyPageUser">) => {
   const vm = getRootViewModel<UserListViewModel>(
-    (viewModel) => viewModel.tab.UserList
+    (viewModel) => viewModel.tab.User
   );
 
   useEffect(() => {

@@ -2,7 +2,6 @@ import * as React from "react";
 import { useEffect } from "react";
 
 import ContentLayout from "~presentation/components/Layout/ContentLayout";
-import { View } from "~presentation/components/Themed";
 import { RootTabScreenProps } from "../../../../../types";
 import ErrorMsg from "~presentation/components/Shared/ErrorMsg";
 import NoData from "~presentation/components/Shared/NoData";
@@ -11,7 +10,8 @@ import { getRootViewModel } from "../../Index.vm";
 import SettingViewModel from "./Setting.vm";
 import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
-import { SETTING_SCREEN_NAME } from ".";
+import { View } from "react-native";
+import { SETTING_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 const SettingScreen = ({
   navigation,

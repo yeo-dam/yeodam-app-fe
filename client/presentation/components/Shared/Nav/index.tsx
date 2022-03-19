@@ -11,11 +11,12 @@ const Component: FC<Props> = () => {
   return (
     <Wrapper>
       <InnerWrapper>
-        <SearchBox>
+        {/* TODO : 메인화면에서 삭제 필요해보임. */}
+        {/* <SearchBox>
           <TouchableIcon onPress={() => console.log("Touched")}>
             <WithLocalSvg asset={require("~asset/Icons/Search.svg")} />
           </TouchableIcon>
-        </SearchBox>
+        </SearchBox> */}
         <NotiBox>
           <TouchableIcon onPress={() => console.log("Touched")}>
             <WithLocalSvg asset={require("~asset/Icons/Notification.svg")} />

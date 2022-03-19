@@ -1,4 +1,5 @@
 import { action, computed, flow, observable } from "mobx";
+import FindDto from "~domain/dto/FindPostDto";
 import CommentModel from "~domain/model/CommentModel";
 import PagerModel from "~domain/model/PagerModel";
 import CommentRepositoryImpl from "~domain/repository/CommentRepository";
@@ -6,16 +7,16 @@ import MeRepositoryImpl from "~domain/repository/MeRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../../BaseViewModel";
 
-export default class ThisViewModel extends BaseViewModel {
-  private static _Instance: ThisViewModel;
+export default class CommentViewModel extends BaseViewModel {
+  private static _Instance: CommentViewModel;
   private readonly _commentRepo: CommentRepositoryImpl;
   private readonly _meRepo: MeRepositoryImpl;
 
   static GetInstance(args: ConstructorParameter) {
-    if (!ThisViewModel._Instance) {
-      ThisViewModel._Instance = new ThisViewModel(args);
+    if (!CommentViewModel._Instance) {
+      CommentViewModel._Instance = new CommentViewModel(args);
     }
-    return ThisViewModel._Instance;
+    return CommentViewModel._Instance;
   }
   private constructor(args: ConstructorParameter) {
     super(args);
@@ -63,10 +64,12 @@ export default class ThisViewModel extends BaseViewModel {
   }
 
   @action
-  load = flow(function* (this: ThisViewModel) {
+  load = flow(function* (this: CommentViewModel, query: FindDto) {
     try {
       this._isLoading.set(true);
-      const [pagerInstance, commentInstances] = yield this._commentRepo.find();
+      const [pagerInstance, commentInstances] = yield this._commentRepo.find({
+        query,
+      });
       commentInstances.forEach((item: CommentModel) => {
         this._comments.set(item.id, item);
       });
@@ -81,7 +84,7 @@ export default class ThisViewModel extends BaseViewModel {
   });
 
   @action
-  addComment = flow(function* (this: ThisViewModel) {
+  addComment = flow(function* (this: CommentViewModel) {
     try {
       this._isLoading.set(true);
       yield this._meRepo.addComment();
@@ -94,7 +97,7 @@ export default class ThisViewModel extends BaseViewModel {
   });
 
   @action
-  addNestedComment = flow(function* (this: ThisViewModel) {
+  addNestedComment = flow(function* (this: CommentViewModel) {
     try {
       this._isLoading.set(true);
       yield this._meRepo.addNestedComment();
@@ -107,7 +110,7 @@ export default class ThisViewModel extends BaseViewModel {
   });
 
   @action
-  updateComment = flow(function* (this: ThisViewModel) {
+  updateComment = flow(function* (this: CommentViewModel) {
     try {
       this._isLoading.set(true);
       yield this._meRepo.updateComment();
@@ -120,7 +123,7 @@ export default class ThisViewModel extends BaseViewModel {
   });
 
   @action
-  deleteComment = flow(function* (this: ThisViewModel) {
+  deleteComment = flow(function* (this: CommentViewModel) {
     try {
       this._isLoading.set(true);
       yield this._meRepo.deleteComment();
@@ -133,7 +136,7 @@ export default class ThisViewModel extends BaseViewModel {
   });
 
   @action
-  reportComment = flow(function* (this: ThisViewModel) {
+  reportComment = flow(function* (this: CommentViewModel) {
     try {
       this._isLoading.set(true);
       yield this._meRepo.reportComment();

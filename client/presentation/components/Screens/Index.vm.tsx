@@ -2,7 +2,7 @@ import { useLocalObservable } from "mobx-react-lite";
 import React, { PropsWithChildren, useContext } from "react";
 import MainViewModel from "./Main/Main.vm";
 import MyPageViewModel from "./MyPage/MyPage.vm";
-import SearchViewModel from "./Main/Search/Search.vm";
+import SearchViewModel from "./Create/Post/Search/Search.vm";
 import CommentViewModel from "./Main/Comment/Comment.vm";
 import LikeViewModel from "./MyPage/Likes/Likes.vm";
 import MapViewModel from "./MyPage/Map/Map.vm";
@@ -13,7 +13,7 @@ import NoticeViewModel from "./MyPage/Setting/Notice/Notice.vm";
 import NotificationViewModel from "./MyPage/Setting/Notification/Notification.vm";
 import PolicyViewModel from "./MyPage/Setting/Policy/Policy.vm";
 import UserViewModel from "./MyPage/Users/UserList.vm";
-import PostViewModel from "./Create/Post/Post.vm";
+import PostViewModel from "./Create/Post/CreatePost.vm";
 import DecodedIdTokenModel from "~domain/model/DecodedIdTokenModel";
 
 export type InitialData = {

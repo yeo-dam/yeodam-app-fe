@@ -1,5 +1,5 @@
 import PagerModel from "domain/model/PagerModel";
-import WishlistModel from "domain/model/WishlistModel";
+import WishlistModel from "~domain/model/BookmarkModel";
 import { action, computed, flow, observable } from "mobx";
 import MeRepositoryImpl from "~domain/repository/MeRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
@@ -61,11 +61,11 @@ export default class ThisViewModel extends BaseViewModel {
   load = flow(function* (this: ThisViewModel) {
     try {
       this._isLoading.set(true);
-      const [pager, wishlistInstances] = yield this._meRepo.findWishlist();
-      wishlistInstances.forEach((item: WishlistModel) => {
-        this._wishlist.set(item.id, item);
-      });
-      this._pager.set(pager);
+      // const [pager, wishlistInstances] = yield this._meRepo.findWishlist();
+      // wishlistInstances.forEach((item: WishlistModel) => {
+      //   this._wishlist.set(item.id, item);
+      // });
+      // this._pager.set(pager);
     } catch (error) {
       console.error(error);
       this._isError.set(true);

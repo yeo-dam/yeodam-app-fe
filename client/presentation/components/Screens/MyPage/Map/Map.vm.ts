@@ -25,6 +25,9 @@ export default class MapViewModel extends BaseViewModel {
     this._MapRepo = MapRepositoryImpl.GetInstace({
       accessToken: args.accessToken,
     });
+    this._MeRepo = MeRepositoryImpl.GetInstace({
+      accessToken: args.accessToken,
+    });
   }
 
   @observable
@@ -37,7 +40,7 @@ export default class MapViewModel extends BaseViewModel {
   private _pager = observable.box<PagerModel>(undefined);
 
   @observable
-  private _posts = observable.map<string, PlaceModel>(undefined);
+  private _places = observable.map<string, PlaceModel>(undefined);
 
   @computed
   public get isLoading() {
@@ -50,8 +53,8 @@ export default class MapViewModel extends BaseViewModel {
   }
 
   @computed
-  public get posts() {
-    return [...this._posts.values()];
+  public get places() {
+    return [...this._places.values()];
   }
 
   @computed
@@ -60,14 +63,17 @@ export default class MapViewModel extends BaseViewModel {
   }
 
   @action
+  setError = (data: boolean) => {
+    this._isError.set(data);
+  };
+
+  @action
   load = flow(function* (this: MapViewModel) {
     try {
       this._isLoading.set(true);
-      const [pager, postInstances] = yield this._MeRepo.findPlaces();
-      // TODO : 추후에 아래 메서드로 변경해 줄 것.
-      // const [pager, postInstances] = yield this._meRepo.findPosts();
-      postInstances.forEach((item: PlaceModel) => {
-        this._posts.set(item.id, item);
+      const [pager, placeInstances] = yield this._MeRepo.findPlaces();
+      placeInstances.forEach((item: PlaceModel) => {
+        this._places.set(item.id, item);
       });
       this._pager.set(pager);
     } catch (error) {

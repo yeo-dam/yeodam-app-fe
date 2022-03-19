@@ -25,8 +25,8 @@ const TouchableView = styled.TouchableWithoutFeedback``;
 const imageW = Dimensions.get("screen").width;
 
 const PageItem = styled.View`
-  width: ${imageW}px;
-  height: ${imageW * 0.54}px;
+  width: ${imageW + "px"};
+  height: ${imageW * 0.54 + "px"};
 `;
 
 const ImageItem = styled.Image`

@@ -7,6 +7,8 @@ import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+import { ThemeProvider } from "styled-components";
+import theme from "themes";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -18,12 +20,14 @@ export default function App() {
     return null;
   } else {
     return (
-      <ViewModelProvider auth={auth} >
-        <SafeAreaProvider>
-          <StyledSafeAreaView>
-            <Navigation colorScheme={colorScheme} />
-          </StyledSafeAreaView>
-        </SafeAreaProvider>
+      <ViewModelProvider auth={auth}>
+        <ThemeProvider theme={theme}>
+          <SafeAreaProvider>
+            <StyledSafeAreaView>
+              <Navigation colorScheme={colorScheme} />
+            </StyledSafeAreaView>
+          </SafeAreaProvider>
+        </ThemeProvider>
       </ViewModelProvider>
     );
   }

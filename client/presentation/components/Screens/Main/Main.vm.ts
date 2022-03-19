@@ -2,6 +2,7 @@ import PagerModel from "domain/model/PagerModel";
 import PostModel from "domain/model/PostModel/model";
 import PostRepositoryImpl from "domain/repository/PostRepository";
 import { action, computed, flow, observable } from "mobx";
+import FindDto from "~domain/dto/FindPostDto";
 import MeRepositoryImpl from "~domain/repository/MeRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../BaseViewModel";
@@ -63,12 +64,9 @@ export default class MainViewModel extends BaseViewModel {
   }
 
   @action
-  load = flow(function* (this: MainViewModel) {
+  load = flow(function* (this: MainViewModel, query: FindDto) {
     try {
-      this._isLoading.set(true);
-      const [pager, postInstances] = yield this._postRepo.find();
-      // TODO : 추후에 아래 메서드로 변경해 줄 것.
-      // const [pager, postInstances] = yield this._meRepo.findPosts();
+      const [pager, postInstances] = yield this._postRepo.find({ query });
       postInstances.forEach((item: PostModel) => {
         this._posts.set(item.id, item);
       });
@@ -77,71 +75,69 @@ export default class MainViewModel extends BaseViewModel {
       console.error(error);
       this._isError.set(true);
       throw error;
-    } finally {
-      this._isLoading.set(false);
     }
   });
 
   @action
   addWishlist = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
       yield this._meRepo.addWishlist();
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 
   @action
   addLikes = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
       yield this._meRepo.addLikes();
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 
   @action
   deleteLikes = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
       yield this._meRepo.deleteLikes();
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 
   @action
   downloadImage = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 
   @action
   share = flow(function* (this: MainViewModel) {
     try {
-      this._isLoading.set(true);
+      // this._isLoading.set(true);
     } catch (error) {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      // this._isLoading.set(false);
     }
   });
 }

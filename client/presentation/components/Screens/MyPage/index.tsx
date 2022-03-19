@@ -5,20 +5,7 @@ import Map from "./Map";
 import Setting from "./Setting";
 import User from "./Users";
 import MyPageMain from "./MyPage.Main";
-
-export const MYPAGE_SCREEN_NAME: {
-  MAIN: "MyPageMain";
-  LIKE: "MyPageLikes";
-  MAP: "MyPageMap";
-  SETTING: "MyPageSetting";
-  USER: "MyPageUser";
-} = {
-  MAIN: "MyPageMain",
-  LIKE: "MyPageLikes",
-  MAP: "MyPageMap",
-  SETTING: "MyPageSetting",
-  USER: "MyPageUser",
-};
+import { MYPAGE_SCREEN_NAME } from "constants/SCREEN_NAME";
 
 export type BnbCreateNavigator = {
   [MYPAGE_SCREEN_NAME.MAIN]: undefined;
@@ -32,7 +19,10 @@ const CreateScreen = () => {
   const Stack = createNativeStackNavigator<BnbCreateNavigator>();
 
   return (
-    <Stack.Navigator initialRouteName={MYPAGE_SCREEN_NAME.MAIN}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={MYPAGE_SCREEN_NAME.MAIN}
+    >
       <Stack.Screen name={MYPAGE_SCREEN_NAME.MAIN} component={MyPageMain} />
       <Stack.Screen name={MYPAGE_SCREEN_NAME.LIKE} component={Likes} />
       <Stack.Screen name={MYPAGE_SCREEN_NAME.MAP} component={Map} />

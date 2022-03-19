@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import PlaceType from "../../enum/PlaceType";
 
 class PlaceModel {
@@ -6,13 +6,33 @@ class PlaceModel {
   @IsNotEmpty()
   id: string;
 
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @IsString()
+  @IsNotEmpty()
+  title: string;
+
+  @IsString()
+  @IsNotEmpty()
+  description: string;
+
   @IsEnum(PlaceType)
   @IsNotEmpty()
   type: PlaceType;
 
+  @IsNumber()
+  @IsNotEmpty()
+  latitude: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  longitude: number;
+
   @IsString()
   @IsNotEmpty()
-  address: string;
+  formattedAddress: string;
 }
 
 export default PlaceModel;

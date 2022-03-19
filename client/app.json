@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "yeodam-app-expo",
-    "slug": "yeodam-app-expo",
+    "slug": "yeowoon-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -12,6 +12,14 @@
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow yeowoon to access your photos.",
+          "savePhotosPermission": "Allow yeowoon to save photos.",
+          "isAccessMediaLocationEnabled": true
         }
       ]
     ],

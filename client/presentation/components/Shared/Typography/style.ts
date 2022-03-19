@@ -6,79 +6,79 @@ import { Variant } from "./types";
 export const variantStyles: {
   [key in Variant]: FlattenInterpolation<ThemeProps<any>>;
 } = {
-  heading2: css`
+  ["headline-bold"]: css`
     font-style: normal;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 24px;
-    line-height: 29px;
-    letter-spacing: -0.025px;
   `,
-  heading3: css`
+  ["headline-light"]: css`
     font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 29px;
-    letter-spacing: -0.5px;
+    font-weight: 300;
+    font-size: 24px;
   `,
-  heading4: css`
+  ["subhead-medium"]: css`
     font-style: normal;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 18px;
-    line-height: 27px;
-    letter-spacing: -0.45px;
   `,
-  heading5: css`
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.4px;
-  `,
-  subtitle1: css`
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: -0.35px;
-  `,
-  subtitle2: css`
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: -0.35px;
-  `,
-  body1: css`
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 25px;
-    letter-spacing: -0.37px;
-  `,
-  body2: css`
-    font-style: normal;
-    font-weight: normal;
-    font-size: 10px;
-    line-height: 20px;
-    letter-spacing: -0.35px;
-  `,
-  caption1: css`
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 18px;
-  `,
-  caption2: css`
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-  `,
-  button1: css`
+  ["subhead-medium-small"]: css`
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
-    line-height: 20px;
-    letter-spacing: -0.4px;
+  `,
+  ["subhead-regular"]: css`
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+  `,
+  ["body-bold"]: css`
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+  `,
+  ["body-regular"]: css`
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+  `,
+  ["body-medium"]: css`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+  `,
+  ["caption-regular"]: css`
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+  `,
+  ["caption-light"]: css`
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+  `,
+  ["caption-medium"]: css`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+  `,
+  digit: css`
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+  `,
+  ["english-regular"]: css`
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+  `,
+  ["english-regular-small"]: css`
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+  `,
+  ["button"]: css`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
   `,
 };
