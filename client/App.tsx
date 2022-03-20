@@ -14,7 +14,9 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-  const { auth }: InitialData = {};
+  const { auth }: InitialData = {
+    
+  };
 
   if (!isLoadingComplete) {
     return null;

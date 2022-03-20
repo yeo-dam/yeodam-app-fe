@@ -12,20 +12,16 @@ import { PickType } from "helper/mappedTypes";
 import PlaceModel from "~domain/model/PlaceModel/model";
 import PostModel from "~domain/model/PostModel";
 
-class Place extends PickType(PlaceModel, [
-  "name",
-  "type",
-  "formattedAddress",
-]) {}
+class Place extends PickType(PlaceModel, ["type"]) {}
 class CreatePostDto extends PickType(PostModel, ["description"]) {
   @MinLength(8, { message: "YYYY.DD.MM 형태로 입력해주세요" })
   @IsString()
   @IsNotEmpty()
   inputDateTime: string;
 
-  @IsDate()
+  @IsString()
   @IsOptional()
-  date?: Date;
+  date?: string;
 
   @Type(() => Place)
   @IsNotEmpty()
@@ -35,6 +31,8 @@ class CreatePostDto extends PickType(PostModel, ["description"]) {
   @ArrayNotEmpty()
   @IsNotEmpty()
   tags: string[];
+
+  images: number[];
 }
 
 export default CreatePostDto;

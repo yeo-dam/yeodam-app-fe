@@ -1,4 +1,4 @@
-import MapRepositoryImpl from "domain/repository/MapRepository";
+import PlaceRepositoryImpl from "~domain/repository/PlaceRepository";
 import { action, computed, flow, observable } from "mobx";
 import PagerModel from "~domain/model/PagerModel";
 import PlaceModel from "~domain/model/PlaceModel/model";
@@ -8,7 +8,7 @@ import BaseViewModel from "../../BaseViewModel";
 
 export default class MapViewModel extends BaseViewModel {
   private static _Instance: MapViewModel;
-  private readonly _MapRepo: MapRepositoryImpl;
+  private readonly _PlaceRepo: PlaceRepositoryImpl;
   private readonly _MeRepo: MeRepositoryImpl;
 
   static GetInstance(args: ConstructorParameter) {
@@ -22,7 +22,7 @@ export default class MapViewModel extends BaseViewModel {
     if (args.accessToken) {
       this.setAccessToken(args.accessToken);
     }
-    this._MapRepo = MapRepositoryImpl.GetInstace({
+    this._PlaceRepo = PlaceRepositoryImpl.GetInstace({
       accessToken: args.accessToken,
     });
     this._MeRepo = MeRepositoryImpl.GetInstace({
@@ -86,13 +86,16 @@ export default class MapViewModel extends BaseViewModel {
   });
 
   @action
-  findPlaceById = flow(function* (this: MapViewModel) {
+  findPlaceById = flow(function* (this: MapViewModel, placeId: string) {
     try {
       this._isLoading.set(true);
-      yield this._MeRepo.findPlaceById();
+      yield this._PlaceRepo.findPlaceById({
+        parameter: {
+          placeId,
+        },
+      });
     } catch (error) {
       console.error(error);
-      this._isError.set(true);
     } finally {
       this._isLoading.set(false);
     }

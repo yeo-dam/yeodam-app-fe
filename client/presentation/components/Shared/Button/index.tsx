@@ -6,7 +6,7 @@ import Typography from "~presentation/components/Shared/Typography";
 export type Props = {
   label: string;
   color?: string;
-  onPress?: () => void;
+  onPress?: (data?: any) => void;
 } & TouchableOpacityProps;
 
 const Component: FC<Props> = ({ label, onPress, color, ...rest }) => {

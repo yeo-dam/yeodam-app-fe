@@ -108,11 +108,10 @@ export default class PostRepositoryImpl extends BaseRepository {
 
   async uploadImages(dto: { body: FormData }) {
     try {
-      const res = await this._remote._fetcher("/image/upload/multiple", {
+      return await this._remote._fetcher("/image/upload/multiple", {
         method: "POST",
         body: dto.body,
       });
-      return res;
     } catch (error) {
       throw error;
     }

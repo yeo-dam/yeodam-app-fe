@@ -34,7 +34,7 @@ const Atom = ({
     return <Item key={item.id} onPressHandler={onPressHandler} item={item} />;
   };
 
-  if (noImage) {
+  if (pages.length === 0) {
     return (
       <Container>
         <NoImageView>

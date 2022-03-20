@@ -2,17 +2,10 @@ import * as React from "react";
 import Image from "~presentation/components/Shared/Image";
 import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
-import * as MediaLibrary from "expo-media-library";
 import styled from "styled-components/native";
 import { RootTabScreenProps } from "types";
 import { WithLocalSvg } from "react-native-svg";
-import {
-  TouchableWithoutFeedback,
-  Pressable,
-  View,
-  Text,
-  InputAccessoryView,
-} from "react-native";
+import { TouchableWithoutFeedback, View } from "react-native";
 import Input from "~presentation/components/Shared/Input";
 import FormLayout from "~presentation/components/Layout/FormLayout";
 import Form from "~presentation/components/Shared/Form";
@@ -21,15 +14,11 @@ import { getRootViewModel } from "../../Index.vm";
 import CreatePostViewModel from "./CreatePost.vm";
 import Interval from "~presentation/components/Shared/Interval";
 import Flex from "~presentation/components/Shared/FlexBox";
-import Divider from "~presentation/components/Shared/Divider";
 import PlaceType from "~domain/enum/PlaceType";
 import { CREATE_SCREEN_NAME } from "constants/SCREEN_NAME";
-import SubmitButton from "~presentation/components/Shared/SubmitButton";
-import theme from "themes";
-import Tags from "~presentation/components/Shared/Tags";
-import PlaceTypeSelector from "~presentation/components/Local/PlaceTypeSelector";
 import Carousel from "~presentation/components/Shared/Carousel";
 import DescriptionForm from "~presentation/components/Local/DescriptionForm";
+import ImageForm from "~presentation/components/Local/ImageForm";
 
 const CreatePost = ({
   navigation,
@@ -43,52 +32,38 @@ const CreatePost = ({
     const year = dateTime.slice(0, 4);
     const month = dateTime.slice(4, 6);
     const day = dateTime.slice(6, 8);
-    const transformed = new Date(`${year}-${month}-${day}`);
-
-    const newDto: any = {
+    const transformed = `${year}.${month}.${day}`;
+    const ImageIds = vm.uploadedImages.map((item) => item.id);
+    const newTags = data.tags.map((item) => (item ? item : ""));
+    const formmatedDto: CreatePostDto = {
       ...data,
+      place: { ...vm.selectedPlace, type: data.place.type },
+      tags: newTags as string[],
       date: transformed,
+      images: ImageIds,
     };
 
-    console.log(`TCL ~ [index.tsx] ~ line ~ 57 ~ newDto`, newDto);
+    console.log(`formmatedDto >>> `, formmatedDto);
 
     try {
-      await vm.createPost(newDto);
+      await vm.createPost({ body: formmatedDto });
       // navigation.push("Root");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const onSelect = (data: PlaceType) => {
-    console.log("data", data);
-  };
-
   const renderForm = () => {
     if (vm.isFront) {
-      if (vm.uploadedImages.length === 0) {
-        return (
-          <ImageUploadWrapper>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate("ImageUpload")}
-            >
-              <ImageUploadSection>
-                <WithLocalSvg
-                  asset={require("~asset/images/No_image.svg")}
-                ></WithLocalSvg>
-                <Interval height="10px" />
-                <ImageUploadText>이미지를 넣어주세요!</ImageUploadText>
-              </ImageUploadSection>
-            </TouchableWithoutFeedback>
-          </ImageUploadWrapper>
-        );
-      } else {
-        return <Carousel pages={vm.uploadedImages} isTextImg={false} />;
-      }
+      return <ImageForm vm={vm} navigation={navigation} />;
     } else {
       return (
         <DescriptionBox>
-          <DescriptionForm navigation={navigation} onSubmit={onSubmit} />
+          <DescriptionForm
+            vm={vm}
+            navigation={navigation}
+            onSubmit={onSubmit}
+          />
         </DescriptionBox>
       );
     }
@@ -100,12 +75,10 @@ const CreatePost = ({
         schema={CreatePostDto}
         defaultValues={{
           place: {
-            name: "쉑쉑버거",
-            type: PlaceType.FOOD,
-            formattedAddress: "서울특별시 강남구 논현동",
+            type: undefined,
           },
-          description: "여기 진짜 맛있어요!",
-          tags: ["#맛집", "#카페"],
+          description: "강남구청입니다.",
+          tags: [""],
           inputDateTime: "20111222",
         }}
       >

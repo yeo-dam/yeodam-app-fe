@@ -2,7 +2,12 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreatePost from "./Post";
 import ImageUpload from "./Post/ImageUpload";
-import { Pressable, TouchableWithoutFeedback, View } from "react-native";
+import {
+  InputAccessoryView,
+  Pressable,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { WithLocalSvg } from "react-native-svg";
 import { CREATE_SCREEN_NAME, MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 import Typography from "~presentation/components/Shared/Typography";
@@ -16,8 +21,11 @@ import Search from "./Post/Search";
 import Input from "~presentation/components/Shared/Input";
 import Form from "~presentation/components/Shared/Form";
 import FindPostDto from "~domain/dto/FindPostDto";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { runInAction } from "mobx";
+import theme from "themes";
+import Button from "~presentation/components/Shared/Button";
+import PlaceSearchDto from "~domain/dto/PlaceSearchDto";
 
 export type BnbCreateNavigator = {
   [CREATE_SCREEN_NAME.POST]: undefined;
@@ -31,6 +39,7 @@ const CreateScreen = ({ navigation }: any) => {
   const vm = getRootViewModel<CreatePostViewModel>(
     (viewModel) => viewModel.tab.Post
   );
+  const [inputTextValue, setInputTextValue] = useState("");
 
   const handleClick = useCallback(
     (bool: boolean) => {
@@ -38,6 +47,22 @@ const CreateScreen = ({ navigation }: any) => {
     },
     [vm.isFront]
   );
+
+  const handleChange = (e: any) => {
+    setInputTextValue(e);
+  };
+
+  const onSubmit = async () => {
+    const findDto: PlaceSearchDto = {
+      keyword: inputTextValue,
+    };
+
+    runInAction(() => vm.setSearchWord(inputTextValue));
+
+    await vm.findPlaces({
+      query: findDto,
+    });
+  };
 
   return (
     <Stack.Navigator initialRouteName={CREATE_SCREEN_NAME.POST}>
@@ -89,17 +114,23 @@ const CreateScreen = ({ navigation }: any) => {
                 <Form schema={FindPostDto}>
                   <SearchBox>
                     <View>
-                      <WithLocalSvg
-                        asset={require("~asset/Icons/Search.svg")}
-                      />
-                      <Interval width="8px" />
                       <Input
                         name="placeName"
                         placeholderTextColor="#999999"
-                        placeholder="지번, 도로명, 건물명으로 위치 검색"
+                        value={inputTextValue}
+                        onChangeText={handleChange}
+                        placeholder="장소 이름 검색"
+                        inputAccessoryViewID={CREATE_SCREEN_NAME.SEARCH}
                       />
                     </View>
                   </SearchBox>
+                  <InputAccessoryView nativeID={CREATE_SCREEN_NAME.SEARCH}>
+                    <Button
+                      label="검색하기"
+                      onPress={onSubmit}
+                      color={theme.colors.grey.AA}
+                    />
+                  </InputAccessoryView>
                 </Form>
               </>
             );
@@ -123,6 +154,7 @@ const HeaderView = styled(Flex)``;
 
 const SearchBox = styled(Flex)`
   flex: 1;
+  height: 40px;
   margin-right: 42.5px;
-  border: 1px solid blue;
+  align-items: center;
 `;

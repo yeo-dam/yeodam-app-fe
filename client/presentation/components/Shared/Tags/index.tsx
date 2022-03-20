@@ -11,13 +11,15 @@ import FlexBox from "../FlexBox";
 type Props = {};
 
 const Component: FC<Props> = () => {
-  const { setValue } = useFormContext();
+  const { watch, setValue } = useFormContext();
+  const watchedTags = watch("tags");
+
   // this will be attached with each input onChangeText
   const [textValue, setTextValue] = useState("");
   // our number of inputs, we can add the length or decrease
   const [numberInputs, setNumberInputs] = useState(0);
   // all our input fields are tracked with this array
-  const refInputs = useRef<string[]>([textValue]);
+  const refInputs = useRef<string[]>([...watchedTags]);
 
   // is to set the input fields value
   const setInputValue = (index: number, value: string) => {
@@ -29,7 +31,6 @@ const Component: FC<Props> = () => {
   };
 
   const handleSubmit = () => {
-    setValue(`tags.${numberInputs}`, textValue);
     addInput();
   };
 
@@ -41,8 +42,12 @@ const Component: FC<Props> = () => {
 
   // add a new input when the add input button is pressed
   const addInput = () => {
+    // set value in the form
+    setValue(`tags.${numberInputs}`, textValue);
     // add a new element in our refInputs array
     refInputs.current.push("");
+    // set value for next
+    setValue(`tags.${numberInputs + 1}`, "");
     // increase the number of inputs
     setNumberInputs((value) => value + 1);
   };
@@ -57,6 +62,7 @@ const Component: FC<Props> = () => {
   };
 
   const renderInputs = () => {
+    // FIXME : 화면전환 시, 인풋 값 날라감
     const inputs: JSX.Element[] = [];
     for (let idx = 0; idx < numberInputs + 1; idx++) {
       inputs.push(

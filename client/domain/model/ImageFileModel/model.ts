@@ -1,14 +1,13 @@
-import FileModel from "../FileModel/model";
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsString, IsNumber } from "class-validator";
 
-class ImageFileModel extends FileModel {
+class ImageFileModel {
   @IsNumber()
   @IsNotEmpty()
-  width: number;
+  id: number;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
-  height: number;
+  url: string;
 }
 
 export default ImageFileModel;

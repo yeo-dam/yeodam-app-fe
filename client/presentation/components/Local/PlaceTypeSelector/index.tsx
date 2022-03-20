@@ -1,22 +1,26 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components/native";
-import { View, Text, Pressable } from "react-native";
-import { useFormContext } from "react-hook-form";
+import { View, Pressable } from "react-native";
+import { get, useFormContext } from "react-hook-form";
 import Typography from "~presentation/components/Shared/Typography";
 import Interval from "~presentation/components/Shared/Interval";
 import DropDownContainer from "~presentation/components/Shared/DropDownContainer";
 import Divider from "~presentation/components/Shared/Divider";
 import PlaceType from "~domain/enum/PlaceType";
 import Flex from "~presentation/components/Shared/FlexBox";
+import { renderErrMsg } from "helper/Formatter/ErrorMessage";
 
 type Props = {};
 
 const Component: FC<Props> = () => {
-  const { watch, setValue } = useFormContext();
-  const watchedType = watch("place.type");
+  const { watch, setValue, formState } = useFormContext();
+  const INPUT_NAME = "place.type";
+
+  const error = get(formState.errors, INPUT_NAME);
+  const watchedType = watch(INPUT_NAME);
   const [modalVisible, setModalVisible] = useState(false);
   const onSelect = (data: PlaceType) => {
-    setValue("place.type", data);
+    setValue(INPUT_NAME, data);
     setModalVisible(false);
   };
   return (
@@ -92,6 +96,7 @@ const Component: FC<Props> = () => {
       }
     >
       <Typo>{watchedType ? watchedType : "장소"}</Typo>
+      {error && <ErrMsg>{renderErrMsg(error)}</ErrMsg>}
     </DropDownContainer>
   );
 };
@@ -120,4 +125,8 @@ const LeftSection = styled(Flex)`
 const RightSection = styled(Flex)`
   justify-content: center;
   width: 48%;
+`;
+
+const ErrMsg = styled(Typography)`
+  color: red;
 `;

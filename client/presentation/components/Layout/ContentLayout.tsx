@@ -4,8 +4,8 @@ import styled from "styled-components/native";
 
 type Props = {
   title?: string;
-  justifyContent?: "flex-start" | "flex-end" | "center";
-  alignItems?: "flex-start" | "flex-end" | "center";
+  justifyContent?: "flex-start" | "flex-end" | "center" | "space-between";
+  alignItems?: "flex-start" | "flex-end" | "center" | "space-between";
   hasHeader?: boolean;
 };
 

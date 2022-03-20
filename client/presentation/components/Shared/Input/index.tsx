@@ -29,8 +29,6 @@ const Component: FC<Props> = ({
   const { control, formState } = useFormContext();
   const error = get(formState.errors, name);
 
-  console.log(`TCL ~ [index.tsx] ~ line ~ 32 ~ error`, error);
-
   return (
     <InputWrapper hidden={hidden}>
       <Controller
@@ -62,10 +60,7 @@ const Component: FC<Props> = ({
 export default Component;
 
 const InputWrapper = styled.View<{ hidden: boolean }>`
-  /* FIXME : Input Color가 변경되지 않고 있음. */
-  color: white;
   display: ${({ hidden }) => (hidden ? "none" : "flex")};
-  /* border: 1px solid blue; */
 `;
 
 const StyledTextInput = styled(TextInput)<Props>`

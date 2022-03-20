@@ -23,6 +23,7 @@ import { useState } from "react";
 import SignInScreen from "~presentation/components/Screens/SignInScreen";
 import WelcomeScreen from "~presentation/components/Screens/WelcomeScreen";
 import { BNB_SCREEN_NAME } from "constants/SCREEN_NAME";
+import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
 
 export default function Navigation({
   colorScheme,
@@ -43,6 +44,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   // TODO : Auth VM으로 변경해야 함
+  // const { accessTocken } = getRootViewModel((vm) => vm.auth);
   const [user, setUser] = useState<boolean>(false);
 
   return (

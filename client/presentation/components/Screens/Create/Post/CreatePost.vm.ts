@@ -1,15 +1,19 @@
 import { action, computed, flow, observable } from "mobx";
+import PlaceEntity from "~data/entity/PlaceEntity";
 import CreatePostDto from "~domain/dto/CreatePostDto";
+import PlaceSearchDto from "~domain/dto/PlaceSearchDto";
+import ImageFileModel from "~domain/model/ImageFileModel";
+import PagerModel from "~domain/model/PagerModel";
+import PlaceRepositoryImpl from "~domain/repository/PlaceRepository";
 import PostRepositoryImpl from "~domain/repository/PostRepository";
 import { ConstructorParameter } from "~domain/repository/Repository";
 import BaseViewModel from "../../BaseViewModel";
 
-type ImageType = {
-  id: string;
-  url: string;
-};
+export type PlaceList = Pick<PlaceEntity, "placeId" | "placeName" | "address">;
+
 export default class CreatePostViewModel extends BaseViewModel {
   private static _Instance: CreatePostViewModel;
+  private readonly _placeRepo: PlaceRepositoryImpl;
   private readonly _postRepo: PostRepositoryImpl;
 
   static GetInstance(args: ConstructorParameter) {
@@ -23,6 +27,10 @@ export default class CreatePostViewModel extends BaseViewModel {
     if (args.accessToken) {
       this.setAccessToken(args.accessToken);
     }
+    this._placeRepo = PlaceRepositoryImpl.GetInstace({
+      accessToken: args.accessToken,
+    });
+
     this._postRepo = PostRepositoryImpl.GetInstace({
       accessToken: args.accessToken,
     });
@@ -32,10 +40,28 @@ export default class CreatePostViewModel extends BaseViewModel {
   private _isLoading = observable.box<boolean>(false);
 
   @observable
+  private _isUploadLoading = observable.box<boolean>(false);
+
+  @observable
+  private _isSearchLoading = observable.box<boolean>(false);
+
+  @observable
   private _isError = observable.box<boolean>(false);
 
   @observable
-  private _uploadedImages = observable.map<string, ImageType>([]);
+  private _pager = observable.box<PagerModel>(undefined);
+
+  @observable
+  private _uploadedImages = observable.map<string, ImageFileModel>(undefined);
+
+  @observable
+  private _searchedList = observable.map<number, PlaceList>(undefined);
+
+  @observable
+  private _searchedWord = observable.box<string>(undefined);
+
+  @observable
+  private _selectedPlace = observable.box<PlaceList>(undefined);
 
   @observable
   private _isFront = observable.box<boolean>(true);
@@ -43,6 +69,31 @@ export default class CreatePostViewModel extends BaseViewModel {
   @computed
   public get isLoading() {
     return this._isLoading.get();
+  }
+
+  @computed
+  public get isUploadLoading() {
+    return this._isUploadLoading.get();
+  }
+
+  @computed
+  public get isSearchLoading() {
+    return this._isSearchLoading.get();
+  }
+
+  @computed
+  public get searchedWord() {
+    return this._searchedWord.get();
+  }
+
+  @computed
+  public get selectedPlace() {
+    return this._selectedPlace.get();
+  }
+
+  @computed
+  public get searchedList() {
+    return [...this._searchedList.values()];
   }
 
   @computed
@@ -66,12 +117,25 @@ export default class CreatePostViewModel extends BaseViewModel {
   }
 
   @action
+  setSearchWord(word: string) {
+    this._searchedWord.set(word);
+  }
+
+  @action
+  selectPlace(id: number) {
+    const place = this._searchedList.get(id);
+    if (place) {
+      this._selectedPlace.set(place);
+    }
+  }
+
+  @action
   createPost = flow(function* (
     this: CreatePostViewModel,
     dto: { body: CreatePostDto }
   ) {
     try {
-      this._isLoading.set(true);
+      this._isUploadLoading.set(true);
       yield this._postRepo.createPost({
         body: dto.body,
       });
@@ -79,7 +143,7 @@ export default class CreatePostViewModel extends BaseViewModel {
       console.error(error);
       this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      this._isUploadLoading.set(false);
     }
   });
 
@@ -89,21 +153,45 @@ export default class CreatePostViewModel extends BaseViewModel {
     dto: { body: FormData }
   ) {
     try {
-      this._isLoading.set(true);
+      this._isUploadLoading.set(true);
       const res = yield this._postRepo.uploadImages({
         body: dto.body,
       });
 
-      console.log(`TCL ~ [CreatePost.vm.ts] ~ line ~ 97 ~ res`, res);
-
       if (res) {
-        this._uploadedImages.set(res[0].id, res[0]);
+        this._uploadedImages.set(res[0].imageId, {
+          id: res[0].imageId,
+          url: res[0].uri,
+        });
       }
     } catch (error) {
       console.error(error);
-      this._isError.set(true);
     } finally {
-      this._isLoading.set(false);
+      this._isUploadLoading.set(false);
+    }
+  });
+
+  @action
+  findPlaces = flow(function* (
+    this: CreatePostViewModel,
+    dto: {
+      query: PlaceSearchDto;
+    }
+  ) {
+    try {
+      this._isSearchLoading.set(true);
+
+      const searchInstances = yield this._placeRepo.findPlace({
+        query: dto.query,
+      });
+
+      searchInstances.forEach((item: PlaceList) => {
+        this._searchedList.set(item.placeId, item);
+      });
+    } catch (error) {
+      throw error;
+    } finally {
+      this._isSearchLoading.set(false);
     }
   });
 }

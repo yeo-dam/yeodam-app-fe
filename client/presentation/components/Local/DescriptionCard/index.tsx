@@ -15,14 +15,14 @@ export type Props = {
 } & PhotoCardProps;
 
 const Component = ({ item, setIsFront, navigation }: Props) => {
+  const handlePress = () => navigation.push(MAIN_SCREEN_NAME.MAP);
+
   return (
     <TouchableWithoutFeedback onPress={() => setIsFront(true)}>
       <PhotoFrame>
         <PhotoBox>
           <ContentBox>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.push(MAIN_SCREEN_NAME.MAP)}
-            >
+            <TouchableWithoutFeedback onPress={handlePress}>
               <View>
                 <WhiteTitleTypo>{item.title}</WhiteTitleTypo>
                 <Interval height="8px" />

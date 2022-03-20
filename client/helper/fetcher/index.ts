@@ -57,6 +57,8 @@ const Fetcher = async <T>(
   const requestUrl = `${process.env.HOSTNAME}${url}`;
 
   console.log("Input >>>>> ", requestUrl);
+  console.log("headers >>>>> ", mergedOpt.headers);
+  console.trace("query string >>>>> ", options?.querystring);
 
   const response = await fetch(requestUrl, mergedOpt);
   const responseJson = await response.json();
