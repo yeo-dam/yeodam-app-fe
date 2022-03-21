@@ -22,6 +22,11 @@ import FlexBox from "~presentation/components/Shared/FlexBox";
 import Divider from "~presentation/components/Shared/Divider";
 import Interval from "~presentation/components/Shared/Interval";
 import { runInAction } from "mobx";
+import Layout from "constants/Layout";
+
+const {
+  window: { width: windowWidth, height: windowHeight },
+} = Layout;
 
 const MyPageScreen = ({
   navigation,
@@ -36,17 +41,13 @@ const MyPageScreen = ({
     navigation.navigate("CreatePost");
   };
 
-  // const onSubmit = (data: any) =>
-  // console.log("검색어 쿼리를 전송합니다..", data);
-  // TODO : 해당 화면에선 BottomBar를 숨겨줘야 합니다.
+  const onSubmit = (data: any) =>
+    console.log("등록 화면으로 이동합니다..", data);
 
-  console.log(
-    `TCL ~ [index.tsx] ~ line ~ 39 ~ vm.selectedPlace`,
-    vm.selectedPlace
-  );
+  // TODO : 추후 BottomBar를 숨겨줘야 합니다.
 
   return (
-    <Wrapper title="Tab Three" justifyContent="flex-end">
+    <ContentLayoutWrapper title="Tab Three" justifyContent="flex-end">
       <ContentBox>
         {vm.searchedList &&
           vm.searchedList.map((item) => {
@@ -66,40 +67,31 @@ const MyPageScreen = ({
               </Content>
             );
           })}
-
-        {/* <Content onPress={() => handlePress("12")}>
-         <Content onPress={() => handlePress(item.id)}>
-          <Interval height="16px" />
-          <Title variant="subhead-regular">검색페이지</Title>
-          <Interval height="1px" />
-          <Description variant="caption-regular">검색페이지</Description>
-          <Interval height="16px" />
-          <Divider orientation="Horizontal" />
-        </Content> */}
       </ContentBox>
       <ButtonBox>
         {vm.searchedWord && (
           <StyledButton
             label={`${`"${vm.searchedWord}" 등록하기`}`}
             color={theme.colors.primary.main}
-            // onPress={onSubmit}
+            onPress={onSubmit}
           />
         )}
       </ButtonBox>
-    </Wrapper>
+    </ContentLayoutWrapper>
   );
 };
 
 export default observer(MyPageScreen);
 
-const Wrapper = styled(ContentLayout)`
+const ContentLayoutWrapper = styled(ContentLayout)`
   padding: 16px 24px 0px 24px;
+  width: ${windowWidth + "px"};
 `;
 
 const Content = styled.Pressable``;
 
 const ContentBox = styled.ScrollView`
-  flex: 1;
+  flex: 11.5;
 `;
 
 const Title = styled(Typography)`
@@ -115,6 +107,7 @@ const StyledInputAccessoryView = styled(InputAccessoryView)`
 `;
 
 const ButtonBox = styled(FlexBox)`
+  flex: 1;
   align-items: flex-end;
 `;
 

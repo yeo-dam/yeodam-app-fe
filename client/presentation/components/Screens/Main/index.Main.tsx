@@ -11,17 +11,21 @@ import MainViewModel from "./Main.vm";
 import { observer } from "mobx-react";
 import PostModel from "domain/model/PostModel/model";
 import Carousel from "~presentation/components/Shared/Carousel";
-
+import Image from "~presentation/components/Shared/Image";
 import MainItemCard from "~presentation/components/Local/MainItemCard";
 import { MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
 import Modal from "~presentation/components/Shared/DropDownContainer";
 import Fetcher from "helper/fetcher";
+import styled from "styled-components/native";
+import { getStatusBarHeight } from "react-native-status-bar-height";
+import Nav from "~presentation/components/Shared/Nav";
+
+const SafeAreaHeightForIos = getStatusBarHeight();
 
 const MainScreen = ({
   navigation,
 }: RootTabScreenProps<typeof MAIN_SCREEN_NAME.HOME>) => {
   const vm = getRootViewModel<MainViewModel>((viewModel) => viewModel.tab.Main);
-  const w = Dimensions.get("window");
 
   async function loadPosts(limit?: number, offset?: number) {
     await vm.load({
@@ -46,16 +50,43 @@ const MainScreen = ({
   //   return <Loadable />;
   // }
 
-  if (vm.isError) {
-    return <ErrorMsg />;
-  }
+  // if (vm.isError) {
+  //   return <ErrorMsg />;
+  // }
 
-  const renderNodata = (item: PostModel) => {
-    if (vm.posts && vm.posts.length === 0) {
-      return <NoData />;
-    } else {
-      <MainItemCard item={item} navigation={navigation} />;
-    }
+  const renderList = () => {
+    // if (vm.posts && vm.posts.length === 0) {
+    //   return <NoData />;
+    // } else {
+    return (
+      <FlatList<PostModel>
+        data={vm.posts}
+        ListHeaderComponent={
+          <>
+            <NavSection>
+              <Nav />
+            </NavSection>
+            {/* TODO : MainImage 및 Text 반영되도록 변경 필요 */}
+            <Carousel
+              aspectRatio={375 / 346}
+              pages={[
+                { id: "1", url: "https://picsum.photos/375/346" },
+                { id: "2", url: "https://picsum.photos/375/346" },
+              ]}
+              isTextImg={false}
+            />
+          </>
+        }
+        renderItem={({ item }) => (
+          <MainItemCard item={item} navigation={navigation} />
+        )}
+        keyExtractor={(item) => item.id}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.3}
+        // onRefresh={handleRefresh}
+      ></FlatList>
+    );
+    // }
   };
 
   const handleLoadMore = () => {
@@ -70,30 +101,16 @@ const MainScreen = ({
 
   return (
     <ContentLayout>
-      <View>
-        <FlatList<PostModel>
-          data={vm.posts}
-          ListHeaderComponent={
-            // FIXME : 샘플 이미지에서 새로운 이미지로 변경 필요함
-            <Carousel
-              pages={[
-                { id: "1", url: "https://picsum.photos/2400/1240" },
-                { id: "2", url: "https://picsum.photos/2400/1240" },
-              ]}
-              isTextImg={false}
-            />
-          }
-          renderItem={({ item }) => (
-            <MainItemCard item={item} navigation={navigation} />
-          )}
-          keyExtractor={(item) => item.id}
-          onEndReached={handleLoadMore}
-          onEndReachedThreshold={0.3}
-          // onRefresh={handleRefresh}
-        ></FlatList>
-      </View>
+      <View>{renderList()}</View>
     </ContentLayout>
   );
 };
 
 export default observer(MainScreen);
+
+const NavSection = styled.View`
+  position: absolute;
+  top: ${SafeAreaHeightForIos + "px"};
+  right: 0;
+  z-index: 1;
+`;

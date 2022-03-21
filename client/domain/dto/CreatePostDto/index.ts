@@ -32,6 +32,9 @@ class CreatePostDto extends PickType(PostModel, ["description"]) {
   @IsNotEmpty()
   tags: string[];
 
+  @IsNumber()
+  @ArrayNotEmpty()
+  @IsNotEmpty({ message: "이미지를 입력해주세요." })
   images: number[];
 }
 

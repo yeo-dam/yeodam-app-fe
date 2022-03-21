@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import GoogleLogin from "../Shared/GoogleLogin";
 
 // TODO : 성공 시, Main으로 이동. 실패 시, 다른 동작이 필요할 것.
 // TODO : JWT 토큰을 받아왔다는 가정 하에, Decode하고 해당 정보를 App 내에 저장하는 것까지 해볼 것.
@@ -22,9 +23,7 @@ export default function SignInScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Google Login</Text>
-      <TouchableOpacity style={styles.link}>
-        <Button title="Login" onPress={handleLoginFunc} />
-      </TouchableOpacity>
+      <GoogleLogin />
     </View>
   );
 }

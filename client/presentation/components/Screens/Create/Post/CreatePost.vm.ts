@@ -118,7 +118,9 @@ export default class CreatePostViewModel extends BaseViewModel {
 
   @action
   setSearchWord(word: string) {
-    this._searchedWord.set(word);
+    if (word) {
+      this._searchedWord.set(word);
+    }
   }
 
   @action

@@ -9,14 +9,14 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { ThemeProvider } from "styled-components";
 import theme from "themes";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-  const { auth }: InitialData = {
-    
-  };
+  const accessTocken = AsyncStorage.getItem("accessTocken");
+  const { auth }: InitialData = { accessTocken };
 
   if (!isLoadingComplete) {
     return null;
@@ -25,9 +25,9 @@ export default function App() {
       <ViewModelProvider auth={auth}>
         <ThemeProvider theme={theme}>
           <SafeAreaProvider>
-            <StyledSafeAreaView>
-              <Navigation colorScheme={colorScheme} />
-            </StyledSafeAreaView>
+            {/* <StyledSafeAreaView> */}
+            <Navigation colorScheme={colorScheme} />
+            {/* </StyledSafeAreaView> */}
           </SafeAreaProvider>
         </ThemeProvider>
       </ViewModelProvider>

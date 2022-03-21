@@ -1,12 +1,11 @@
 import PostModel from "domain/model/PostModel";
 import React from "react";
-import { ListRenderItem, TouchableWithoutFeedback } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
 import Image from "~presentation/components/Shared/Image";
 import Typography from "~presentation/components/Shared/Typography";
 import { dateFormatter } from "helper/Formatter/DateFormatter";
 import FlexBox from "~presentation/components/Shared/FlexBox";
-import Layout from "constants/Layout";
 
 export type Props = {
   item: PostModel;
@@ -18,7 +17,7 @@ const PhotoCard = ({ item, setIsFront }: Props) => {
     <PhotoFrame>
       <PhotoContent>
         <TouchableWithoutFeedback onPress={() => setIsFront(false)}>
-          <MainImage source={{ uri: item.images[0].filePath }} />
+          <MainImage source={{ uri: item.images[0].url }} />
         </TouchableWithoutFeedback>
         <PhotoDate>
           <PhotoDateTypo type="Number" variant="digit">

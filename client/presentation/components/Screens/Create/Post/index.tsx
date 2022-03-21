@@ -4,8 +4,7 @@ import { observer } from "mobx-react";
 import Typography from "~presentation/components/Shared/Typography";
 import styled from "styled-components/native";
 import { RootTabScreenProps } from "types";
-import { WithLocalSvg } from "react-native-svg";
-import { TouchableWithoutFeedback, View } from "react-native";
+import { View } from "react-native";
 import Input from "~presentation/components/Shared/Input";
 import FormLayout from "~presentation/components/Layout/FormLayout";
 import Form from "~presentation/components/Shared/Form";
@@ -16,9 +15,13 @@ import Interval from "~presentation/components/Shared/Interval";
 import Flex from "~presentation/components/Shared/FlexBox";
 import PlaceType from "~domain/enum/PlaceType";
 import { CREATE_SCREEN_NAME } from "constants/SCREEN_NAME";
-import Carousel from "~presentation/components/Shared/Carousel";
 import DescriptionForm from "~presentation/components/Local/DescriptionForm";
 import ImageForm from "~presentation/components/Local/ImageForm";
+import Layout from "constants/Layout";
+
+const {
+  window: { width: windowWidth, height: windowHeight },
+} = Layout;
 
 const CreatePost = ({
   navigation,
@@ -77,9 +80,9 @@ const CreatePost = ({
           place: {
             type: undefined,
           },
-          description: "강남구청입니다.",
-          tags: [""],
-          inputDateTime: "20111222",
+          description: undefined,
+          tags: [],
+          inputDateTime: undefined,
         }}
       >
         <Wrapper>

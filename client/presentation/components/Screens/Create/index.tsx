@@ -7,6 +7,7 @@ import {
   Pressable,
   TouchableWithoutFeedback,
   View,
+  Text,
 } from "react-native";
 import { WithLocalSvg } from "react-native-svg";
 import { CREATE_SCREEN_NAME, MAIN_SCREEN_NAME } from "constants/SCREEN_NAME";
@@ -39,7 +40,7 @@ const CreateScreen = ({ navigation }: any) => {
   const vm = getRootViewModel<CreatePostViewModel>(
     (viewModel) => viewModel.tab.Post
   );
-  const [inputTextValue, setInputTextValue] = useState("");
+  const [inputTextValue, setInputTextValue] = useState(undefined);
 
   const handleClick = useCallback(
     (bool: boolean) => {
@@ -54,10 +55,10 @@ const CreateScreen = ({ navigation }: any) => {
 
   const onSubmit = async () => {
     const findDto: PlaceSearchDto = {
-      keyword: inputTextValue,
+      keyword: inputTextValue as unknown as string,
     };
 
-    runInAction(() => vm.setSearchWord(inputTextValue));
+    runInAction(() => vm.setSearchWord(inputTextValue as unknown as string));
 
     await vm.findPlaces({
       query: findDto,
@@ -113,6 +114,11 @@ const CreateScreen = ({ navigation }: any) => {
                 <Interval width="10px" />
                 <Form schema={FindPostDto}>
                   <SearchBox>
+                    <IconBox>
+                      <WithLocalSvg
+                        asset={require("~asset/Icons/SearchIcon.svg")}
+                      ></WithLocalSvg>
+                    </IconBox>
                     <View>
                       <Input
                         name="placeName"
@@ -157,4 +163,12 @@ const SearchBox = styled(Flex)`
   height: 40px;
   margin-right: 42.5px;
   align-items: center;
+  padding: 12px;
+  background-color: #f9f9f9;
+  border: 1px solid grey;
+  border-radius: 15px;
+`;
+
+const IconBox = styled.View`
+  margin-right: 8px;
 `;

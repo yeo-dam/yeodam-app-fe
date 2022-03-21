@@ -7,7 +7,7 @@ type Props = {};
 const Component: FC<Props> = () => {
   return (
     <Wrapper>
-      <Text>No Data</Text>
+      <Text>데이터가 없습니다.</Text>
     </Wrapper>
   );
 };

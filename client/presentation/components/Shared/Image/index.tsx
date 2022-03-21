@@ -10,6 +10,8 @@ export type Props = {
   round?: boolean;
 } & ImageProps;
 
+// TODO : Carousel 처럼 aspectRatio 추가 할 것
+
 const StyledImg = styled(Image)<{
   width?: number;
   height?: number;

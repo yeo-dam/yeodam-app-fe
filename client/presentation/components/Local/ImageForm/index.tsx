@@ -9,17 +9,13 @@ import Interval from "~presentation/components/Shared/Interval";
 import Image from "~presentation/components/Shared/Image";
 import Typography from "~presentation/components/Shared/Typography";
 import { observer } from "mobx-react";
+import Carousel from "~presentation/components/Shared/Carousel";
 
 type Props = {
   vm: CreatePostViewModel;
 } & Pick<RootTabScreenProps<typeof CREATE_SCREEN_NAME.POST>, "navigation">;
 
 const Component: FC<Props> = ({ vm, navigation }) => {
-  console.log(
-    `TCL ~ [index.tsx] ~ line ~ 19 ~ vm.uploadedImages`,
-    vm.uploadedImages
-  );
-
   const renderForm = () => {
     if (vm.uploadedImages.length === 0) {
       return (
@@ -39,11 +35,12 @@ const Component: FC<Props> = ({ vm, navigation }) => {
       );
     } else {
       return (
-        // 여러개 이미지 올렸을 때, 확인 가능하도록 변경해줘야 함
-        <Image
-          source={{ uri: vm.uploadedImages[0].url }}
-          width={319}
-          height={390}
+        <Carousel
+          slideWidth={319}
+          slideHeight={390}
+          aspectRatio={319 / 390}
+          pages={vm.uploadedImages}
+          isTextImg={false}
         />
       );
     }

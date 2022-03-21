@@ -2,19 +2,18 @@ import React from "react";
 import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 
-type Props = {
+export type CarouselItem = {
   onPressHandler: (url: string) => void;
+  aspectRatio: number;
   item: any;
 };
+const imageW = Dimensions.get("screen").width;
 
-const Item = ({ onPressHandler, item }: Props) => {
+const Item = ({ onPressHandler, item, aspectRatio }: CarouselItem) => {
   return (
     <TouchableView onPress={() => onPressHandler(item.url)}>
       <PageItem>
-        <ImageItem
-          source={{ uri: item.url }}
-          style={{ aspectRatio: 375 / 195 }}
-        />
+        <ImageItem source={{ uri: item.url }} style={{ aspectRatio }} />
       </PageItem>
     </TouchableView>
   );
@@ -22,15 +21,11 @@ const Item = ({ onPressHandler, item }: Props) => {
 
 const TouchableView = styled.TouchableWithoutFeedback``;
 
-const imageW = Dimensions.get("screen").width;
-
 const PageItem = styled.View`
   width: ${imageW + "px"};
-  height: ${imageW * 0.54 + "px"};
+  height: ${imageW * 0.92 + "px"};
 `;
 
-const ImageItem = styled.Image`
-  resize-mode: contain;
-`;
+const ImageItem = styled.Image``;
 
 export default Item;

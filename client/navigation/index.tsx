@@ -7,7 +7,7 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 
 import * as React from "react";
-import { ColorSchemeName, Image, Pressable } from "react-native";
+import { ColorSchemeName, Image } from "react-native";
 import styled from "styled-components/native";
 
 import ModalScreen from "~presentation/components/Screens/ModalScreen";
@@ -24,6 +24,7 @@ import SignInScreen from "~presentation/components/Screens/SignInScreen";
 import WelcomeScreen from "~presentation/components/Screens/WelcomeScreen";
 import { BNB_SCREEN_NAME } from "constants/SCREEN_NAME";
 import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default function Navigation({
   colorScheme,
@@ -46,7 +47,7 @@ function RootNavigator() {
   // TODO : Auth VM으로 변경해야 함
   // const { accessTocken } = getRootViewModel((vm) => vm.auth);
   const [user, setUser] = useState<boolean>(false);
-
+  
   return (
     <Stack.Navigator
       screenOptions={{ headerMode: "screen", headerShown: false }}
