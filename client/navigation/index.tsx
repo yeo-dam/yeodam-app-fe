@@ -24,8 +24,11 @@ import SignInScreen from "~presentation/components/Screens/SignInScreen";
 import WelcomeScreen from "~presentation/components/Screens/WelcomeScreen";
 import { BNB_SCREEN_NAME } from "constants/SCREEN_NAME";
 import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
-import AsyncStorage from "@react-native-community/async-storage";
 
+import FeedLogo from "~asset/Icons/Navigation/Feed/Feed.svg";
+import CreateLogo from "~asset/Icons/Navigation/Create/Create.svg";
+import SettingLogo from "~asset/Icons/Navigation/Setting/Setting.svg";
+import theme from "themes";
 export default function Navigation({
   colorScheme,
 }: {
@@ -42,6 +45,10 @@ export default function Navigation({
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
+
+// TODO : png가 나을지, svg가 나을지 결정해야 함. svg로 할 경우,
+// PNG로 할 경우, 파일이 깨질 수 있음.
+// SVG로 할 경우, 파일이 수정될 필요가 있음.
 
 function RootNavigator() {
   // TODO : Auth VM으로 변경해야 함
@@ -95,16 +102,6 @@ export type BnbMainNavigator = {
 const BottomTab = createBottomTabNavigator<BnbMainNavigator>();
 
 function BottomTabNavigator() {
-  const [currentTab, setCurrentTab] = useState<"피드" | "입력" | "마이">(
-    "피드"
-  );
-  const isFeedClicked = currentTab === "피드";
-  const isCreateClicked = currentTab === "입력";
-  const isMyClicked = currentTab === "마이";
-
-  // FIXME : 버튼 클릭시, 화면전환이 바로 반영 안되는 문제 발생됨
-  // FIXME : 클릭 시, state 변경 가능하도록 구성하는 다른 방안 모색해 볼 것
-
   return (
     <BottomTab.Navigator
       initialRouteName={BNB_SCREEN_NAME.MAIN}
@@ -117,19 +114,17 @@ function BottomTabNavigator() {
         name={BNB_SCREEN_NAME.MAIN}
         component={MainScreen}
         options={{
-          tabBarLabel: () => (
-            <BottomBarTypo isClicked={isFeedClicked}>피드</BottomBarTypo>
+          tabBarLabel: ({ focused }) => (
+            <BottomBarTypo isClicked={focused}>피드</BottomBarTypo>
           ),
-          tabBarIcon: () => (
-            // <Pressable onPress={() => setCurrentTab("피드")}>
-            <WithLocalSvg
-              asset={
-                isFeedClicked
-                  ? require("~asset/Icons/Navigation/Feed/Feed_clicked.svg")
-                  : require("~asset/Icons/Navigation/Feed/Feed.svg")
+          tabBarIcon: ({ focused }) => (
+            <FeedLogo
+              fill={
+                focused
+                  ? theme.colors.primary.sub
+                  : theme.colors.background.paper
               }
             />
-            // </Pressable>
           ),
         }}
       />
@@ -137,20 +132,18 @@ function BottomTabNavigator() {
         name={BNB_SCREEN_NAME.CREATE}
         component={CreateScreen}
         options={{
-          tabBarLabel: () => (
-            <BottomBarTypo isClicked={isCreateClicked}>입력</BottomBarTypo>
+          tabBarLabel: ({ focused }) => (
+            <BottomBarTypo isClicked={focused}>입력</BottomBarTypo>
           ),
-          tabBarIcon: () => (
+          tabBarIcon: ({ focused }) => (
             <CreateBtnBox>
-              {/* <Pressable onPress={() => setCurrentTab("입력")}> */}
-              <WithLocalSvg
-                asset={
-                  isCreateClicked
-                    ? require("~asset/Icons/Navigation/Create/Create_clicked.svg")
-                    : require("~asset/Icons/Navigation/Create/Create.svg")
+              <CreateLogo
+                fill={
+                  focused
+                    ? theme.colors.primary.sub
+                    : theme.colors.background.paper
                 }
               />
-              {/* </Pressable> */}
             </CreateBtnBox>
           ),
         }}
@@ -159,19 +152,17 @@ function BottomTabNavigator() {
         name={BNB_SCREEN_NAME.MYPAGE}
         component={MyPageScreen}
         options={{
-          tabBarLabel: () => (
-            <BottomBarTypo isClicked={isMyClicked}>마이</BottomBarTypo>
+          tabBarLabel: ({ focused }) => (
+            <BottomBarTypo isClicked={focused}>마이</BottomBarTypo>
           ),
-          tabBarIcon: () => (
-            // <Pressable onPress={() => setCurrentTab("마이")}>
-            <WithLocalSvg
-              asset={
-                isMyClicked
-                  ? require("~asset/Icons/Navigation/Setting/Setting_clicked.svg")
-                  : require("~asset/Icons/Navigation/Setting/Setting.svg")
+          tabBarIcon: ({ focused }) => (
+            <SettingLogo
+              fill={
+                focused
+                  ? theme.colors.primary.sub
+                  : theme.colors.background.paper
               }
             />
-            // {/* </Pressable> */}
           ),
         }}
       />
@@ -185,6 +176,10 @@ const BackIcon = styled(Image)`
 
 const CloseIcon = styled(Image)`
   margin-right: 32px;
+`;
+
+const CustomImage = styled(Image)<{ isFocused: boolean }>`
+  tint-color: ${({ isFocused }) => (isFocused ? "red" : "black")};
 `;
 
 const CreateBtnBox = styled.View`
