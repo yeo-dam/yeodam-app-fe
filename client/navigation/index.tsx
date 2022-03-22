@@ -54,7 +54,7 @@ function RootNavigator() {
   // TODO : Auth VM으로 변경해야 함
   // const { accessTocken } = getRootViewModel((vm) => vm.auth);
   const [user, setUser] = useState<boolean>(false);
-  
+
   return (
     <Stack.Navigator
       screenOptions={{ headerMode: "screen", headerShown: false }}

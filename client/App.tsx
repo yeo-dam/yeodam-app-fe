@@ -9,14 +9,14 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { ThemeProvider } from "styled-components";
 import theme from "themes";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
   const accessTocken = AsyncStorage.getItem("accessTocken");
-  const { auth }: InitialData = { accessTocken };
+  const { auth }: InitialData = {};
 
   if (!isLoadingComplete) {
     return null;
