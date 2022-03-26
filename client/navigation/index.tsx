@@ -19,16 +19,19 @@ import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { WithLocalSvg } from "react-native-svg";
 import Typography from "~presentation/components/Shared/Typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SignInScreen from "~presentation/components/Screens/SignInScreen";
 import WelcomeScreen from "~presentation/components/Screens/WelcomeScreen";
 import { BNB_SCREEN_NAME } from "constants/SCREEN_NAME";
 import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
 
 import FeedLogo from "~asset/Icons/Navigation/Feed/Feed.svg";
+import ClickedFeedLogo from "~asset/Icons/Navigation/Feed/Feed_clicked.svg";
+import ClickedCreateLogo from "~asset/Icons/Navigation/Create/Create_clicked.svg";
 import CreateLogo from "~asset/Icons/Navigation/Create/Create.svg";
+import ClickedSettingLogo from "~asset/Icons/Navigation/Setting/Setting_clicked.svg";
 import SettingLogo from "~asset/Icons/Navigation/Setting/Setting.svg";
-import theme from "themes";
+
 export default function Navigation({
   colorScheme,
 }: {
@@ -46,21 +49,16 @@ export default function Navigation({
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-// TODO : png가 나을지, svg가 나을지 결정해야 함. svg로 할 경우,
-// PNG로 할 경우, 파일이 깨질 수 있음.
-// SVG로 할 경우, 파일이 수정될 필요가 있음.
-
 function RootNavigator() {
-  // TODO : Auth VM으로 변경해야 함
-  // const { accessTocken } = getRootViewModel((vm) => vm.auth);
-  const [user, setUser] = useState<boolean>(false);
+  const vm = getRootViewModel((vm) => vm.auth);
 
   return (
     <Stack.Navigator
       screenOptions={{ headerMode: "screen", headerShown: false }}
     >
       <React.Fragment>
-        {!user && (
+        {/* FIXME : 주석해제 필요
+        {!vm.auth?.accessToken && (
           <React.Fragment>
             <Stack.Screen
               name="SignIn"
@@ -73,7 +71,7 @@ function RootNavigator() {
               options={{ headerShown: false }}
             />
           </React.Fragment>
-        )}
+        )} */}
         <Stack.Screen
           name="Root"
           component={BottomTabNavigator}
@@ -117,15 +115,8 @@ function BottomTabNavigator() {
           tabBarLabel: ({ focused }) => (
             <BottomBarTypo isClicked={focused}>피드</BottomBarTypo>
           ),
-          tabBarIcon: ({ focused }) => (
-            <FeedLogo
-              fill={
-                focused
-                  ? theme.colors.primary.sub
-                  : theme.colors.background.paper
-              }
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? <ClickedFeedLogo /> : <FeedLogo />,
         }}
       />
       <BottomTab.Screen
@@ -135,17 +126,14 @@ function BottomTabNavigator() {
           tabBarLabel: ({ focused }) => (
             <BottomBarTypo isClicked={focused}>입력</BottomBarTypo>
           ),
-          tabBarIcon: ({ focused }) => (
-            <CreateBtnBox>
-              <CreateLogo
-                fill={
-                  focused
-                    ? theme.colors.primary.sub
-                    : theme.colors.background.paper
-                }
-              />
-            </CreateBtnBox>
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <ClickedCreateLogo />
+            ) : (
+              <CreateBtnBox>
+                <CreateLogo />
+              </CreateBtnBox>
+            ),
         }}
       />
       <BottomTab.Screen
@@ -155,15 +143,8 @@ function BottomTabNavigator() {
           tabBarLabel: ({ focused }) => (
             <BottomBarTypo isClicked={focused}>마이</BottomBarTypo>
           ),
-          tabBarIcon: ({ focused }) => (
-            <SettingLogo
-              fill={
-                focused
-                  ? theme.colors.primary.sub
-                  : theme.colors.background.paper
-              }
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? <ClickedSettingLogo /> : <SettingLogo />,
         }}
       />
     </BottomTab.Navigator>
