@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ViewModelProvider, {
-  InitialData,
+  getRootViewModel,
 } from "~presentation/components/Screens/Index.vm";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
@@ -14,15 +14,25 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  const [localStore, setLocalStore] = useState("");
 
-  const accessTocken = AsyncStorage.getItem("accessTocken");
-  const { auth }: InitialData = {};
+  // 1) 여기서 유저 엑세스 토큰이 발급되어 있는지 따져주고 있으면 바로 처리
+  const getTocken = async () => {
+    const loginToken = await AsyncStorage.getItem("loginToken");
+    if (loginToken) {
+      setLocalStore(loginToken);
+    }
+  };
+
+  useEffect(() => {
+    getTocken();
+  }, [localStore]);
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <ViewModelProvider auth={auth}>
+      <ViewModelProvider accessToken={localStore}>
         <ThemeProvider theme={theme}>
           <SafeAreaProvider>
             {/* <StyledSafeAreaView> */}

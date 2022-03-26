@@ -15,38 +15,33 @@ import PolicyViewModel from "./MyPage/Setting/Policy/Policy.vm";
 import UserViewModel from "./MyPage/Users/UserList.vm";
 import PostViewModel from "./Create/Post/CreatePost.vm";
 import DecodedIdTokenModel from "~domain/model/DecodedIdTokenModel";
+import AuthViewModel, { AuthTokenType } from "./AuthViewModel";
 
-export type InitialData = {
-  auth?: {
-    decodedIdToken: DecodedIdTokenModel;
-    accessToken: string;
-    refreshToken: string;
-  };
-};
-
-const createViewModel = ({ auth }: InitialData) => {
+const createViewModel = ({
+  accessToken,
+}: Pick<AuthTokenType, "accessToken">) => {
   return {
     tab: {
-      Main: MainViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      Search: SearchViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      Comment: CommentViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      Post: PostViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      MyPage: MyPageViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      Likes: LikeViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      Map: MapViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      User: UserViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      Setting: SettingViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      Event: EventViewModel.GetInstance({ accessToken: auth?.accessToken }),
-      Notice: NoticeViewModel.GetInstance({ accessToken: auth?.accessToken }),
+      Main: MainViewModel.GetInstance({ accessToken }),
+      Search: SearchViewModel.GetInstance({ accessToken }),
+      Comment: CommentViewModel.GetInstance({ accessToken }),
+      Post: PostViewModel.GetInstance({ accessToken }),
+      MyPage: MyPageViewModel.GetInstance({ accessToken }),
+      Likes: LikeViewModel.GetInstance({ accessToken }),
+      Map: MapViewModel.GetInstance({ accessToken }),
+      User: UserViewModel.GetInstance({ accessToken }),
+      Setting: SettingViewModel.GetInstance({ accessToken }),
+      Event: EventViewModel.GetInstance({ accessToken }),
+      Notice: NoticeViewModel.GetInstance({ accessToken }),
       Notification: NotificationViewModel.GetInstance({
-        accessToken: auth?.accessToken,
+        accessToken,
       }),
-      Policy: PolicyViewModel.GetInstance({ accessToken: auth?.accessToken }),
+      Policy: PolicyViewModel.GetInstance({ accessToken }),
       ProfileEdit: ProfileEditViewModel.GetInstance({
-        accessToken: auth?.accessToken,
+        accessToken,
       }),
     },
-    auth,
+    auth: AuthViewModel.GetInstance({ accessToken }),
   };
 };
 
@@ -54,9 +49,9 @@ export type RootViewModel = ReturnType<typeof createViewModel>;
 const vmCtx = React.createContext<RootViewModel | null>(null);
 
 const ViewModelProvider: React.FunctionComponent<
-  PropsWithChildren<InitialData>
-> = ({ auth, children }) => {
-  const store = useLocalObservable(() => createViewModel({ auth }));
+  PropsWithChildren<Pick<AuthTokenType, "accessToken">>
+> = ({ accessToken, children }) => {
+  const store = useLocalObservable(() => createViewModel({ accessToken }));
   return <vmCtx.Provider value={store}>{children}</vmCtx.Provider>;
 };
 
@@ -69,6 +64,7 @@ export const getRootViewModel = function <Selection>(
     dataSelectorFunc: (store: Store) => Selection
   ) {
     const value = useContext(context);
+
     if (!value) {
       throw new Error("useStore must be used within a StoreProvider");
     }

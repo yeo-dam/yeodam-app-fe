@@ -22,7 +22,7 @@ export default class ThisViewModel extends BaseViewModel {
       this.setAccessToken(args.accessToken);
     }
   }
-  
+
   @observable
   private _isLoading = observable.box<boolean>(false);
 

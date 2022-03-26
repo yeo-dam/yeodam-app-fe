@@ -37,11 +37,6 @@ export default class CommentRepositoryImpl
         mockArr[index] = genCommentMockObject();
       }
 
-      console.log(
-        `TCL ~ [CommentRepository.ts] ~ line ~ 40 ~ mockArr`,
-        mockArr
-      );
-
       const mockList: ListEntity<CommentEntity> = {
         items: [...mockArr.slice(offsetNum, offsetNum + limitNum)],
         count: 4,

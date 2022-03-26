@@ -50,7 +50,7 @@ const CreatePost = ({
 
     try {
       await vm.createPost({ body: formmatedDto });
-      // navigation.push("Root");
+      navigation.push("Root");
     } catch (error) {
       console.log(error);
     }

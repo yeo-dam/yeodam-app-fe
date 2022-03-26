@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "yeodam-app-expo",
-    "slug": "yeowoon-app",
+    "slug": "yeowoon",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -33,9 +33,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yeodam.yeowoon"
     },
     "android": {
+      "package": "com.yeodam.yeowoon",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"

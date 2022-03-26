@@ -29,7 +29,6 @@ const GoogleMap = ({
       await vm.load();
     }
     loadPlaces();
-    return () => console.log("cleanup");
   }, []);
 
   useEffect(() => {

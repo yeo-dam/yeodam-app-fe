@@ -4,15 +4,18 @@ import PhotoCard from "~presentation/components/Local/PhotoCard";
 import DescriptionCard from "~presentation/components/Local/DescriptionCard";
 import PostModel from "~domain/model/PostModel";
 import PhotoContainer from "~presentation/components/Local/PhotoContainer";
-import { Animated } from "react-native";
+import { Animated, View } from "react-native";
 import DoubleTap from "~presentation/components/Shared/DoubleTap";
+import MainViewModel from "~presentation/components/Screens/Main/Main.vm";
+import Loadable from "~presentation/components/Shared/Loadable";
 
 type Props = {
+  vm: MainViewModel;
   item: PostModel;
   navigation: any;
 };
 
-const Component: FC<Props> = ({ item, navigation }) => {
+const Component: FC<Props> = ({ vm, item, navigation }) => {
   const [isFront, setIsFront] = useState<boolean>(true);
 
   let animatedValue = new Animated.Value(0);
@@ -42,33 +45,37 @@ const Component: FC<Props> = ({ item, navigation }) => {
   };
 
   const renderCard = (postItem: PostModel, router: any) => {
-    if (isFront) {
-      return (
-        <PhotoContainer item={item}>
-          <DoubleTap
-            delay={1500}
-            animatedValue={animatedValue}
-            setIsFront={setIsFront}
-          >
-            <PhotoCard item={postItem} setIsFront={setIsFront} />
-            {renderOverlay()}
-          </DoubleTap>
-        </PhotoContainer>
-      );
+    if (vm.isLoading) {
+      return <Loadable />;
     } else {
-      return (
-        <PhotoContainer item={item}>
-          <DescriptionCard
-            item={postItem}
-            navigation={router}
-            setIsFront={setIsFront}
-          />
-        </PhotoContainer>
-      );
+      if (isFront) {
+        return (
+          <PhotoContainer item={item}>
+            <DoubleTap
+              delay={1500}
+              animatedValue={animatedValue}
+              setIsFront={setIsFront}
+            >
+              <PhotoCard item={postItem} setIsFront={setIsFront} />
+              {renderOverlay()}
+            </DoubleTap>
+          </PhotoContainer>
+        );
+      } else {
+        return (
+          <PhotoContainer item={item}>
+            <DescriptionCard
+              item={postItem}
+              navigation={router}
+              setIsFront={setIsFront}
+            />
+          </PhotoContainer>
+        );
+      }
     }
   };
 
-  return <>{renderCard(item, navigation)}</>;
+  return <View>{renderCard(item, navigation)}</View>;
 };
 
 export default Component;

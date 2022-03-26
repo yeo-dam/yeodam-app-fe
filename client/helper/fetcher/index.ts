@@ -54,6 +54,15 @@ const Fetcher = async <T>(
     mergedOpt.body = options?.body;
   }
 
+  // 토큰 확인 후 삽입
+  if (options?.accessToken !== undefined) {
+    mergedOpt.headers = Object.assign(
+      {},
+      { "x-auth-token": options.accessToken },
+      mergedOpt.headers
+    );
+  }
+
   const requestUrl = `${process.env.HOSTNAME}${url}`;
 
   console.log("Input >>>>> ", requestUrl);
