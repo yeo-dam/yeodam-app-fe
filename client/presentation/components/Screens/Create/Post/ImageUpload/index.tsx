@@ -34,13 +34,13 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
           let type = match ? `image/${match[1]}` : `image`;
 
           const formdata: FormData = new FormData();
-          const imageObj = {
+          const imageObj: any = {
             name: filename,
             uri: localUri,
             type,
           };
 
-          formdata.append("images", imageObj as any);
+          formdata.append("images", imageObj);
 
           await vm.uploadImages({
             body: formdata,

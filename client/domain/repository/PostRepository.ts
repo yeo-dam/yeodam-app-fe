@@ -97,7 +97,7 @@ export default class PostRepositoryImpl extends BaseRepository {
 
   async createPost(dto: { body: CreatePostDto }) {
     try {
-      return await this._remote._fetcher("/post/new", {
+      await this._remote._fetcher("/post/new", {
         method: "PUT",
         body: JSON.stringify(dto.body),
       });

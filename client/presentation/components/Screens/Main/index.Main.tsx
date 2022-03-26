@@ -34,27 +34,12 @@ const MainScreen = ({
     });
   }
 
-  // async function testFucn() {
-  //   const res = await Fetcher("/");
-  //   console.log(`TCL ~ [index.Main.tsx] ~ line ~ 35 ~ res`, res);
-  // }
-
   useEffect(() => {
     // loadPosts();
-    // testFucn();
-    return () => console.log("cleanup");
   }, []);
 
-  // TODO : 초기 페이지 렌더링 시, 로더블은 필요해보임.
-  // if (vm.isLoading) {
-  //   return <Loadable />;
-  // }
-
-  // if (vm.isError) {
-  //   return <ErrorMsg />;
-  // }
-
   const renderList = () => {
+    // FIXME : 주석해제 필요
     // if (vm.posts && vm.posts.length === 0) {
     //   return <NoData />;
     // } else {
@@ -78,7 +63,7 @@ const MainScreen = ({
           </>
         }
         renderItem={({ item }) => (
-          <MainItemCard item={item} navigation={navigation} />
+          <MainItemCard vm={vm} item={item} navigation={navigation} />
         )}
         keyExtractor={(item) => item.id}
         onEndReached={handleLoadMore}

@@ -31,6 +31,7 @@ import ClickedCreateLogo from "~asset/Icons/Navigation/Create/Create_clicked.svg
 import CreateLogo from "~asset/Icons/Navigation/Create/Create.svg";
 import ClickedSettingLogo from "~asset/Icons/Navigation/Setting/Setting_clicked.svg";
 import SettingLogo from "~asset/Icons/Navigation/Setting/Setting.svg";
+import theme from "themes";
 
 export default function Navigation({
   colorScheme,

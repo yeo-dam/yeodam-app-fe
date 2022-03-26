@@ -40,7 +40,7 @@ export default class MapViewModel extends BaseViewModel {
   private _pager = observable.box<PagerModel>(undefined);
 
   @observable
-  private _places = observable.map<string, PlaceModel>(undefined);
+  private _places = observable.map<number, PlaceModel>(undefined);
 
   @computed
   public get isLoading() {
@@ -73,7 +73,7 @@ export default class MapViewModel extends BaseViewModel {
       this._isLoading.set(true);
       const [pager, placeInstances] = yield this._MeRepo.findPlaces();
       placeInstances.forEach((item: PlaceModel) => {
-        this._places.set(item.id, item);
+        this._places.set(item.placeId, item);
       });
       this._pager.set(pager);
     } catch (error) {
@@ -86,7 +86,7 @@ export default class MapViewModel extends BaseViewModel {
   });
 
   @action
-  findPlaceById = flow(function* (this: MapViewModel, placeId: string) {
+  findPlaceById = flow(function* (this: MapViewModel, placeId: number) {
     try {
       this._isLoading.set(true);
       yield this._PlaceRepo.findPlaceById({
