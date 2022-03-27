@@ -19,10 +19,7 @@ const Component: FC<Props> = ({ item, children }) => {
   return (
     <Wrapper>
       <PhotoHeader>
-        <Avatar
-          name={item.user.name}
-          imageSource={item.user.avatar?.filePath}
-        />
+        <Avatar name={item.user.name} imageSource={item.user.avatar?.url} />
         <IconSection>
           <IconBox>
             <WithLocalSvg asset={require("~asset/Icons/wishlist.svg")} />

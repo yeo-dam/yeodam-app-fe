@@ -36,7 +36,6 @@ const MyPageScreen = ({
   );
 
   const handlePress = (placeId: number) => {
-    console.log(`TCL ~ [index.tsx] ~ line ~ 34 ~ placeId`, placeId);
     runInAction(() => vm.selectPlace(placeId));
     navigation.navigate("CreatePost");
   };

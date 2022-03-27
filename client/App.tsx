@@ -10,33 +10,35 @@ import styled from "styled-components/native";
 import { ThemeProvider } from "styled-components";
 import theme from "themes";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ActivityIndicator } from "react-native";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-  const [localStore, setLocalStore] = useState("");
+  const [accessToken, setToken] = useState<string>("");
 
   // 1) 여기서 유저 엑세스 토큰이 발급되어 있는지 따져주고 있으면 바로 처리
   const getTocken = async () => {
     const loginToken = await AsyncStorage.getItem("loginToken");
     if (loginToken) {
-      setLocalStore(loginToken);
+      // AsyncStorage.clear();
+      setToken(loginToken);
     }
   };
 
   useEffect(() => {
     getTocken();
-  }, [localStore]);
+  }, [accessToken]);
 
   if (!isLoadingComplete) {
-    return null;
+    return <ActivityIndicator />;
   } else {
     return (
-      <ViewModelProvider accessToken={localStore}>
+      <ViewModelProvider accessToken={accessToken}>
         <ThemeProvider theme={theme}>
           <SafeAreaProvider>
             {/* <StyledSafeAreaView> */}
-            <Navigation colorScheme={colorScheme} />
+            <Navigation colorScheme={colorScheme} setToken={setToken} />
             {/* </StyledSafeAreaView> */}
           </SafeAreaProvider>
         </ThemeProvider>

@@ -35,22 +35,24 @@ import theme from "themes";
 
 export default function Navigation({
   colorScheme,
+  setToken,
 }: {
   colorScheme: ColorSchemeName;
+  setToken: (data: string) => void;
 }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      <RootNavigator />
+      <RootNavigator setToken={setToken} />
     </NavigationContainer>
   );
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
+function RootNavigator({ setToken }: { setToken: (data: string) => void }) {
   const vm = getRootViewModel((vm) => vm.auth);
 
   return (
@@ -58,14 +60,11 @@ function RootNavigator() {
       screenOptions={{ headerMode: "screen", headerShown: false }}
     >
       <React.Fragment>
-        {/* FIXME : 주석해제 필요
-        {!vm.auth?.accessToken && (
+        {/* {!vm.auth?.accessToken && (
           <React.Fragment>
-            <Stack.Screen
-              name="SignIn"
-              component={SignInScreen}
-              options={{ headerShown: false }}
-            />
+            <Stack.Screen name="SignIn" options={{ headerShown: false }}>
+              {(props) => <SignInScreen {...props} setToken={setToken} />}
+            </Stack.Screen>
             <Stack.Screen
               name="Welcome"
               component={WelcomeScreen}

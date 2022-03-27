@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   Text,
+  View,
   TouchableNativeFeedback,
 } from "react-native";
 import styled from "styled-components/native";
@@ -20,10 +21,16 @@ import { useNavigation } from "@react-navigation/native";
 import DecodedIdTokenModel from "~domain/model/DecodedIdTokenModel";
 WebBrowser.maybeCompleteAuthSession();
 
-export default function App() {
+export default function Component({
+  setToken,
+}: {
+  setToken: (data: string) => void;
+}) {
   const vm = getRootViewModel((vm) => vm.auth);
+  const mainVm = getRootViewModel((vm) => vm.tab.Main);
   const navigation = useNavigation();
   const accessToken = vm?.auth?.accessToken;
+  const [userInfo, setUserInfo] = React.useState();
 
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId: process.env.EXPO_CLIENT_ID,
@@ -35,11 +42,20 @@ export default function App() {
     async function sendAccessToken() {
       if (response?.type === "success") {
         const { authentication } = response;
+
+        console.log(
+          `TCL ~ [index.tsx] ~ line ~ 39 ~ authentication`,
+          authentication
+        );
+
         if (authentication?.accessToken) {
+          // vm.setLoginToken(authentication?.accessToken);
           const loginToken = await vm.requestLoginToken(
             authentication.accessToken,
             ProviderType.GOOGLE
           );
+
+          console.log(`TCL ~ [index.tsx] ~ line ~ 59 ~ loginToken`, loginToken);
 
           if (loginToken) {
             // 받아온 response를 accessToken으로 저장해야 함.
@@ -48,45 +64,57 @@ export default function App() {
             // 바로 받아온 뒤, viewModel에도 값을 저장해준다.
             const StogageToken = await AsyncStorage.getItem("loginToken");
 
+            console.log(
+              `TCL ~ [index.tsx] ~ line ~ 53 ~ StogageToken`,
+              StogageToken
+            );
+
             if (StogageToken) {
               // 혹시 모르니 viewModel에도 decoded된 토큰 값을 저장해준다.
               vm.setLoginToken(StogageToken);
               const decodedToken: any = jwt_decode(StogageToken);
-
               console.log(
                 `TCL ~ [index.tsx] ~ line ~ 52 ~ decodedToken`,
                 decodedToken
               );
-
               const issuedDate = new Date(0);
               const expiredDate = new Date(0);
-
               if (decodedToken.iat && decodedToken.exp) {
                 issuedDate.setUTCSeconds(decodedToken.iat);
                 expiredDate.setUTCSeconds(decodedToken.exp);
               }
-
               // iat, exp를 Date 형식으로 변환해준다
               const newDecodedToken: DecodedIdTokenModel = {
                 ...decodedToken,
                 iat: issuedDate,
                 exp: expiredDate,
               };
-
               vm.setUserInfo(newDecodedToken);
             }
 
             // 메인화면으로 이동한다.
             navigation.navigate("Root");
           }
-
-          // 확인해본다.
-          console.log(`vm.auth.accessToken >>> `, vm.auth?.accessToken);
         }
       }
     }
     sendAccessToken();
   }, [response]);
+
+  // async function getUserData() {
+  //   let userInfoResponse = await fetch(
+  //     "https://www.googleapis.com/userinfo/v2/me",
+  //     {
+  //       headers: { Authorization: `Bearer ${accessToken}` },
+  //     }
+  //   );
+
+  //   userInfoResponse.json().then((data) => {
+  //     setUserInfo(data);
+  //   });
+  // }
+
+  console.log(`TCL ~ [index.tsx] ~ line ~ 42 ~ userInfo`, userInfo);
 
   function showUserInfo() {
     if (vm.user) {
@@ -102,8 +130,15 @@ export default function App() {
   return (
     <Wrapper>
       {showUserInfo()}
-      <IconBox onPress={() => promptAsync({ showInRecents: true })}>
-        <Text>{accessToken ? "유저 정보 불러오기" : "Google Login"}</Text>
+      <IconBox
+        onPress={
+          // accessToken ? getUserData : () => promptAsync({ showInRecents: true })
+          () => promptAsync({ showInRecents: true })
+        }
+      >
+        <LogoBox>
+          <GoogleLogo />
+        </LogoBox>
       </IconBox>
     </Wrapper>
   );
@@ -123,3 +158,13 @@ const UserProfile = styled.Image`
 `;
 
 const UserBox = styled.View``;
+
+const LogoBox = styled(View)`
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 56px;
+  background-color: ${({ theme }) => theme.colors.background.paper};
+`;

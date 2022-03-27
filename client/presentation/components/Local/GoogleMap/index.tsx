@@ -9,7 +9,6 @@ import styled from "styled-components/native";
 import { observer } from "mobx-react";
 import MapViewModel from "~presentation/components/Screens/MyPage/Map/Map.vm";
 import Layout from "constants/Layout";
-import GeoDataToAddress from "helper/Formatter/GeoInfoFormatter";
 
 type Props = {
   vm: MapViewModel;
@@ -29,13 +28,6 @@ const GoogleMap = ({
       await vm.load();
     }
     loadPlaces();
-  }, []);
-
-  useEffect(() => {
-    const fetchMaps = async () => {
-      await GeoDataToAddress({ latitude, longitude });
-    };
-    fetchMaps();
   }, []);
 
   return (
@@ -59,7 +51,7 @@ const GoogleMap = ({
                 latitude: item.latitude,
                 longitude: item.longitude,
               }}
-              title={item.name}
+              title={item.placeName}
               description={item.description}
             />
           );

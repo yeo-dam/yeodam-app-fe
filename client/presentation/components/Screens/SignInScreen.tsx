@@ -16,25 +16,16 @@ import Typography from "../Shared/Typography";
 const SplashImagePath = "../../../assets/images/main.png";
 
 // TODO : 성공 시, Main으로 이동. 실패 시, 다른 동작이 필요할 것.
-// TODO : JWT 토큰을 받아왔다는 가정 하에, Decode하고 해당 정보를 App 내에 저장하는 것까지 해볼 것.
-// TODO : 그러려면 JWT Token에 대한 형식을 기본적으로 정의하고, Decode하는 로직을 추가해야 할 것.
 
 const {
   window: { width: windowWidth, height: windowHeight },
 } = Layout;
 
-export default function SignInScreen() {
-  const navigation = useNavigation();
-  // const handleLoginFunc = () => {
-  //   try {
-  //     console.log("실행중..");
-  //   } catch (error) {
-  //     throw error;
-  //   } finally {
-  //     navigation.navigate("Root");
-  //   }
-  // };
-
+export default function SignInScreen({
+  setToken,
+}: {
+  setToken: (data: string) => void;
+}) {
   return (
     <ImageBackground
       source={require(SplashImagePath)}
@@ -46,7 +37,7 @@ export default function SignInScreen() {
           <Title>로그인 화면</Title>
         </TitleSection>
         <LoginUISection>
-          <GoogleLogin />
+          <GoogleLogin setToken={setToken} />
         </LoginUISection>
       </InnerWrapper>
     </ImageBackground>

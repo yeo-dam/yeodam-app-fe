@@ -14,7 +14,7 @@ export default class PostRepositoryImpl extends BaseRepository {
   private static _Instance: PostRepositoryImpl;
 
   static GetInstace(args: ConstructorParameter) {
-    if (!PostRepositoryImpl._Instance) {
+    if (!PostRepositoryImpl._Instance || !this._Instance._accessToken) {
       PostRepositoryImpl._Instance = new PostRepositoryImpl(args);
     }
     return PostRepositoryImpl._Instance;

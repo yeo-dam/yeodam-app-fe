@@ -16,6 +16,7 @@ export default class MainViewModel extends BaseViewModel {
     if (!MainViewModel._Instance) {
       MainViewModel._Instance = new MainViewModel(args);
     }
+
     return MainViewModel._Instance;
   }
   private constructor(args: ConstructorParameter) {

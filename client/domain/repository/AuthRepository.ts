@@ -23,10 +23,11 @@ export default class AuthRepositoryImpl
 
   async requestLoginToken(dto: { body: CreateTokenDto }) {
     try {
-      await this._remote._fetcher("/auth/loginToken", {
+      const res = await this._remote._fetcher("/auth/loginToken", {
         method: "POST",
         body: JSON.stringify(dto.body),
       });
+      return res;
     } catch (error) {
       throw error;
     }
