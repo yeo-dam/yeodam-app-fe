@@ -5,11 +5,11 @@ import Typography from "~presentation/components/Shared/Typography";
 import styled from "styled-components/native";
 import { RootTabScreenProps } from "types";
 import { ActivityIndicator, TouchableOpacity, View, Text } from "react-native";
-import { ImageBrowser } from "expo-image-picker-multiple";
 import FormLayout from "~presentation/components/Layout/FormLayout";
 import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
 import CreatePostViewModel from "../CreatePost.vm";
 import { CREATE_SCREEN_NAME } from "constants/SCREEN_NAME";
+import ImageBrowser from "expo-image-picker-multiple";
 
 const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
   const vm = getRootViewModel<CreatePostViewModel>(
@@ -76,6 +76,7 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
           onChange={updateHandler}
           callback={ImagesCallback}
         />
+        {/* <ImageBrowser /> */}
       </View>
     </FormLayout>
   );
