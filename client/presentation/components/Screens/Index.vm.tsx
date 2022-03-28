@@ -1,4 +1,3 @@
-import { useLocalObservable } from "mobx-react-lite";
 import React, { PropsWithChildren, useContext } from "react";
 import MainViewModel from "./Main/Main.vm";
 import MyPageViewModel from "./MyPage/MyPage.vm";
@@ -14,7 +13,6 @@ import NotificationViewModel from "./MyPage/Setting/Notification/Notification.vm
 import PolicyViewModel from "./MyPage/Setting/Policy/Policy.vm";
 import UserViewModel from "./MyPage/Users/UserList.vm";
 import PostViewModel from "./Create/Post/CreatePost.vm";
-import DecodedIdTokenModel from "~domain/model/DecodedIdTokenModel";
 import AuthViewModel, { AuthTokenType } from "./AuthViewModel";
 
 const createViewModel = ({
@@ -51,8 +49,11 @@ const vmCtx = React.createContext<RootViewModel | null>(null);
 const ViewModelProvider: React.FunctionComponent<
   PropsWithChildren<Pick<AuthTokenType, "accessToken">>
 > = ({ accessToken, children }) => {
-  const store = useLocalObservable(() => createViewModel({ accessToken }));
-  return <vmCtx.Provider value={store}>{children}</vmCtx.Provider>;
+  return (
+    <vmCtx.Provider value={createViewModel({ accessToken })}>
+      {children}
+    </vmCtx.Provider>
+  );
 };
 
 export const getRootViewModel = function <Selection>(

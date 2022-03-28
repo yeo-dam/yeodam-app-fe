@@ -19,6 +19,8 @@ import Fetcher from "helper/fetcher";
 import styled from "styled-components/native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import Nav from "~presentation/components/Shared/Nav";
+import GoogleLogo from "~asset/Icons/Login/Google.svg";
+import { WithLocalSvg } from "react-native-svg";
 
 const SafeAreaHeightForIos = getStatusBarHeight();
 
@@ -36,6 +38,13 @@ const MainScreen = ({
 
   useEffect(() => {
     // loadPosts();
+    // const testFunc = async () => {
+    //   console.log(
+    //     `TCL ~ [index.Main.tsx] ~ line ~ 42 ~ Fetcher("/") `,
+    //     Fetcher("/")
+    //   );
+    // };
+    // testFunc();
   }, []);
 
   const renderList = () => {
@@ -66,7 +75,7 @@ const MainScreen = ({
           <MainItemCard vm={vm} item={item} navigation={navigation} />
         )}
         keyExtractor={(item) => item.id}
-        onEndReached={handleLoadMore}
+        // onEndReached={handleLoadMore}
         onEndReachedThreshold={0.3}
         // onRefresh={handleRefresh}
       ></FlatList>
@@ -74,11 +83,11 @@ const MainScreen = ({
     // }
   };
 
-  const handleLoadMore = () => {
-    const limitNum = vm.pager.limit;
-    const pagerNum = vm.pager.offset + vm.pager.limit;
-    loadPosts(limitNum, pagerNum);
-  };
+  // const handleLoadMore = () => {
+  //   const limitNum = vm.pager.limit;
+  //   const pagerNum = vm.pager.offset + vm.pager.limit;
+  //   loadPosts(limitNum, pagerNum);
+  // };
 
   const handleRefresh = () => {
     console.log("이 지점에서부터 refresh 합니다.");

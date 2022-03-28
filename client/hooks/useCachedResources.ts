@@ -3,6 +3,12 @@ import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import * as React from "react";
 
+const customFonts = {
+  "Spoqa-Han-Sans-Neo": require("../assets/fonts/SpoqaHanSansNeo-Regular.ttf"),
+  Montserrat: require("../assets/fonts/Montserrat-Regular.ttf"),
+  "Digit-Numbers": require("../assets/fonts/DigitalNumbers-Regular.ttf"),
+};
+
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
 
@@ -15,9 +21,7 @@ export default function useCachedResources() {
         // Load fonts
         await Font.loadAsync({
           ...FontAwesome.font,
-          "Spoqa-Han-Sans-Neo": require("../assets/fonts/SpoqaHanSansNeo-Regular.ttf"),
-          Montserrat: require("../assets/fonts/Montserrat-Regular.ttf"),
-          "Digit-Numbers": require("../assets/fonts/DigitalNumbers-Regular.ttf"),
+          ...customFonts,
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

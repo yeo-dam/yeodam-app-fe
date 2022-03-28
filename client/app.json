@@ -19,7 +19,7 @@
         {
           "photosPermission": "Allow yeowoon to access your photos.",
           "savePhotosPermission": "Allow yeowoon to save photos.",
-          "isAccessMediaLocationEnabled": true
+          "isAccessMediaLocationEnabled": "true"
         }
       ]
     ],
