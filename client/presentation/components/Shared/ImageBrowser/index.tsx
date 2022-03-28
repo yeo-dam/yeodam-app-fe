@@ -24,17 +24,23 @@ interface getPhotoParams extends Record<string, any> {
 }
 
 type Props = {
-  loadCount: number;
-  mediaType: MediaType;
-  sortBy: SortBy;
   max: number;
+  callback: (data: Promise<Asset[]>) => void;
+  onChange: (data: number, func: () => void) => void;
+  loadCount?: number;
+  mediaType?: MediaType;
+  sortBy?: SortBy;
+  loadCompleteMetadata?: boolean;
 };
 
 const ImageBrowser: FC<Props> = ({
+  max,
+  onChange,
+  callback,
   loadCount = 50,
   mediaType = [MediaLibrary.MediaType.photo],
   sortBy,
-  max,
+  loadCompleteMetadata = false,
 }) => {
   const [hasCameraPermission, setHasCameraPermission] =
     useState<boolean>(false);
@@ -128,10 +134,30 @@ const ImageBrowser: FC<Props> = ({
     setSelected(newSelected);
   };
 
+  const prepareCallback = () => {
+    const selectedPhotos = selected.map((i) => photos[i]);
+    console.log(
+      `TCL ~ [index.tsx] ~ line ~ 139 ~ selectedPhotos`,
+      selectedPhotos
+    );
+    console.log(
+      `TCL ~ [index.tsx] ~ line ~ 139 ~ loadCompleteMetadata`,
+      loadCompleteMetadata
+    );
+
+    if (!loadCompleteMetadata) {
+      callback(Promise.all(selectedPhotos));
+    } else {
+      // const assetsInfo = Promise.all(
+      //   selectedPhotos.map((i) => MediaLibrary.getAssetInfoAsync(i))
+      // );
+      // callback(assetsInfo);
+    }
+  };
+
   useEffect(() => {
     onChange(selected.length, () => prepareCallback());
-  }, [selected])
-  
+  }, [selected]);
 
   const getPhotos = () => {
     const params: getPhotoParams = {

@@ -9,7 +9,9 @@ import FormLayout from "~presentation/components/Layout/FormLayout";
 import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
 import CreatePostViewModel from "../CreatePost.vm";
 import { CREATE_SCREEN_NAME } from "constants/SCREEN_NAME";
-import ImageBrowser from "expo-image-picker-multiple";
+import ImageBrowser from "~presentation/components/Shared/ImageBrowser";
+import { Asset } from "expo-media-library";
+// import ImageBrowser from "expo-image-picker-multiple";
 
 const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
   const vm = getRootViewModel<CreatePostViewModel>(
@@ -26,7 +28,8 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
     });
 
     callback
-      .then(async (photos: any) => {
+      .then(async (photos: Asset[]) => {
+        console.log(`TCL ~ [index.tsx] ~ line ~ 32 ~ photos`, photos);
         for (let photo of photos) {
           let localUri = photo.uri;
           let filename = photo.filename;
@@ -41,6 +44,8 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
           };
 
           formdata.append("images", imageObj);
+
+          console.log(`TCL ~ [index.tsx] ~ line ~ 48 ~ formdata`, formdata);
 
           await vm.uploadImages({
             body: formdata,
@@ -71,12 +76,16 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
   return (
     <FormLayout>
       <View>
+        {/* <ImageBrowser
+          max={2}
+          onChange={updateHandler}
+          callback={ImagesCallback}
+        /> */}
         <ImageBrowser
           max={2}
           onChange={updateHandler}
           callback={ImagesCallback}
         />
-        {/* <ImageBrowser /> */}
       </View>
     </FormLayout>
   );

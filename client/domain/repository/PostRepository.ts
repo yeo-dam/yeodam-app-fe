@@ -112,6 +112,10 @@ export default class PostRepositoryImpl extends BaseRepository {
         method: "POST",
         body: dto.body,
       });
+      // await this._remote._fetcher("/", {
+      //   method: "POST",
+      //   body: dto.body,
+      // });
     } catch (error) {
       throw error;
     }
