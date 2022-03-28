@@ -4778,14 +4778,6 @@ expo-auth-session@3.5.0:
     invariant "^2.2.4"
     qs "6.9.1"
 
-expo-constants@13.0.1:
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-13.0.1.tgz#fda7e0908f4d66f73f706cc8446148efe6767dd9"
-  integrity sha512-48rhXCZMJGVx/v4DEd9PqTY6V/xLgtWHBy8nos27QIpYCyiC27I3QUQEUI1T3MXUwBsIR4LLJuwnD/4IfftrBw==
-  dependencies:
-    "@expo/config" "^6.0.6"
-    uuid "^3.3.2"
-
 expo-constants@~13.0.0:
   version "13.0.2"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-13.0.2.tgz#b489ecd575cc82a9a0b3dfbf2385d45a44300eb1"
@@ -4825,6 +4817,18 @@ expo-font@~10.0.4:
   integrity sha512-x9YwM0xLkDdSvFjeNbyuh33Q1Hk3uc2jbMuuAN5W2ZVcUZqG0M8GCX/KV/D/7rYqdXKbliQA5r44MyDwZe/XRw==
   dependencies:
     fontfaceobserver "^2.1.0"
+
+expo-image-loader@~3.1.0:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-3.1.1.tgz#f88d94e66c5a102f15d858973c03b92e10662575"
+  integrity sha512-ZX4Bh3K4CCX1aZflnmbOgFNLS+c0/GUys4wdvqxO+4A4KU1NNb3jE7RVa/OFYNPDcGhEw20c1QjyE/WsVURJpg==
+
+expo-image-manipulator@10.2.0:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/expo-image-manipulator/-/expo-image-manipulator-10.2.0.tgz#f575a03a85ca954f4aae5be1c7e02fcd30216500"
+  integrity sha512-yq4vtE1Xbs39ertKx0sN1cXKPu3or9mJMvEu2QhdDCop13gXufK5bJ6V+dFMz+x4zESt56eM8uIAghDobWJjpQ==
+  dependencies:
+    expo-image-loader "~3.1.0"
 
 expo-image-picker-multiple@1.4.1:
   version "1.4.1"
@@ -4936,6 +4940,13 @@ expo-screen-orientation@^3.0.0:
   integrity sha512-J+VSqaMw65UNjavhIVbSNV8suzx7CzbvuuaPxbyqTzPejjlpcLpTFImS28Px58OXTkcMPky72vrj4KynLKsUNA==
   dependencies:
     "@expo/config-plugins" "^3.0.0"
+
+expo-screen-orientation@~4.1.1:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/expo-screen-orientation/-/expo-screen-orientation-4.1.2.tgz#52b0799adf2bf7c275bfca308a97797731fa9f53"
+  integrity sha512-ZK9JnIuys3bL0IPIkBazBwc6dZambm2xxu0TEV7HYtowb769XLTFOJgVttrpeNDMXEt/22+dhCE4ZFaPNu6JlA==
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
 
 expo-splash-screen@0.14.1:
   version "0.14.1"
@@ -5997,7 +6008,7 @@ jszip@^3.6.0:
     readable-stream "~2.3.6"
     set-immediate-shim "~1.0.1"
 
-jwt-decode@^3.1.2:
+jwt-decode@3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
