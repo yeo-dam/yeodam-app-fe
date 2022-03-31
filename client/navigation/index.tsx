@@ -60,7 +60,7 @@ function RootNavigator({ setToken }: { setToken: (data: string) => void }) {
       screenOptions={{ headerMode: "screen", headerShown: false }}
     >
       <React.Fragment>
-        {/* {!vm.auth?.accessToken && (
+        {!vm.auth?.accessToken && (
           <React.Fragment>
             <Stack.Screen name="SignIn" options={{ headerShown: false }}>
               {(props) => <SignInScreen {...props} setToken={setToken} />}
@@ -71,7 +71,7 @@ function RootNavigator({ setToken }: { setToken: (data: string) => void }) {
               options={{ headerShown: false }}
             />
           </React.Fragment>
-        )} */}
+        )}
         <Stack.Screen
           name="Root"
           component={BottomTabNavigator}

@@ -1,3 +1,4 @@
+import { Asset } from "expo-media-library";
 import React, { FC } from "react";
 import {
   Dimensions,
@@ -9,9 +10,9 @@ import {
 const { width } = Dimensions.get("window");
 
 type Props = {
-  item: any;
-  index: any;
-  selected: any;
+  item: Asset;
+  index: number;
+  selected: boolean;
   selectImage: any;
   selectedItemNumber: any;
   renderSelectedComponent?: any;
@@ -28,8 +29,6 @@ const ImageTile: FC<Props> = ({
   renderExtraComponent,
 }) => {
   if (!item) return null;
-
-  console.log(`TCL ~ [ImageTile.tsx] ~ line ~ 32 ~ selected`, selected);
 
   return (
     <TouchableHighlight

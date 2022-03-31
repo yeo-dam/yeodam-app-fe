@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState } from "react";
 import * as ScreenOrientation from "expo-screen-orientation";
 import * as ImagePicker from "expo-image-picker";
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { Orientation } from "expo-screen-orientation";
 import * as MediaLibrary from "expo-media-library";
 import { Asset, PagedInfo } from "expo-media-library";
 import ImageTile from "./ImageTile";
+import styled from "styled-components/native";
+import Typography from "../Typography";
 
 type MediaType = ["audio" | "photo" | "video" | "unknown"];
 type SortBy = [
@@ -111,9 +113,18 @@ const ImageBrowser: FC<Props> = ({
 
   const getItemLayout = () => {};
 
-  const renderImageTile = ({ item, index }: { item: any; index: number }) => {
+  const renderImageTile = ({ item, index }: { item: Asset; index: number }) => {
     const IsSelected = selected.indexOf(index) !== -1;
     const selectedItemNumber = selected.indexOf(index) + 1;
+
+    const renderSelectedComponent = (number: number) => {
+      return (
+        <CountBox>
+          <CountTypo>{number}</CountTypo>
+        </CountBox>
+      );
+    };
+
     return (
       <ImageTile
         selectedItemNumber={selectedItemNumber}
@@ -121,7 +132,7 @@ const ImageBrowser: FC<Props> = ({
         index={index}
         selected={IsSelected}
         selectImage={selectImage}
-        // renderSelectedComponent={renderSelectedComponent}
+        renderSelectedComponent={renderSelectedComponent}
         // renderExtraComponent={renderExtraComponent}
       />
     );
@@ -129,7 +140,6 @@ const ImageBrowser: FC<Props> = ({
 
   const selectImage = (index: number) => {
     let newSelected = Array.from(selected);
-    console.log(`TCL ~ [index.tsx] ~ line ~ 118 ~ newSelected`, newSelected);
 
     if (newSelected.indexOf(index) === -1) {
       newSelected.push(index);
@@ -144,22 +154,13 @@ const ImageBrowser: FC<Props> = ({
 
   const prepareCallback = () => {
     const selectedPhotos = selected.map((i) => photos[i]);
-    console.log(
-      `TCL ~ [index.tsx] ~ line ~ 139 ~ selectedPhotos`,
-      selectedPhotos
-    );
-    console.log(
-      `TCL ~ [index.tsx] ~ line ~ 139 ~ loadCompleteMetadata`,
-      loadCompleteMetadata
-    );
-
     if (!loadCompleteMetadata) {
       callback(Promise.all(selectedPhotos));
     } else {
-      // const assetsInfo = Promise.all(
-      //   selectedPhotos.map((i) => MediaLibrary.getAssetInfoAsync(i))
-      // );
-      // callback(assetsInfo);
+      const assetsInfo = Promise.all(
+        selectedPhotos.map((i) => MediaLibrary.getAssetInfoAsync(i))
+      );
+      callback(assetsInfo);
     }
   };
 
@@ -194,13 +195,38 @@ const ImageBrowser: FC<Props> = ({
   }, []);
 
   return (
-    <FlatList
-      data={photos}
-      numColumns={numColumns}
-      key={numColumns}
-      renderItem={renderImageTile}
-    />
+    <Wrapper>
+      <FlatList
+        data={photos}
+        numColumns={numColumns}
+        key={numColumns}
+        renderItem={renderImageTile}
+      />
+    </Wrapper>
   );
 };
 
 export default ImageBrowser;
+
+const Wrapper = styled.View`
+  flex: 1;
+`;
+
+const CountBox = styled(View)`
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.primary.main};
+`;
+
+const CountTypo = styled(Typography)`
+  font-weight: bold;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.background.paper};
+`;

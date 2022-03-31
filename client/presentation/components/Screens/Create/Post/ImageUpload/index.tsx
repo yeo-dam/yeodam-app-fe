@@ -11,7 +11,6 @@ import CreatePostViewModel from "../CreatePost.vm";
 import { CREATE_SCREEN_NAME } from "constants/SCREEN_NAME";
 import ImageBrowser from "~presentation/components/Shared/ImageBrowser";
 import { Asset } from "expo-media-library";
-// import ImageBrowser from "expo-image-picker-multiple";
 
 const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
   const vm = getRootViewModel<CreatePostViewModel>(
@@ -73,11 +72,6 @@ const Component = ({ navigation }: RootTabScreenProps<"ImageUpload">) => {
   return (
     <FormLayout>
       <View>
-        {/* <ImageBrowser
-          max={2}
-          onChange={updateHandler}
-          callback={ImagesCallback}
-        /> */}
         <ImageBrowser
           max={2}
           onChange={updateHandler}

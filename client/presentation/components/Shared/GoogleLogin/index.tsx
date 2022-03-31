@@ -27,7 +27,6 @@ export default function Component({
   setToken: (data: string) => void;
 }) {
   const vm = getRootViewModel((vm) => vm.auth);
-  const mainVm = getRootViewModel((vm) => vm.tab.Main);
   const navigation = useNavigation();
   const accessToken = vm?.auth?.accessToken;
   const [userInfo, setUserInfo] = React.useState();
@@ -43,13 +42,8 @@ export default function Component({
       if (response?.type === "success") {
         const { authentication } = response;
 
-        console.log(
-          `TCL ~ [index.tsx] ~ line ~ 39 ~ authentication`,
-          authentication
-        );
-
         if (authentication?.accessToken) {
-          // vm.setLoginToken(authentication?.accessToken);
+          vm.setLoginToken(authentication?.accessToken);
           const loginToken = await vm.requestLoginToken(
             authentication.accessToken,
             ProviderType.GOOGLE
@@ -101,21 +95,6 @@ export default function Component({
     sendAccessToken();
   }, [response]);
 
-  // async function getUserData() {
-  //   let userInfoResponse = await fetch(
-  //     "https://www.googleapis.com/userinfo/v2/me",
-  //     {
-  //       headers: { Authorization: `Bearer ${accessToken}` },
-  //     }
-  //   );
-
-  //   userInfoResponse.json().then((data) => {
-  //     setUserInfo(data);
-  //   });
-  // }
-
-  console.log(`TCL ~ [index.tsx] ~ line ~ 42 ~ userInfo`, userInfo);
-
   function showUserInfo() {
     if (vm.user) {
       return (
@@ -130,12 +109,7 @@ export default function Component({
   return (
     <Wrapper>
       {showUserInfo()}
-      <IconBox
-        onPress={
-          // accessToken ? getUserData : () => promptAsync({ showInRecents: true })
-          () => promptAsync({ showInRecents: true })
-        }
-      >
+      <IconBox onPress={() => promptAsync({ showInRecents: true })}>
         <LogoBox>
           <GoogleLogo />
         </LogoBox>
