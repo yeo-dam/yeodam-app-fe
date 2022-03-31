@@ -1,20 +1,18 @@
-import PlaceType from "domain/enum/PlaceType";
 import CommentEntity from "../CommentEntity";
 import ImageFileEntity from "../ImageFileEntity";
+import PlaceEntity from "../PlaceEntity";
+import TagEntity from "../TagEntity";
+import UserEntity from "../UserEntity";
 
 export default interface Entity {
   id: string;
-  user: {
-    id: string;
-  };
-  place: {
-    id: string;
-  };
+  user: UserEntity;
+  place: PlaceEntity;
   title: string;
   description: string;
   createdAt: Date;
   updatedAt?: Date;
-  placeType: PlaceType;
   images: ImageFileEntity[];
   comments?: CommentEntity[];
+  tags?: TagEntity[];
 }

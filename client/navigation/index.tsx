@@ -4,55 +4,85 @@ import {
   DefaultTheme,
   DarkTheme,
 } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import * as React from "react";
-import { ColorSchemeName, Image, Pressable } from "react-native";
+import { ColorSchemeName, Image } from "react-native";
 import styled from "styled-components/native";
 
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
-import ModalScreen from "../screens/ModalScreen";
-import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../presentation/components/Pages/TabOne";
-import TabThreeScreen from "../presentation/components/Pages/TabThree";
-import TabTwoScreen from "../presentation/components/Pages/TabTwo";
-import {
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
-} from "../types";
+import ModalScreen from "~presentation/components/Screens/ModalScreen";
+import NotFoundScreen from "~presentation/components/Screens/NotFoundScreen";
+import MainScreen from "~presentation/components/Screens/Main";
+import MyPageScreen from "~presentation/components/Screens/MyPage";
+import CreateScreen from "~presentation/components/Screens/Create";
+import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import { WithLocalSvg } from "react-native-svg";
+import Typography from "~presentation/components/Shared/Typography";
+import { useEffect, useState } from "react";
+import SignInScreen from "~presentation/components/Screens/SignInScreen";
+import WelcomeScreen from "~presentation/components/Screens/WelcomeScreen";
+import { BNB_SCREEN_NAME } from "constants/SCREEN_NAME";
+import { getRootViewModel } from "~presentation/components/Screens/Index.vm";
+
+import FeedLogo from "~asset/Icons/Navigation/Feed/Feed.svg";
+import ClickedFeedLogo from "~asset/Icons/Navigation/Feed/Feed_clicked.svg";
+import ClickedCreateLogo from "~asset/Icons/Navigation/Create/Create_clicked.svg";
+import CreateLogo from "~asset/Icons/Navigation/Create/Create.svg";
+import ClickedSettingLogo from "~asset/Icons/Navigation/Setting/Setting_clicked.svg";
+import SettingLogo from "~asset/Icons/Navigation/Setting/Setting.svg";
+import theme from "themes";
 
 export default function Navigation({
   colorScheme,
+  setToken,
 }: {
   colorScheme: ColorSchemeName;
+  setToken: (data: string) => void;
 }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      <RootNavigator />
+      <RootNavigator setToken={setToken} />
     </NavigationContainer>
   );
 }
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
+function RootNavigator({ setToken }: { setToken: (data: string) => void }) {
+  const vm = getRootViewModel((vm) => vm.auth);
+
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Not Found!" }}
-      />
+    <Stack.Navigator
+      screenOptions={{ headerMode: "screen", headerShown: false }}
+    >
+      <React.Fragment>
+        {/* {!vm.auth?.accessToken && (
+          <React.Fragment>
+            <Stack.Screen name="SignIn" options={{ headerShown: false }}>
+              {(props) => <SignInScreen {...props} setToken={setToken} />}
+            </Stack.Screen>
+            <Stack.Screen
+              name="Welcome"
+              component={WelcomeScreen}
+              options={{ headerShown: false }}
+            />
+          </React.Fragment>
+        )} */}
+        <Stack.Screen
+          name="Root"
+          component={BottomTabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="NotFound"
+          component={NotFoundScreen}
+          options={{ title: "Not Found!" }}
+        />
+      </React.Fragment>
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
@@ -60,91 +90,62 @@ function RootNavigator() {
   );
 }
 
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+export type BnbMainNavigator = {
+  [BNB_SCREEN_NAME.MAIN]: undefined;
+  [BNB_SCREEN_NAME.CREATE]: undefined;
+  [BNB_SCREEN_NAME.MYPAGE]: undefined;
+};
+
+// BottomTabParamList란 Type들을 리스팅해주면 좋을 듯
+const BottomTab = createBottomTabNavigator<BnbMainNavigator>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName={BNB_SCREEN_NAME.MAIN}
       backBehavior="order"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        headerTitleStyle: { display: "none" },
+        headerShown: false,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          tabBarLabel: "포트폴리오",
-          tabBarIcon: () => (
-            <Image source={require("../assets/Icons/Navigation/Main.png")} />
+        name={BNB_SCREEN_NAME.MAIN}
+        component={MainScreen}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <BottomBarTypo isClicked={focused}>피드</BottomBarTypo>
           ),
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}>
-              <BackIcon
-                source={require("../assets/Icons/Navigation/Back.png")}
-              />
-            </Pressable>
-          ),
-          headerRight: () => (
-            <Pressable onPress={() => console.log("X button Clicked")}>
-              <CloseIcon
-                source={require("../assets/Icons/Navigation/Close.png")}
-              />
-            </Pressable>
-          ),
-        })}
+          tabBarIcon: ({ focused }) =>
+            focused ? <ClickedFeedLogo /> : <FeedLogo />,
+        }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={({ navigation }: RootTabScreenProps<"TabTwo">) => ({
-          tabBarLabel: "계좌",
-          tabBarIcon: () => (
-            <Image source={require("../assets/Icons/Navigation/Account.png")} />
+        name={BNB_SCREEN_NAME.CREATE}
+        component={CreateScreen}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <BottomBarTypo isClicked={focused}>입력</BottomBarTypo>
           ),
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}>
-              <BackIcon
-                source={require("../assets/Icons/Navigation/Back.png")}
-              />
-            </Pressable>
-          ),
-          headerRight: () => (
-            <Pressable onPress={() => console.log("X button Clicked")}>
-              <CloseIcon
-                source={require("../assets/Icons/Navigation/Close.png")}
-              />
-            </Pressable>
-          ),
-        })}
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <ClickedCreateLogo />
+            ) : (
+              <CreateBtnBox>
+                <CreateLogo />
+              </CreateBtnBox>
+            ),
+        }}
       />
       <BottomTab.Screen
-        name="TabThree"
-        component={TabThreeScreen}
-        options={({ navigation }: RootTabScreenProps<"TabThree">) => ({
-          tabBarLabel: "설정",
-          tabBarIcon: () => (
-            <Image source={require("../assets/Icons/Navigation/Setting.png")} />
+        name={BNB_SCREEN_NAME.MYPAGE}
+        component={MyPageScreen}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <BottomBarTypo isClicked={focused}>마이</BottomBarTypo>
           ),
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}>
-              <BackIcon
-                source={require("../assets/Icons/Navigation/Back.png")}
-              />
-            </Pressable>
-          ),
-          headerRight: () => (
-            <Pressable onPress={() => console.log("X button Clicked")}>
-              <CloseIcon
-                source={require("../assets/Icons/Navigation/Close.png")}
-              />
-            </Pressable>
-          ),
-        })}
+          tabBarIcon: ({ focused }) =>
+            focused ? <ClickedSettingLogo /> : <SettingLogo />,
+        }}
       />
     </BottomTab.Navigator>
   );
@@ -156,4 +157,21 @@ const BackIcon = styled(Image)`
 
 const CloseIcon = styled(Image)`
   margin-right: 32px;
+`;
+
+const CustomImage = styled(Image)<{ isFocused: boolean }>`
+  tint-color: ${({ isFocused }) => (isFocused ? "red" : "black")};
+`;
+
+const CreateBtnBox = styled.View`
+  padding-top: 8px;
+`;
+
+const BottomBarTypo = styled(Typography).attrs({
+  textSize: "10px",
+})<{
+  isClicked: boolean;
+}>`
+  color: ${({ theme, isClicked }) =>
+    isClicked ? theme.colors.primary.sub : theme.colors.grey.AA};
 `;

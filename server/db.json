@@ -1,150 +1,661 @@
 {
-  "users": [
-    {
-      "id": "1",
-      "name": "빠니보틀 Pani Bottle",
-      "email": "panibottle88@gmail.com",
-      "userType": "AIO",
-      "password": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
-      "createdAt": "2021. 11. 29. 오후 12:44:22"
-    },
-    {
-      "id": "2",
-      "name": "영알남YAN",
-      "email": "Yan8522@gmail.com",
-      "userType": "STP",
-      "password": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
-      "createdAt": "2021. 11. 29. 오후 12:44:22",
-      "ProviderType": "N"
-    },
-    {
-      "id": "3",
-      "name": "미키서 Mickey Seo",
-      "email": "MickeySeo88@naver.com",
-      "userType": "AHN",
-      "password": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
-      "createdAt": "2021. 11. 29. 오후 12:44:22",
-      "ProviderType": "K"
-    }
-  ],
-  "posts": [
-    {
-      "postId": "1",
-      "user": { "id": "1" },
-      "placeId": "1",
-      "placeType": "F",
-      "title": "강남역 쉑쉑 버거",
-      "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
-      "create_time": "2021. 11. 29. 오후 1:44:22",
-      "update_time": "2021. 11. 29. 오후 1:44:22",
-      "images": [
-        {
-          "imageId:": "1",
-          "width": 200,
-          "height": 300,
-          "fileName": "asdas.jpg",
-          "filepath": "https://picsum.photos/200/300"
+  "posts": {
+    "items": [
+      {
+        "id": "1",
+        "user": {
+          "id": "1",
+          "name": "love_trip",
+          "email": "MickeySeo@gmail.com",
+          "userType": "AHN",
+          "createdAt": "2021-12-19T14:15:24.343Z",
+          "providerType": "K",
+          "avatar": {
+            "width": 200,
+            "height": 200,
+            "id": "11",
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          }
         },
-        {
-          "imageId:": "2",
-          "width": 200,
-          "height": 300,
-          "fileName": "asdas.jpg",
-          "filepath": "https://picsum.photos/200/300"
+        "place": {
+          "id": "1",
+          "name": "place",
+          "title": "marker1",
+          "description": "marker1 description",
+          "type": "C",
+          "latitude": 37.28972304408989,
+          "longitude": 126.81528244167568
         },
-        {
-          "imageId:": "3",
-          "width": 200,
-          "height": 300,
-          "fileName": "asdas.jpg",
-          "filepath": "https://picsum.photos/200/300"
-        }
-      ],
-      "comments": [
-        {
-          "postId": "1",
-          "id": "2",
-          "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
+        "title": "강남역 쉑쉑버거",
+        "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+        "createdAt": "2021-12-19T14:15:24.343Z",
+        "updatedAt": "2021-12-19T14:15:24.343Z",
+        "images": [
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          },
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          },
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          }
+        ],
+        "comments": [
+          {
+            "id": "2",
+            "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          },
+          {
+            "id": "3",
+            "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛.....",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          },
+          {
+            "id": "4",
+            "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          }
+        ],
+        "tags": [
+          {
+            "id": "1",
+            "title": "맛집"
+          },
+          {
+            "id": "2",
+            "title": "사진 찍기 좋은 곳"
+          },
+          {
+            "id": "3",
+            "title": "감성카페"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "user": {
+          "id": "1",
+          "name": "love_trip",
+          "email": "MickeySeo@gmail.com",
+          "userType": "AHN",
+          "createdAt": "2021-12-19T14:15:24.343Z",
+          "providerType": "K",
+          "avatar": {
+            "width": 200,
+            "height": 200,
+            "id": "11",
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          }
         },
-        {
-          "postId": "1",
-          "id": "3",
-          "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
+        "place": {
+          "id": "1",
+          "name": "place",
+          "title": "marker1",
+          "description": "marker1 description",
+          "type": "C",
+          "latitude": 37.28972304408989,
+          "longitude": 126.81528244167568
         },
-        {
-          "postId": "1",
-          "id": "4",
-          "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
-        }
-      ]
-    },
-    {
-      "postId": "2",
-      "user": { "id": "1" },
-      "placeId": "1",
-      "placeType": "F",
-      "title": "강남역 쉑쉑 버거",
-      "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
-      "create_time": "2021. 11. 29. 오후 1:44:22",
-      "update_time": "2021. 11. 29. 오후 1:44:22",
-      "images": [
-        { "imageId:": "1", "filepath": "https://picsum.photos/200/300" },
-        { "imageId:": "2", "filepath": "https://picsum.photos/200/300" },
-        { "imageId:": "3", "filepath": "https://picsum.photos/200/300" }
-      ],
-      "comments": [
-        {
-          "postId": "1",
-          "id": "2",
-          "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
+        "title": "강남역 쉑쉑버거",
+        "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+        "createdAt": "2021-12-19T14:15:24.343Z",
+        "updatedAt": "2021-12-19T14:15:24.343Z",
+        "images": [
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          },
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          },
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          }
+        ],
+        "comments": [
+          {
+            "id": "2",
+            "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          },
+          {
+            "id": "3",
+            "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛.....",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          },
+          {
+            "id": "4",
+            "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          }
+        ],
+        "tags": [
+          {
+            "id": "1",
+            "title": "맛집"
+          },
+          {
+            "id": "2",
+            "title": "사진 찍기 좋은 곳"
+          },
+          {
+            "id": "3",
+            "title": "감성카페"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "user": {
+          "id": "1",
+          "name": "love_trip",
+          "email": "MickeySeo@gmail.com",
+          "userType": "AHN",
+          "createdAt": "2021-12-19T14:15:24.343Z",
+          "providerType": "K",
+          "avatar": {
+            "width": 200,
+            "height": 200,
+            "id": "11",
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          }
         },
-        {
-          "postId": "1",
-          "id": "3",
-          "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
+        "place": {
+          "id": "1",
+          "name": "place",
+          "title": "marker1",
+          "description": "marker1 description",
+          "type": "C",
+          "latitude": 37.28972304408989,
+          "longitude": 126.81528244167568
         },
-        {
-          "postId": "1",
-          "id": "4",
-          "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
-        }
-      ]
-    },
-    {
-      "postId": "3",
-      "user": { "id": "1" },
-      "placeId": "1",
-      "id": "1",
-      "placeType": "F",
-      "title": "강남역 쉑쉑 버거",
-      "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
-      "create_time": "2021. 11. 29. 오후 1:44:22",
-      "update_time": "2021. 11. 29. 오후 1:44:22",
-      "images": [
-        { "imageId:": "1", "filepath": "https://picsum.photos/200/300" },
-        { "imageId:": "2", "filepath": "https://picsum.photos/200/300" },
-        { "imageId:": "3", "filepath": "https://picsum.photos/200/300" }
-      ],
-      "comments": [
-        {
-          "postId": "1",
-          "id": "2",
-          "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루"
+        "title": "강남역 쉑쉑버거",
+        "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+        "createdAt": "2021-12-19T14:15:24.343Z",
+        "updatedAt": "2021-12-19T14:15:24.343Z",
+        "images": [
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          },
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          },
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          }
+        ],
+        "comments": [
+          {
+            "id": "2",
+            "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          },
+          {
+            "id": "3",
+            "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛.....",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          },
+          {
+            "id": "4",
+            "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          }
+        ],
+        "tags": [
+          {
+            "id": "1",
+            "title": "맛집"
+          },
+          {
+            "id": "2",
+            "title": "사진 찍기 좋은 곳"
+          },
+          {
+            "id": "3",
+            "title": "감성카페"
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "user": {
+          "id": "1",
+          "name": "love_trip",
+          "email": "MickeySeo@gmail.com",
+          "userType": "AHN",
+          "createdAt": "2021-12-19T14:15:24.343Z",
+          "providerType": "K",
+          "avatar": {
+            "width": 200,
+            "height": 200,
+            "id": "11",
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          }
         },
-        {
-          "postId": "1",
-          "id": "3",
-          "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛....."
+        "place": {
+          "id": "1",
+          "name": "place",
+          "title": "marker1",
+          "description": "marker1 description",
+          "type": "C",
+          "latitude": 37.28972304408989,
+          "longitude": 126.81528244167568
         },
-        {
-          "postId": "1",
-          "id": "4",
-          "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ"
-        }
-      ]
-    }
-  ],
-  "diaries": [
+        "title": "강남역 쉑쉑버거",
+        "description": "런칭당시부터 그리고 지금까지도 인기가 대단한 그 버거를 이제야 먹어봤어여 강남 쉑쉑버거 방문했습니당 :)",
+        "createdAt": "2021-12-19T14:15:24.343Z",
+        "updatedAt": "2021-12-19T14:15:24.343Z",
+        "images": [
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          },
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          },
+          {
+            "id": "11",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2021-12-19T14:15:24.343Z",
+            "updatedAt": "2021-12-19T14:15:24.343Z",
+            "bucket": "bucket",
+            "resizable": false,
+            "downloadable": false,
+            "filePath": "https://picsum.photos/200/300",
+            "filename": "sampleImage"
+          }
+        ],
+        "comments": [
+          {
+            "id": "2",
+            "content": "강남은 언제왔다갔냠 쥐도새도모르게....쉑쉑 가격대비 별루",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          },
+          {
+            "id": "3",
+            "content": "쉑쉑버거 잊고 잇엇는데 반갑당 ㅋㅋㅋㅋㅋ. 줄을 아직도 스다닛.....",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          },
+          {
+            "id": "4",
+            "content": "부천역에있는 크라이치즈버거가 더맛있다고도하둔데..... 쉑쉑 궁금하긴해용 함먹어봐야 직성이풀릴거가튼ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아직도 줄을스네여ㅠㅠㅠ",
+            "user": {
+              "id": "1",
+              "name": "love_trip",
+              "email": "MickeySeo@gmail.com",
+              "userType": "AHN",
+              "createdAt": "2021-12-19T14:15:24.343Z",
+              "providerType": "K",
+              "avatar": {
+                "width": 200,
+                "height": 200,
+                "id": "11",
+                "createdAt": "2021-12-19T14:15:24.343Z",
+                "updatedAt": "2021-12-19T14:15:24.343Z",
+                "bucket": "bucket",
+                "resizable": false,
+                "downloadable": false,
+                "filePath": "https://picsum.photos/200/300",
+                "filename": "sampleImage"
+              }
+            }
+          }
+        ],
+        "tags": [
+          {
+            "id": "1",
+            "title": "맛집"
+          },
+          {
+            "id": "2",
+            "title": "사진 찍기 좋은 곳"
+          },
+          {
+            "id": "3",
+            "title": "감성카페"
+          }
+        ]
+      }
+    ],
+    "offset": 0,
+    "limit": 10,
+    "total": 3,
+    "count": 3
+  },
+  "story": [
     {
       "id": "1",
       "name": "11월 29일 일기",
@@ -156,8 +667,8 @@
         { "id": "4" },
         { "id": "5" }
       ],
-      "createAt": "2021. 11. 29. 오후 1:44:22",
-      "updateAt": "2021. 11. 29. 오후 1:44:22"
+      "createdAt": "2021-12-19T14:15:24.343Z",
+      "updatedAt": "2021-12-19T14:15:24.343Z"
     },
     {
       "id": "2",
@@ -170,8 +681,8 @@
         { "id": "4" },
         { "id": "5" }
       ],
-      "createAt": "2021. 11. 29. 오후 1:44:22",
-      "updateAt": "2021. 11. 29. 오후 1:44:22"
+      "createdAt": "2021-12-19T14:15:24.343Z",
+      "updatedAt": "2021-12-19T14:15:24.343Z"
     },
     {
       "id": "3",
@@ -184,22 +695,8 @@
         { "id": "4" },
         { "id": "5" }
       ],
-      "createAt": "2021. 11. 29. 오후 1:44:22",
-      "updateAt": "2021. 11. 29. 오후 1:44:22"
-    }
-  ],
-  "tags": [
-    {
-      "id": "1",
-      "title": "맛집"
-    },
-    {
-      "id": "2",
-      "title": "사진 찍기 좋은 곳"
-    },
-    {
-      "id": "3",
-      "title": "감성카페"
+      "createdAt": "2021-12-19T14:15:24.343Z",
+      "updatedAt": "2021-12-19T14:15:24.343Z"
     }
   ],
   "playlists": [
@@ -213,5 +710,40 @@
       "title": "한적하고 분위기 있는 일식 맛집",
       "posts": [{ "id": "5" }, { "id": "6" }, { "id": "7" }, { "id": "8" }]
     }
-  ]
+  ],
+  "places": {
+    "items": [
+      {
+        "id": "1",
+        "name": "name1",
+        "title": "marker1",
+        "description": "marker1 description",
+        "type": "C",
+        "latitude": 37.28972304408989,
+        "longitude": 126.81528244167568
+      },
+      {
+        "id": "2",
+        "name": "name2",
+        "title": "marker2",
+        "description": "marker2 description",
+        "type": "C",
+        "latitude": 37.27972304408989,
+        "longitude": 126.80528244167568
+      },
+      {
+        "id": "3",
+        "name": "name3",
+        "title": "marker3",
+        "description": "marker3 description",
+        "type": "C",
+        "latitude": 37.29972304408989,
+        "longitude": 126.80528244167568
+      }
+    ],
+    "offset": 0,
+    "limit": 10,
+    "total": 3,
+    "count": 3
+  }
 }

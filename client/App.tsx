@@ -1,40 +1,52 @@
-import React from "react";
-import dotenv from "dotenv";
-import { StatusBar, Platform } from "react-native";
-import ViewModelProvider from "~presentation/components/Pages/Index.vm";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import styled from "styled-components/native";
+import React, { useEffect, useState } from "react";
+import ViewModelProvider, {
+  getRootViewModel,
+} from "~presentation/components/Screens/Index.vm";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-
-dotenv.config();
-
-export const IsAndroid = Platform.OS === "android";
-export const STATUS_BAR_HEIGHT = IsAndroid
-  ? StatusBar.currentHeight
-  : getStatusBarHeight();
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import styled from "styled-components/native";
+import { ThemeProvider } from "styled-components";
+import theme from "themes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ActivityIndicator } from "react-native";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  const [accessToken, setToken] = useState<string>("");
+
+  // 1) 여기서 유저 엑세스 토큰이 발급되어 있는지 따져주고 있으면 바로 처리
+  const getTocken = async () => {
+    const loginToken = await AsyncStorage.getItem("loginToken");
+    if (loginToken) {
+      // AsyncStorage.clear();
+      setToken(loginToken);
+    }
+  };
+
+  useEffect(() => {
+    getTocken();
+  }, [accessToken]);
 
   if (!isLoadingComplete) {
-    return null;
+    return <ActivityIndicator />;
   } else {
     return (
-      <ViewModelProvider>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-          <Nav />
-        </SafeAreaProvider>
+      <ViewModelProvider accessToken={accessToken}>
+        <ThemeProvider theme={theme}>
+          <SafeAreaProvider>
+            {/* <StyledSafeAreaView> */}
+            <Navigation colorScheme={colorScheme} setToken={setToken} />
+            {/* </StyledSafeAreaView> */}
+          </SafeAreaProvider>
+        </ThemeProvider>
       </ViewModelProvider>
     );
   }
 }
 
-const Nav = styled.View`
-  height: ${STATUS_BAR_HEIGHT + "px"};
+const StyledSafeAreaView = styled(SafeAreaView)`
+  flex: 1;
 `;

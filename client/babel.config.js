@@ -3,9 +3,14 @@ module.exports = function (api) {
   return {
     presets: ["babel-preset-expo"],
     plugins: [
+      [
+        "module:react-native-dotenv",
+        {
+          moduleName: "react-native-dotenv",
+        },
+      ],
       ["react-native-reanimated/plugin"],
       ["@babel/plugin-proposal-decorators", { legacy: true }],
-      ["@babel/plugin-proposal-class-properties", { loose: true }],
       [
         "module-resolver",
         {
@@ -13,6 +18,9 @@ module.exports = function (api) {
           extensions: [".ios.js", ".android.js", ".js", ".ts", ".tsx", ".json"],
           alias: {
             "~presentation": "./presentation",
+            "~domain": "./domain",
+            "~data": "./data",
+            "~asset": "./assets",
           },
         },
       ],
